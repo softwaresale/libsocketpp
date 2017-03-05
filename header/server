@@ -1,0 +1,37 @@
+#ifndef SERVER_PP
+#define SERVER_PP
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <socketpp/socket>
+
+using namespace std;
+
+/* Server class: wrapper for C sockets, specifically server */
+
+class Server {
+
+private:
+	int                server, conn;
+	struct sockaddr_in addr;
+	int                port;
+	bool               isBound =  false;
+
+public:
+	Server();                        // creates a server without address data
+	Server(int _port);               // creates a server and binds address
+
+	int binds();                     // binds the server to the address if data is already given
+	int binds(int _port);            // binds address with data
+
+	Socket* accepts();               // accepts a socket connection and returns a socket
+	int     acceptfd();              // returns the connected socket descriptor
+
+	void closes();                   // closes the server
+
+};
+
+#endif
