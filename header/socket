@@ -11,6 +11,9 @@ using namespace std;
 
 /* Socket class: a class wrapper for TCP/IP sockets in C */
 
+/* Dealing with TCP sockets */
+namespace tcp {
+
 class Socket {
 
 private:
@@ -36,5 +39,7 @@ public:
 	void closes();                      // closes the connection
 
 };
+
+}
 
 #endif

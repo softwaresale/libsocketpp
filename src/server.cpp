@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Server::Server(){
+tcp::Server::Server(){
 
 	// creates the server socket
 	server = socket(AF_INET, SOCK_STREAM, 0);
@@ -23,7 +23,7 @@ Server::Server(){
 
 }
 
-Server::Server(int _port){
+tcp::Server::Server(int _port){
 
 	// creates the socket
 	server = socket(AF_INET, SOCK_STREAM, 0);
@@ -35,14 +35,12 @@ Server::Server(int _port){
 	port = _port;
 }
 
-int Server::binds(){
+int tcp::Server::binds(){
 
 	if (isBound){
 		cerr << "Server already bound" << endl;
 		return 1;
 	}
-
-	if (port == 0){
 		cerr << "Host and port not set: use other bind func" << endl;
 		return 1;
 	}
@@ -60,7 +58,7 @@ int Server::binds(){
 	return 0;
 }
 
-int Server::binds(int _port){
+int tcp::Server::binds(int _port){
 
 	if (isBound){
 		cerr << "Server already bound" << endl;
@@ -80,7 +78,7 @@ int Server::binds(int _port){
 	return 0;
 }
 
-Socket* Server::accepts(){
+tcp::Socket* tcp::Server::accepts(){
 
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
@@ -89,13 +87,13 @@ Socket* Server::accepts(){
 		return nullptr;
 	}
 
-	Socket* temp = new Socket(conn);
+	tcp::Socket* temp = new tcp::Socket(conn);
 
 	return temp;
 
 }
 
-int Server::acceptfd(){
+int tcp::Server::acceptfd(){
 
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
@@ -106,7 +104,7 @@ int Server::acceptfd(){
 
 }
 
-void Server::closes(){
+void tcp::Server::closes(){
 	close(conn);
 	close(server);
 }

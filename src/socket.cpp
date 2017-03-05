@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Socket::Socket(){
+tcp::Socket::Socket(){
 
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
@@ -22,7 +22,7 @@ Socket::Socket(){
 
 }
 
-Socket::Socket(char* _host, int _port){
+tcp::Socket::Socket(char* _host, int _port){
 
 	host = _host; // sets the class host variable
 	port = _port; // sets the class port variable
@@ -36,11 +36,11 @@ Socket::Socket(char* _host, int _port){
 
 }
 
-Socket::Socket(int sockd){
+tcp::Socket::Socket(int sockd){
 	socketfd = sockd; // sets the socket descriptor
 }
 
-int Socket::connects(char* _host, int _port){
+int tcp::Socket::connects(char* _host, int _port){
 
 	addr.sin_family      = AF_INET;         // sets the address's family
 	addr.sin_port        = htons(_port);     // sets the address's port
@@ -53,7 +53,7 @@ int Socket::connects(char* _host, int _port){
 	return 0;
 }
 
-int Socket::connects(){
+int tcp::Socket::connects(){
 
 	if (host == NULL || port == 0){
 
@@ -74,7 +74,7 @@ int Socket::connects(){
 	return 0;
 }
 
-int Socket::sends(char* buffer){
+int tcp::Socket::sends(char* buffer){
 
 	int bytes;
 
@@ -102,7 +102,7 @@ int Socket::sends(char* buffer){
 
 }
 
-int Socket::sends(int ii){
+int tcp::Socket::sends(int ii){
 
 	int bytes;
 
@@ -129,7 +129,7 @@ int Socket::sends(int ii){
 	return 0;
 }
 
-char* Socket::reads(){
+char* tcp::Socket::reads(){
 
 	char* buffer;
 	int bytes, buflen;
@@ -157,7 +157,7 @@ char* Socket::reads(){
 	return buffer;
 }
 
-int Socket::readint(){
+int tcp::Socket::readint(){
 
 	char* buffer;
 	int   bytes, buflen;
@@ -187,6 +187,6 @@ int Socket::readint(){
 	return num;
 }
 
-void Socket::closes(){
+void tcp::Socket::closes(){
 	close(socketfd);
 }
