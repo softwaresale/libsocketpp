@@ -17,7 +17,7 @@ namespace tcp {
 
 class Server {
 
-private:
+protected:
 	int                server, conn;
 	struct sockaddr_in addr;
 	int                port;

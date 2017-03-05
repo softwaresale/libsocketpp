@@ -8,8 +8,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <netdb.h>
-#include "../header/socket"
-#include "../header/server"
+#include "../header/tcp/socket"
+#include "../header/tcp/server"
 
 using namespace std;
 
@@ -40,7 +40,7 @@ int tcp::Server::binds(){
 	if (isBound){
 		cerr << "Server already bound" << endl;
 		return 1;
-	}
+	} else {
 		cerr << "Host and port not set: use other bind func" << endl;
 		return 1;
 	}

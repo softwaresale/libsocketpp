@@ -16,7 +16,7 @@ namespace tcp {
 
 class Socket {
 
-private:
+protected:
 	int                socketfd;
 	struct sockaddr_in addr;
 	char*              host;
