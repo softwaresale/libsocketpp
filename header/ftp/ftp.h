@@ -1,3 +1,6 @@
+#ifndef FTP_H
+#define FTP_H 1
+
 #include <iostream>
 #include <fstream>
 #include "../tcp/socket"
@@ -19,9 +22,6 @@ class Ftp: public Socket {
 	 * basic network functionality */
 
 private:
-	
-	Socket* sock; // socket that the FTP server is running on
-	
 	// some file handleing methods
 
 	/* Reads a file and returns the contents
@@ -43,11 +43,14 @@ public:
 
 	/* Write a file 
 	 * @param path -- file path */
-	void writeFile(char* path);
+	void sendFile(char* path);
 	
 	/* Downloading a file to path
 	 * @param path -- download file path */
-	void readFile(char* path);
+	void recvFile(char* path);
 };
 
 }
+
+
+#endif // FTP_H
