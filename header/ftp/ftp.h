@@ -18,8 +18,36 @@ class Ftp: public Socket {
 	/* This class inherits the Socket class to use its
 	 * basic network functionality */
 
+private:
+	
+	Socket* sock; // socket that the FTP server is running on
+	
+	// some file handleing methods
 
+	/* Reads a file and returns the contents
+	 * @param path -- path to file */
+	char* readFile(char* path);
+	
+	/* Writes a file
+	 * @param path -- path to file
+	 * @param data -- data to be written to file */
+	void  writeFile(char* path, char* data);
 
+protected:
+
+public:
+	// call the Socket's constructor
+	Ftp(char* host, int port) : Socket(char* host, int port) { }
+	
+	/* This class should use all of the Socket functions */
+
+	/* Write a file 
+	 * @param path -- file path */
+	void writeFile(char* path);
+	
+	/* Downloading a file to path
+	 * @param path -- download file path */
+	void readFile(char* path);
 };
 
 }
