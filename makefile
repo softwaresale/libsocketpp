@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-fPIC -c
+CFLAGS=-fPIC -c -std=c++11
 LFLAGS=-shared -Wl,-soname,libsocketpp.so.1 -o libsocketpp.so.1.0
 SRC=$(wildcard src/*.cpp)
 OBJ=$(wildcard out/*.o)
