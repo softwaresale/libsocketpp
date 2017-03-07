@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <netdb.h>
-#include "../header/tcp/socket"
+#include "../header/tcp/socket.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ tcp::Socket::Socket(){
 		return;
 	}
 	
-	isConnected = false;
+	_isConnected = false;
 }
 
 tcp::Socket::Socket(char* _host, int _port){
@@ -35,16 +35,16 @@ tcp::Socket::Socket(char* _host, int _port){
 		return;
 	}
 	
-	isConnected = false;
+	_isConnected = false;
 }
 
 tcp::Socket::Socket(int sockd){
-	isConnected = true; // socket should be connected
+	_isConnected = true; // socket should be connected
 	socketfd = sockd; // sets the socket descriptor
 }
 
 bool tcp::Socket::isConnected(){
-	return isConnected;
+	return _isConnected;
 }
 
 int tcp::Socket::connects(char* _host, int _port){
@@ -58,7 +58,7 @@ int tcp::Socket::connects(char* _host, int _port){
 		return 1;
 	}
 
-	isConnected = true;
+	_isConnected = true;
 	return 0;
 }
 
@@ -80,7 +80,7 @@ int tcp::Socket::connects(){
 		return 1;
 	}
 	
-	isConnected = true;
+	_isConnected = true;
 
 	return 0;
 }

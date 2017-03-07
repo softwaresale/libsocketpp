@@ -6,7 +6,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <socketpp/socket>
+#include "socket.h"
 
 using namespace std;
 

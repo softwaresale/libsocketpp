@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "../tcp/socket"
+#include "../tcp/socket.h"
 
 using namespace std;
 using namespace tcp;
@@ -73,6 +73,9 @@ public:
 	/* Downloading a file to path
 	 * @param dirpath -- download directory path */
 	int recvFile(char* dirpath);
+	
+	/* Closes the ftp connection */
+	void closes();
 };
 
 }

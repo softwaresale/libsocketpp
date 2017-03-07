@@ -21,7 +21,7 @@ protected:
 	struct sockaddr_in addr;
 	char*              host;
 	int                port;
-	bool               isConnected;
+	bool              _isConnected;
 
 public:
 	Socket();                           // create a socket that does not have address info defined

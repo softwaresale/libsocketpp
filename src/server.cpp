@@ -8,8 +8,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <netdb.h>
-#include "../header/tcp/socket"
-#include "../header/tcp/server"
+#include "../header/tcp/socket.h"
+#include "../header/tcp/server.h"
 
 using namespace std;
 
