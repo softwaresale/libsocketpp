@@ -48,12 +48,13 @@ private:
 	 * @param file -- file structure to be parsed
 	 * @return     -- returns an integer containing
 	 *                all of the struct's data */
-	int   sterilize(FtpFile_t file);
+	char*   serialize(FtpFile_t file);
 	
 	/* Calls the readint() to read an integer and
 	 *     create a struct
-	 * @return -- instantiated FtpFile_t struct */
-	FtpFile_t readFileStruct();
+	 * @param data -- data to be parsed into a struct
+	 * @return     -- instantiated FtpFile_t struct */
+	FtpFile_t readFileStruct(char* data);
 
 protected:
 
@@ -70,8 +71,8 @@ public:
 	int sendFile(char* path);
 	
 	/* Downloading a file to path
-	 * @param path -- download file path */
-	int recvFile(char* path);
+	 * @param dirpath -- download directory path */
+	int recvFile(char* dirpath);
 };
 
 }
