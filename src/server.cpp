@@ -37,11 +37,8 @@ tcp::Server::Server(int _port){
 
 int tcp::Server::binds(){
 
-	if (isBound){
+	if (_isBound){
 		cerr << "Server already bound" << endl;
-		return 1;
-	} else {
-		cerr << "Host and port not set: use other bind func" << endl;
 		return 1;
 	}
 
@@ -54,13 +51,15 @@ int tcp::Server::binds(){
 		cerr << "Error listening socket" << endl;
 		return 1;
 	}
+	
+	_isBound = true; // socket has been bound
 
 	return 0;
 }
 
 int tcp::Server::binds(int _port){
 
-	if (isBound){
+	if (_isBound){
 		cerr << "Server already bound" << endl;
 		return 1;
 	}
@@ -74,9 +73,13 @@ int tcp::Server::binds(int _port){
 		cerr << "Error listening socket" << endl;
 		return 1;
 	}
+	
+	_isBound = true; // server has been bound
 
 	return 0;
 }
+
+bool  tcp::Server::isBound() { return this->_isBound; }
 
 tcp::Socket* tcp::Server::accepts(){
 
@@ -101,7 +104,8 @@ int tcp::Server::acceptfd(){
 		cerr << "Error accepting connection" << endl;
 		return 0;
 	}
-
+	
+	return conn; // you actually have to return the value
 }
 
 void tcp::Server::closes(){
