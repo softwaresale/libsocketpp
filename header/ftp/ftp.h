@@ -36,18 +36,20 @@ private:
 protected:
 
 public:
-	// call the Socket's constructor
-	Ftp(char* host, int port) : Socket(char* host, int port) { }
-	
+	// call the Socket's constructors
+	Ftp(char* host, int port) : Socket(host, port) { }
+	Ftp() : Socket() { }
+	Ftp(int sockd) : Socket(sockd) { }
+
 	/* This class should use all of the Socket functions */
 
 	/* Write a file 
 	 * @param path -- file path */
-	void sendFile(char* path);
+	int sendFile(char* path);
 	
 	/* Downloading a file to path
 	 * @param path -- download file path */
-	void recvFile(char* path);
+	int recvFile(char* path);
 };
 
 }

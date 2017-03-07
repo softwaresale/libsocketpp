@@ -21,6 +21,7 @@ protected:
 	struct sockaddr_in addr;
 	char*              host;
 	int                port;
+	bool               isConnected;
 
 public:
 	Socket();                           // create a socket that does not have address info defined
@@ -30,8 +31,10 @@ public:
 	int connects(char* host, int port); // connects to the server if address is not set
 	int connects();                     // connects to the server if address already set
 
+	bool isConnected();                 // true if the socket is connected
+
 	int sends(char* buffer);            // sends a string
-	int sends(int ii);                   // sends an integer
+	int sends(int ii);                  // sends an integer
 
 	char* reads();                      // reads the socket and returns a string
 	int   readint();                    // reads an integer

@@ -19,7 +19,8 @@ tcp::Socket::Socket(){
 		cerr << "Error creating socket" << endl;
 		return;
 	}
-
+	
+	isConnected = false;
 }
 
 tcp::Socket::Socket(char* _host, int _port){
@@ -33,11 +34,17 @@ tcp::Socket::Socket(char* _host, int _port){
 		cerr << "Error creating socket" << endl;
 		return;
 	}
-
+	
+	isConnected = false;
 }
 
 tcp::Socket::Socket(int sockd){
+	isConnected = true; // socket should be connected
 	socketfd = sockd; // sets the socket descriptor
+}
+
+bool tcp::Socket::isConnected(){
+	return isConnected;
 }
 
 int tcp::Socket::connects(char* _host, int _port){
@@ -50,6 +57,8 @@ int tcp::Socket::connects(char* _host, int _port){
 		cerr << "Error connecting to server" << endl;
 		return 1;
 	}
+
+	isConnected = true;
 	return 0;
 }
 
@@ -70,6 +79,8 @@ int tcp::Socket::connects(){
 		cerr << "Error connecting to host" << endl;
 		return 1;
 	}
+	
+	isConnected = true;
 
 	return 0;
 }
