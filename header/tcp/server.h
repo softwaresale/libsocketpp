@@ -6,7 +6,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <socketpp/socket.h>
+#include "socket.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ protected:
 	int                server, conn;
 	struct sockaddr_in addr;
 	int                port;
-	bool               isBound =  false;
+	bool              _isBound = false;
 
 public:
 	Server();                        // creates a server without address data
@@ -29,6 +29,8 @@ public:
 
 	int binds();                     // binds the server to the address if data is already given
 	int binds(int _port);            // binds address with data
+	
+	bool isBound();                  // true if server is bound, false if not
 
 	Socket* accepts();               // accepts a socket connection and returns a socket
 	int     acceptfd();              // returns the connected socket descriptor

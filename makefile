@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-fPIC -c
+CFLAGS=-fPIC -c -std=c++11
 LFLAGS=-shared -Wl,-soname,libsocketpp.so.1 -o libsocketpp.so.1.0
 SRC=$(wildcard src/*.cpp)
 OBJ=$(wildcard out/*.o)
@@ -9,11 +9,11 @@ all: $(OBJ)
 	mv *.so* out/
 
 src: $(SRC)
-	$(CC)  $(CFLAGS) $^
+	$(CC) $(CFLAGS) $^
 	mv *.o out/
 
 install:
-	sudo cp header/tcp/* /usr/local/include/socketpp/tcp/
+	sudo cp -r header/* /usr/local/include/socketpp/
 	sudo cp out/*.so* /usr/local/lib
 	sudo ldconfig
 
