@@ -13,7 +13,7 @@ src: $(SRC)
 	mv *.o out/
 
 install:
-	sudo cp header/* /usr/local/include/socketpp/
+	sudo cp -r header/* /usr/local/include/socketpp/
 	sudo cp out/*.so* /usr/local/lib
 	sudo ldconfig
 
