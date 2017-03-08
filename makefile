@@ -9,7 +9,7 @@ all: $(OBJ)
 	mv *.so* out/
 
 src: $(SRC)
-	$(CC)  $(CFLAGS) $^
+	$(CC) $(CFLAGS) $^
 	mv *.o out/
 
 install:
