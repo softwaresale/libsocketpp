@@ -14,6 +14,7 @@ src: $(SRC)
 
 install:
 	sudo cp header/tcp/* /usr/local/include/socketpp/tcp/
+	sudo cp header/ftp/* /usr/local/include/socketpp/ftp/
 	sudo cp out/*.so* /usr/local/lib
 	sudo ldconfig
 
