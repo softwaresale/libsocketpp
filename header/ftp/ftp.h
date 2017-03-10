@@ -13,17 +13,6 @@ using namespace tcp;
  * are built off of the TCP socket system
  * earlier written to handle file transfer (FTP) .*/
 
-/* This struct contains data about a file
- * Note: This struct has to be sterilized to
- *       be written over a socket */
-
-typedef struct {
-
-	char* title;   // title of file
-	char* buffer;  // file buffer
-
-} FtpFile_t;
-
 namespace ftp
 {
 
@@ -43,18 +32,6 @@ private:
 	 * @param path -- path to file
 	 * @param data -- data to be written to file */
 	void  writeFile(char* path, char* data);
-	
-	/* Sterilizes a file struct
-	 * @param file -- file structure to be parsed
-	 * @return     -- returns an integer containing
-	 *                all of the struct's data */
-	char*   serialize(FtpFile_t file);
-	
-	/* Calls the readint() to read an integer and
-	 *     create a struct
-	 * @param data -- data to be parsed into a struct
-	 * @return     -- instantiated FtpFile_t struct */
-	FtpFile_t readFileStruct(char* data);
 
 protected:
 
