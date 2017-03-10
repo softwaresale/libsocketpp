@@ -21,7 +21,7 @@ char* cat(char* str1, char* str2){
 char* ftp::Ftp::readFile(char* path){
 
 	ifstream reader;
-	reader.open(path);
+	reader.open(path, ios::binary);
 	char* buffer;
 	streampos beg, end;	
 
@@ -32,10 +32,19 @@ char* ftp::Ftp::readFile(char* path){
 		end = reader.tellg();
 
 		int size = end-beg;
-	
+		
+		// get the size of the file
 		buffer = new char[size];
+		reader.close();
 
-		reader.read(buffer, size);
+	} else { return NULL; }
+
+	reader.open(path);
+	if (reader.is_open()){
+		int count = 0;
+		while (!reader.eof())
+			buffer[count++] = reader.get();
+
 		reader.close();
 	} else { return NULL; }
 	
@@ -49,14 +58,12 @@ void ftp::Ftp::writeFile(char* path, char* data){
 	streampos beg, end;
 	
 	if (out.is_open()){
-	
-		beg = out.tellp();
-		out.seekp(0, ios::end);
-		end = out.tellp();
-		int size = end-beg;
+		int size  = sizeof(data);
+		int count = 0;
+		while (!out.eof()){
+			out << data[count++]; // add the data to the buffer
+		}		
 
-		out.write(data, sizeof(data)); // this may not work
-		out.close();
 	} else { out.close(); return; };
 }
 
