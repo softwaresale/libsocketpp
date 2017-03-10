@@ -59,63 +59,16 @@ void ftp::Ftp::writeFile(char* path, char* data){
 	} else { out.close(); return; };
 }
 
-char* ftp::Ftp::serialize(FtpFile_t file){
-
-	int titlesize = sizeof(file.title); // get the title's name
-	int buffersize = sizeof(file.buffer); // get the buffer's size
-	char* data = new char[buffersize + titlesize + 1]; // create a buffer the correct
-	                                                   // size
-	int i; // counter
-	for (i = 0; i < sizeof(file.title); i++)
-		data[i] = file.title[i]; // copy the title into the buffer
-
-	// add a separator. I am using a new line
-	data[titlesize + 1] = '\n';
-	int j = 0; // temp iterator
-	for (i = titlesize+2; i < sizeof(buffersize); i++)
-		data[i] = file.buffer[j++]; // copy the buffer into the data
-
-	
-	return data; // return the data
-}
-
-FtpFile_t ftp::Ftp::readFileStruct(char* data){
-
-	FtpFile_t tmp; // create a temporary file struct
-
-	// instantiate tmp
-	tmp.buffer = new char[1024];
-	tmp.title  = new char[32]; 
-
-	char ch; // tmp
-	int i, j; i = 0; // split up into declaration and initilization. May be useful
-
-	while ((ch = data[i]) != '\n'){
-		tmp.title[i] = data[i]; // copy the data
-		i++; // iterate
-	}
-
-	j = 0;
-	while (ch = data[i]){
-		tmp.buffer[j++] = data[i];
-		i++;
-	}
-
-	return tmp; // this may not work at all, but its worth a shot
-}
-
 int ftp::Ftp::recvFile(char* dirpath){
 	
 	if (!Socket::isConnected())
 		return 1; // error enountered
 
-	char* data = Socket::reads(); // read the file form the socket
-	// TODO: do some error handling
-	FtpFile_t file = this->readFileStruct(data); // parse the ftp file
+	char* title  = this->reads(); // read the title
+	char* buffer = this->reads(); // read the buffer
 	
-	this->writeFile(cat(dirpath, file.title), file.buffer); // write the file
-	// TODO: make sure this worked
-	
+	this->writeFile(cat(dirpath, title), buffer); // write the buffer
+
 	return 0;
 }
 
@@ -125,18 +78,15 @@ int ftp::Ftp::sendFile(char* path){
 	if (!Socket::isConnected())
 		return 1;
 
-	// get the file's name from the path
-	char* name = basename(path);
+	// Send the file's name from the path
+	if ( this->sends(basename(path)) != 0 )
+		return 1; /* Error sending title */
 	
-	// create FtpFile_t struct
-	FtpFile_t file; // file to be sent
-	file.title = name; // set the name of the file
-	file.buffer = this->readFile(path); // read the file
-	
-	char* message = this->serialize(file); // serialize the file
-	return Socket::sends(message); // send the message
-	// NOTE: ^^ should have internal error handling that is just
-	// inherited up
+	// read the file and send its contents
+	if ( this->sends(this->readFile(path)) != 0)
+		return 1; /* Error sending buffer */
+
+	return 0;
 }
 
 void ftp::Ftp::closes(){
