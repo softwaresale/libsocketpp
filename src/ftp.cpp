@@ -75,7 +75,8 @@ char* ftp::Ftp::serialize(FtpFile_t file){
 	for (i = titlesize+2; i < sizeof(buffersize); i++)
 		data[i] = file.buffer[j++]; // copy the buffer into the data
 
-	
+	data[sizeof(data)+1] = '\0'; // null terminator
+
 	return data; // return the data
 }
 
@@ -100,6 +101,9 @@ FtpFile_t ftp::Ftp::readFileStruct(char* data){
 		tmp.buffer[j++] = data[i];
 		i++;
 	}
+	
+	tmp.buffer[sizeof(tmp.buffer)+1] = '\0';
+	tmp.title[sizeof(tmp.title)+1] = '\0';
 
 	return tmp; // this may not work at all, but its worth a shot
 }
