@@ -5,6 +5,7 @@
 #include "../header/ftp/ftp.h"
 #include "../header/tcp/socket.h"
 #include <cstring>
+#include <cstdlib>
 
 using namespace std;
 using namespace tcp;
@@ -85,8 +86,8 @@ FtpFile_t ftp::Ftp::readFileStruct(char* data){
 	FtpFile_t tmp; // create a temporary file struct
 
 	// instantiate tmp
-	tmp.buffer = new char[1024];
-	tmp.title  = new char[32]; 
+	tmp.buffer = new char[sizeof(data)+1];
+	tmp.title  = new char[sizeof(data)+1]; 
 
 	char ch; // tmp
 	int i, j; i = 0; // split up into declaration and initilization. May be useful
@@ -95,6 +96,9 @@ FtpFile_t ftp::Ftp::readFileStruct(char* data){
 		tmp.title[i] = data[i]; // copy the data
 		i++; // iterate
 	}
+	
+	tmp.title[i+1] = '\0'; // add null terminator
+	i--;                   // deincrement
 
 	j = 0;
 	while (ch = data[i]){
@@ -102,8 +106,7 @@ FtpFile_t ftp::Ftp::readFileStruct(char* data){
 		i++;
 	}
 	
-	tmp.buffer[sizeof(tmp.buffer)+1] = '\0';
-	tmp.title[sizeof(tmp.title)+1] = '\0';
+	tmp.buffer[j+1] = '\0';
 
 	return tmp; // this may not work at all, but its worth a shot
 }
