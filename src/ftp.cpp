@@ -21,35 +21,18 @@ char* cat(char* str1, char* str2){
 char* ftp::Ftp::readFile(char* path){
 
 	ifstream reader;
-	reader.open(path, ios::binary);
+	reader.open(path, ios::binary|ios::in|ios::ate);
 	char* buffer;
-	streampos beg, end;	
 	int size;
 
 	if (reader.is_open()){
 	
-		beg = reader.tellg();
 		reader.seekg(0, ios::end);
-		end = reader.tellg();
-
-		size = end-beg;
-		
-		// get the size of the file
+		size = reader.tellg();
 		buffer = new char[size];
+		reader.read(buffer, size);
 		reader.close();
-
-	} else { return NULL; }
-
-	reader.open(path);
-	if (reader.is_open()){
-		int count = 0;
-		while (count <= size){
-			reader >> buffer;
-			count++;
-		}
-
-		reader.close();
-	} else { return NULL; }
+	}
 	
 	return buffer;
 }
