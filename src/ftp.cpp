@@ -25,7 +25,7 @@ char* ftp::Ftp::readFile(char* path){
 
 	ifstream reader;
 	reader.open(path);
-	char* buffer = NULL;
+	char* buffer;
 	int size;
 
 	if (reader.is_open()){
@@ -33,7 +33,8 @@ char* ftp::Ftp::readFile(char* path){
 		reader.seekg(0, ios::end);
 		size = reader.tellg();
 		buffer = new char[size];
-		
+		reader.seekg(0, ios::beg);
+
 		string line;
 		while (getline(reader, line)){
 			char* cline = (char*)line.c_str();
@@ -89,12 +90,19 @@ int ftp::Ftp::sendFile(char* path){
 		return 1;
 
 	// Send the file's name from the path
-	if ( this->sends(basename(path)) != 0 )
-		return 1; /* Error sending title */
+	char* title = basename(path);
+	cout << "Title: " << title << endl;
 	
 	// read the file and send its contents
-	if ( this->sends(this->readFile(path)) != 0)
-		return 1; /* Error sending buffer */
+	cout << "Path: " << path << endl;
+	char* buffer = this->readFile(path);
+	cout << "Buffer: " << buffer << endl;
+
+	if ( this->sends(title) != 0)
+		return 1;
+
+	if ( this->sends(buffer) != 0)
+		return 1;
 
 	return 0;
 }
