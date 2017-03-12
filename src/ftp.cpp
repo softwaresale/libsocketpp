@@ -37,6 +37,7 @@ char* ftp::Ftp::readFile(char* path){
 		string line;
 		while (getline(reader, line)){
 			char* cline = (char*)line.c_str();
+			cout << line << endl;
 			cat(buffer, cline); // cat the two strings
 		}
 		
@@ -47,6 +48,8 @@ char* ftp::Ftp::readFile(char* path){
 		return NULL;
 	}
 	
+	buffer[size+1] = '\0'; // null terminator
+
 	// debugging purposes
 	cout << "Buffer: " << buffer << endl;
 
