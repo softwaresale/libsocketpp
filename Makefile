@@ -13,14 +13,14 @@ all: $(OBJ)
 	$(CC) $(LFLAGS) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o out/$@
 
 install: all
 	sudo cp out/libsocketpp.so.1.0 $(INSTALL_PATH)/lib
 	sudo ln -sf $(INSTALL_PATH)/lib/$(LIB1) $(INSTALL_PATH)/lib/$(LIB2)
 	sudo ln -sf $(INSTALL_PATH)/lib/$(LIB2) $(INSTALL_PATH)/lib/$(LIB3)
 	sudo cp -r header/* /usr/local/include/socketpp/
-	sudo ld-config
+	sudo ldconfig
 
 clean:
 	rm $(OBJ)
