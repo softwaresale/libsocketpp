@@ -32,14 +32,18 @@ char* ftp::Ftp::readFile(char* path){
 	
 		reader.seekg(0, ios::end);
 		size = reader.tellg();
+		buffer = new char[size];
 		
-		vector<char> buf(size); // create a vector
-		reader.read(&buf[0], size);
-		buffer = &buf[0];
-
+		string line;
+		while (getline(reader, line)){
+			char* cline = line.c_str();
+			cat(buffer, cline); // cat the two strings
+		}
+		
 		reader.close();
 
 	} else {
+		cerr << "File is not open" << endl;
 		return NULL;
 	}
 	
