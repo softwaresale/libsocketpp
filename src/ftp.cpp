@@ -6,6 +6,7 @@
 #include "../header/tcp/socket.h"
 #include <cstring>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 using namespace tcp;
@@ -31,9 +32,15 @@ char* ftp::Ftp::readFile(char* path){
 	
 		reader.seekg(0, ios::end);
 		size = reader.tellg();
-		buffer = new char[size];
-		reader.read(buffer, size);
+		
+		vector<char> buf(size); // create a vector
+		reader.read(&buf[0], size);
+		buffer = &buf[0];
+
 		reader.close();
+
+	} else {
+		return NULL;
 	}
 	
 	return buffer;
