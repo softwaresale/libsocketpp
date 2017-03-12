@@ -18,10 +18,12 @@ char* cat(char* str1, char* str2){
 	return result;
 }
 
+/* I belive that the problem lies here */
+
 char* ftp::Ftp::readFile(char* path){
 
 	ifstream reader;
-	reader.open(path, ios::binary|ios::in|ios::ate);
+	reader.open(path);
 	char* buffer;
 	int size;
 
