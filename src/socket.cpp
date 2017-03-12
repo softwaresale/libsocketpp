@@ -96,7 +96,7 @@ int tcp::Socket::sends(char* buffer){
 	bytes = send(socketfd, (char*)&len, sizeof(len), 0); // send the size
 	if (bytes < 0){
 		cerr << "Error sending size of buffer to socket" << endl;
-		return 1;
+		return -1;
 	}
 
 	/* Now acutally send the data */
@@ -104,9 +104,9 @@ int tcp::Socket::sends(char* buffer){
 	bytes = send(socketfd, buffer, datalen, 0);
 	if (bytes < 0){
 		cerr << "Error writing buffer to socket" << endl;
-		return 1;
+		return -1;
 	}
-
+	
 	cout << bytes << " written" << endl;
 
 	return 0;
