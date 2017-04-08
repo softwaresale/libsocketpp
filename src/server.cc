@@ -81,16 +81,16 @@ int tcp::Server::binds(int _port){
 
 bool  tcp::Server::isBound() { return this->_isBound; }
 
-tcp::Socket* tcp::Server::accepts(){
+tcp::Socket tcp::Server::accepts(){
 
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
 	if (conn < 0){
 		cerr << "Error accepting connection" << endl;
-		return nullptr;
+		return NULL;
 	}
 
-	tcp::Socket* temp = new tcp::Socket(conn);
+	tcp::Socket temp = tcp::Socket(conn);
 
 	return temp;
 
