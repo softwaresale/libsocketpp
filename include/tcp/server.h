@@ -32,7 +32,7 @@ public:
 	
 	bool isBound();                  // true if server is bound, false if not
 
-	Socket accepts();               // accepts a socket connection and returns a socket
+	Socket* accepts();               // accepts a socket connection and returns a socket
 	int     acceptfd();              // returns the connected socket descriptor
 
 	void closes();                   // closes the server
