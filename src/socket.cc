@@ -12,6 +12,8 @@
 
 using namespace std;
 
+/* Basic socket */
+
 tcp::Socket::Socket(){
 
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket

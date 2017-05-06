@@ -13,6 +13,8 @@
 
 using namespace std;
 
+/* This is a basic all around tcp server */
+
 tcp::Server::Server(){
 
 	// creates the server socket
