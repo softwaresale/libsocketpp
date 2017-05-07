@@ -1,0 +1,5 @@
+[done] 1. Create TCP socket and server class
+[    ] 2. Create a UDP socket class
+[    ] 3. Create FTP protocol class based off of TCP classes
+[    ] 4. Create HTTP request and response protocol
+[    ] 5. Add asynchronous TCP data exchange
