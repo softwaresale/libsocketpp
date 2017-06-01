@@ -2,9 +2,11 @@
 This is a collection of C++ classes for networking with TCP sockets
 
 ## Installation
-`./configure <prefix>`
-`make`
-`sudo make install`
+```
+./configure <prefix>
+make
+sudo make install
+```
 
 ## Usage
 Compile any files with the `-l socketpp` flags
