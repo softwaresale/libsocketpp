@@ -1,2 +1,5 @@
 
-include_HEADERS = socket.h server.h
+socketppdir = $(includedir)/socketpp
+tcpdir      = $(socketppdir)/tcp
+
+tcp_HEADERS = socket.h server.h
