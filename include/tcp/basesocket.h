@@ -6,6 +6,7 @@
 #include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <streambuf>
 
 using namespace std;
 
@@ -14,7 +15,8 @@ using namespace std;
 /* Dealing with TCP sockets */
 namespace tcp {
 
-class Socket {
+class Basic_socket
+{
 
 protected:
 	int                socketfd;
@@ -24,22 +26,17 @@ protected:
 	bool              _isConnected;
 
 public:
-	Socket();                           // create a socket that does not have address info defined
-	Socket(char* host, int port);       // create a new socket class with host and port
-	Socket(int sockd);                  // create a socket class from existing socket descriptor
+	Basic_socket();                           // create a socket that does not have address info defined
+	Basic_socket(char* host, int port);       // create a new socket class with host and port
+	Basic_socket(int sockd);                  // create a socket class from existing socket descriptor
 	
 	int getSockfd();                    // returns the socket descriptor
+	// char* getLocalhost();               // gets the localhost of the socket
 
 	int connects(char* host, int port); // connects to the server if address is not set
 	int connects();                     // connects to the server if address already set
 
 	bool isConnected();                 // true if the socket is connected
-
-	int sends(char* buffer);            // sends a string
-	int sends(int ii);                  // sends an integer
-
-	char* reads();                      // reads the socket and returns a string
-	int   readint();                    // reads an integer
 
 	void closes();                      // closes the connection
 

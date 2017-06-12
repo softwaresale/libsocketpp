@@ -1,0 +1,33 @@
+
+/* This class is a stream for input and output with sockets */
+
+#ifndef SOCKSTREAM_H
+#define SOCKSTREAM_H 1
+
+#include <ostream>
+#include <istream>
+#include <streambuf>
+#include <iostream>
+
+using namespace std;
+
+namespace tcp
+{
+
+template<class charT, class Traits=char_traits<charT>>
+class SockStream : virtual public basic_ostream<charT, Traits>,
+                   virtual public basic_istream<charT, Traits>
+{
+
+  private:
+          
+
+  protected:
+
+  public:
+
+};
+
+};
+
+#endif // SOCKSTREAM_H

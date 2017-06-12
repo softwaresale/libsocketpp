@@ -1,0 +1,30 @@
+
+/* This is a basic class for inheriting streambuf to make a socket class */
+
+#ifndef BASIC_SOCKBUF_H
+#define BASIC_SOCKBUF_H 1
+
+#include <streambuf>
+
+using namespace std;
+
+namespace tcp
+{
+
+template<class CharT, class Traits = char_traits<CharT>>
+class Basic_Sockbuf : basic_streambuf
+{
+
+ private:
+	
+  
+ protected:
+
+ public:
+	Basic_Sockbuf(); // creates a new streambuf
+  
+};
+
+};
+
+#endif // BASIC_SOCKBUF_H
