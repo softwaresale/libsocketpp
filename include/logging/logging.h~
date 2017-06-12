@@ -1,0 +1,28 @@
+
+/* This file handles basic logging */
+
+#ifndef LOGGING_H
+#define LOGGING_H 1
+
+enum
+{
+	INFO,
+	WARNING,
+	ERROR
+};
+
+class Log
+{
+
+private:
+
+
+protected:
+
+public:
+
+
+
+};
+
+#endif // LOGGING_H
