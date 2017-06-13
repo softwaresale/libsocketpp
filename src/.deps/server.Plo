@@ -109,10 +109,11 @@ server.lo: server.cc /usr/include/stdc-predef.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/confname.h /usr/include/getopt.h /usr/include/netdb.h \
  /usr/include/rpc/netdb.h /usr/include/bits/siginfo.h \
- /usr/include/bits/netdb.h ../include/tcp/socket.h \
- ../include/tcp/basesockbuf.h ../include/tcp/basesocket.h \
- ../include/tcp/basesockstream.h ../include/tcp/server.h \
- ../include/tcp/socket.h
+ /usr/include/bits/netdb.h ../include/socketpp/tcp/socket.h \
+ ../include/socketpp/tcp/basesockbuf.h \
+ ../include/socketpp/tcp/basesocket.h \
+ ../include/socketpp/tcp/basesockstream.h \
+ ../include/socketpp/tcp/server.h ../include/socketpp/tcp/socket.h
 
 /usr/include/stdc-predef.h:
 
@@ -434,14 +435,14 @@ server.lo: server.cc /usr/include/stdc-predef.h \
 
 /usr/include/bits/netdb.h:
 
-../include/tcp/socket.h:
+../include/socketpp/tcp/socket.h:
 
-../include/tcp/basesockbuf.h:
+../include/socketpp/tcp/basesockbuf.h:
 
-../include/tcp/basesocket.h:
+../include/socketpp/tcp/basesocket.h:
 
-../include/tcp/basesockstream.h:
+../include/socketpp/tcp/basesockstream.h:
 
-../include/tcp/server.h:
+../include/socketpp/tcp/server.h:
 
-../include/tcp/socket.h:
+../include/socketpp/tcp/socket.h:

@@ -7,5 +7,5 @@ LT_INIT
 
 AC_PROG_CXX([g++])
 
-AC_CONFIG_FILES([Makefile src/Makefile include/Makefile include/tcp/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile include/Makefile include/socketpp/Makefile include/socketpp/tcp/Makefile])
 AC_OUTPUT

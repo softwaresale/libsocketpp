@@ -8,12 +8,13 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <netdb.h>
-#include "../include/tcp/basesocket.h"
+#include "../include/socketpp/tcp/basesocket.h"
 
 using namespace std;
 
 /* Basic socket */
 
+/*
 tcp::Basic_socket::Basic_socket()
 {
 
@@ -25,6 +26,7 @@ tcp::Basic_socket::Basic_socket()
 	
 	_isConnected = false;
 }
+*/
 
 tcp::Basic_socket::Basic_socket(char* _host, int _port)
 {
@@ -59,7 +61,7 @@ tcp::Basic_socket::isConnected()
 {
 	return _isConnected;
 }
-
+/*
 int
 tcp::Basic_socket::connects(char* _host, int _port)
 {
@@ -76,6 +78,7 @@ tcp::Basic_socket::connects(char* _host, int _port)
 	_isConnected = true;
 	return 0;
 }
+*/
 
 int
 tcp::Basic_socket::connects()
@@ -102,6 +105,19 @@ tcp::Basic_socket::connects()
 	return 0;
 }
 
+char*
+tcp::Basic_socket::getLocalhost()
+{
+	
+	struct sockaddr_in localAddress;
+	socklen_t addressLen = sizeof(localAddress);
+
+	getsockname(socketfd, (struct sockaddr*)&localAddress, &addressLen);
+
+	char* addr = inet_ntoa(localAddress.sin_addr);
+
+	return addr; // get the local address
+}
 
 int
 tcp::Basic_socket::sends(char* buffer)
@@ -136,7 +152,15 @@ tcp::Basic_socket::sends(char* buffer)
 int
 tcp::Basic_socket::sendc(char ch)
 {
-	return this->sends(&ch);
+	int bytes;
+
+	bytes = send(socketfd, (char*)&ch, sizeof(ch), 0); // send a character
+	if (bytes < 0){
+		cerr << "Error sending data" << endl;
+		return -1;
+	}
+
+	return 0;
 }
 
 /*
@@ -171,6 +195,7 @@ tcp::Basic_socket::sends(int ii)
 }
 */
 
+/*
 char*
 tcp::Basic_socket::reads()
 {
@@ -178,7 +203,7 @@ tcp::Basic_socket::reads()
 	char* buffer;
 	int bytes, buflen;
 
-	/* Read the incoming size */
+	/* Read the incoming size 
 	bytes = recv(socketfd, (char*)&buflen, sizeof(buflen), 0);
 	if (bytes < 0){
 		cerr << "Error reading size of data" << endl;
@@ -188,7 +213,7 @@ tcp::Basic_socket::reads()
 
 	buffer = new char[buflen+1]; // create a buffer for reading with room for null terminator
 
-	/* Read the data */
+	/* Read the data 
 
 	bytes = recv(socketfd, buffer, buflen, 0);
 	if (bytes < 0){
@@ -201,16 +226,18 @@ tcp::Basic_socket::reads()
 	return buffer;
 }
 
-char
-tcp::Basic_socket::readc()
+*/
+
+void
+tcp::Basic_socket::readc(char* buffer)
 {
-	char* str = this->reads();
-        if (str == NULL){
-		delete str;
-		return EOF; // return eof on failure
+	int bytes;
+	bytes = recv(socketfd, buffer, sizeof(buffer), 0);
+	if (bytes < 0){
+		cerr << "Error reading data" << endl;
+		return -1;
 	}
 
-	char ch = str[0]; // return first char
 	return ch;
 }
 

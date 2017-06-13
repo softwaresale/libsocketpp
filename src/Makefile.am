@@ -1,11 +1,7 @@
 
 AM_CPPFLAGS = -I../include/
-AM_LDFLAGS = -version-number 2:1:0
-
-LIIBTOOL_DEPS = @LIIBTOOL_DEPS@
-
-libtool: $(LIIBTOOL_DEPS)
-	$(SHELL) ./config.status libtool
+AM_CXXFLAGS = -std=c++11
+AM_LDFLAGS = -version-number 2:1:3
 
 lib_LTLIBRARIES = libsocketpp.la
 

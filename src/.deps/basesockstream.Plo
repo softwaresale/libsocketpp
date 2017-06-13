@@ -1,5 +1,5 @@
 basesockstream.lo: basesockstream.cc /usr/include/stdc-predef.h \
- ../include/tcp/basesockstream.h /usr/include/c++/6.3.1/ostream \
+ ../include/socketpp/tcp/basesockstream.h /usr/include/c++/6.3.1/ostream \
  /usr/include/c++/6.3.1/ios /usr/include/c++/6.3.1/iosfwd \
  /usr/include/c++/6.3.1/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -99,9 +99,9 @@ basesockstream.lo: basesockstream.cc /usr/include/stdc-predef.h \
  /usr/include/c++/6.3.1/bits/basic_ios.tcc \
  /usr/include/c++/6.3.1/bits/ostream.tcc /usr/include/c++/6.3.1/istream \
  /usr/include/c++/6.3.1/bits/istream.tcc /usr/include/c++/6.3.1/iostream \
- ../include/tcp/basesockbuf.h ../include/tcp/basesocket.h \
- /usr/include/netinet/in.h /usr/include/sys/socket.h \
- /usr/include/sys/uio.h /usr/include/bits/uio.h \
+ ../include/socketpp/tcp/basesockbuf.h \
+ ../include/socketpp/tcp/basesocket.h /usr/include/netinet/in.h \
+ /usr/include/sys/socket.h /usr/include/sys/uio.h /usr/include/bits/uio.h \
  /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
  /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
@@ -111,7 +111,7 @@ basesockstream.lo: basesockstream.cc /usr/include/stdc-predef.h \
 
 /usr/include/stdc-predef.h:
 
-../include/tcp/basesockstream.h:
+../include/socketpp/tcp/basesockstream.h:
 
 /usr/include/c++/6.3.1/ostream:
 
@@ -383,9 +383,9 @@ basesockstream.lo: basesockstream.cc /usr/include/stdc-predef.h \
 
 /usr/include/c++/6.3.1/iostream:
 
-../include/tcp/basesockbuf.h:
+../include/socketpp/tcp/basesockbuf.h:
 
-../include/tcp/basesocket.h:
+../include/socketpp/tcp/basesocket.h:
 
 /usr/include/netinet/in.h:
 

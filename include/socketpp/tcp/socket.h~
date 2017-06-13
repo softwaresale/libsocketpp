@@ -1,0 +1,33 @@
+
+/* The final product */
+
+#ifndef SOCKET_H
+#define SOCKET_H 1
+
+#include <socketpp/tcp/basesockbuf.h>
+#include <socketpp/tcp/basesocket.h>
+#include <socketpp/tcp/basesockstream.h>
+#include <ostream>
+#include <iostream>
+
+using namespace std;
+
+namespace tcp
+{
+
+class Socket : virtual public tcp::Basic_Sockbuf,
+       	       virtual public tcp::Basic_Sockstream
+{
+
+private:
+
+protected:
+
+public:
+	Socket(char* host, int port);
+	Socket(int sockfd);
+};
+
+};
+
+#endif // SOCKET_H

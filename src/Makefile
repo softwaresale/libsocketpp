@@ -305,7 +305,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/charlie/Programming/socketpp/build/install
+prefix = /home/charlie/Programming/socketpp/install
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -317,8 +317,8 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 AM_CPPFLAGS = -I../include/
-AM_LDFLAGS = -version-number 2:1:0
-LIIBTOOL_DEPS = @LIIBTOOL_DEPS@
+AM_CXXFLAGS = -std=c++11
+AM_LDFLAGS = -version-number 2:1:3
 lib_LTLIBRARIES = libsocketpp.la
 libsocketpp_la_SOURCES = basesocket.cc basesockbuf.cc server.cc socket.cc basesockstream.cc
 all: all-am
@@ -640,9 +640,6 @@ uninstall-am: uninstall-libLTLIBRARIES
 
 .PRECIOUS: Makefile
 
-
-libtool: $(LIIBTOOL_DEPS)
-	$(SHELL) ./config.status libtool
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

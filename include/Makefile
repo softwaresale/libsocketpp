@@ -287,7 +287,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/charlie/Programming/socketpp/build/install
+prefix = /home/charlie/Programming/socketpp/install
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -298,7 +298,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-SUBDIRS = tcp
+SUBDIRS = socketpp
 all: all-recursive
 
 .SUFFIXES:
