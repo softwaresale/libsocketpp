@@ -38,6 +38,12 @@ public:
 
 	bool isConnected();                 // true if the socket is connected
 
+	int sends(char*);
+	int sendc(char);
+
+	char* reads();
+	char  readc();
+
 	void closes();                      // closes the connection
 
 };

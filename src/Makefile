@@ -14,7 +14,7 @@
 
 
 
-VPATH = ../../src
+
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
     false; \
@@ -145,7 +145,7 @@ AM_V_at = $(am__v_at_$(V))
 am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I. -I$(srcdir)
+DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -262,10 +262,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 0.1
-abs_builddir = /home/charlie/Programming/socketpp/build/src
-abs_srcdir = /home/charlie/Programming/socketpp/build/../src
-abs_top_builddir = /home/charlie/Programming/socketpp/build
-abs_top_srcdir = /home/charlie/Programming/socketpp/build/..
+abs_builddir = /home/charlie/Programming/socketpp/src
+abs_srcdir = /home/charlie/Programming/socketpp/src
+abs_top_builddir = /home/charlie/Programming/socketpp
+abs_top_srcdir = /home/charlie/Programming/socketpp
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -309,12 +309,12 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = ../../src
+srcdir = .
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = ../
 top_builddir = ..
-top_srcdir = ../..
+top_srcdir = ..
 AM_CPPFLAGS = -I../include/
 lib_LTLIBRARIES = libsocketpp.la
 libsocketpp_la_SOURCES = basesocket.cc basesockbuf.cc server.cc
