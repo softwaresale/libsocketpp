@@ -127,7 +127,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
-am_libsocketpp_la_OBJECTS = basesocket.lo basesockbuf.lo server.lo
+am_libsocketpp_la_OBJECTS = basesocket.lo basesockbuf.lo server.lo \
+	socket.lo basesockstream.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -213,7 +214,7 @@ CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"socketpp\" -DPACKAGE_TARNAME=\"socketpp\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"socketpp\ 0.1\" -DPACKAGE_BUGREPORT=\"chucks.8090@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"socketpp\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
+DEFS = -DPACKAGE_NAME=\"socketpp\" -DPACKAGE_TARNAME=\"socketpp\" -DPACKAGE_VERSION=\"0.2\" -DPACKAGE_STRING=\"socketpp\ 0.2\" -DPACKAGE_BUGREPORT=\"chucks.8090@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"socketpp\" -DVERSION=\"0.2\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
 DEPDIR = .deps
 DLLTOOL = false
 DSYMUTIL = 
@@ -251,17 +252,17 @@ OTOOL64 =
 PACKAGE = socketpp
 PACKAGE_BUGREPORT = chucks.8090@gmail.com
 PACKAGE_NAME = socketpp
-PACKAGE_STRING = socketpp 0.1
+PACKAGE_STRING = socketpp 0.2
 PACKAGE_TARNAME = socketpp
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.1
+PACKAGE_VERSION = 0.2
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.1
+VERSION = 0.2
 abs_builddir = /home/charlie/Programming/socketpp/src
 abs_srcdir = /home/charlie/Programming/socketpp/src
 abs_top_builddir = /home/charlie/Programming/socketpp
@@ -304,7 +305,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /home/charlie/Programming/socketpp/build/install
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -316,8 +317,10 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 AM_CPPFLAGS = -I../include/
+AM_LDFLAGS = -version-number 2:1:0
+LIIBTOOL_DEPS = @LIIBTOOL_DEPS@
 lib_LTLIBRARIES = libsocketpp.la
-libsocketpp_la_SOURCES = basesocket.cc basesockbuf.cc server.cc
+libsocketpp_la_SOURCES = basesocket.cc basesockbuf.cc server.cc socket.cc basesockstream.cc
 all: all-am
 
 .SUFFIXES:
@@ -398,7 +401,9 @@ distclean-compile:
 
 include ./$(DEPDIR)/basesockbuf.Plo
 include ./$(DEPDIR)/basesocket.Plo
+include ./$(DEPDIR)/basesockstream.Plo
 include ./$(DEPDIR)/server.Plo
+include ./$(DEPDIR)/socket.Plo
 
 .cc.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -635,6 +640,9 @@ uninstall-am: uninstall-libLTLIBRARIES
 
 .PRECIOUS: Makefile
 
+
+libtool: $(LIIBTOOL_DEPS)
+	$(SHELL) ./config.status libtool
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

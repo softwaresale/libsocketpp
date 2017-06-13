@@ -127,7 +127,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
-am_libsocketpp_la_OBJECTS = basesocket.lo basesockbuf.lo server.lo
+am_libsocketpp_la_OBJECTS = basesocket.lo basesockbuf.lo server.lo \
+	socket.lo basesockstream.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -316,8 +317,10 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I../include/
+AM_LDFLAGS = -version-number 2:1:0
+LIIBTOOL_DEPS = @LIIBTOOL_DEPS@
 lib_LTLIBRARIES = libsocketpp.la
-libsocketpp_la_SOURCES = basesocket.cc basesockbuf.cc server.cc
+libsocketpp_la_SOURCES = basesocket.cc basesockbuf.cc server.cc socket.cc basesockstream.cc
 all: all-am
 
 .SUFFIXES:
@@ -398,7 +401,9 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesockbuf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesocket.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesockstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/socket.Plo@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -635,6 +640,9 @@ uninstall-am: uninstall-libLTLIBRARIES
 
 .PRECIOUS: Makefile
 
+
+libtool: $(LIIBTOOL_DEPS)
+	$(SHELL) ./config.status libtool
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
