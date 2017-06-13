@@ -7,19 +7,19 @@
 using namespace std;
 
 tcp::Socket::Socket()
-	: ostream()
+	: tcp::Basic_Sockstream(NULL)
 {
-	
+
 }
 
 tcp::Socket::Socket(char* host, int port)
-	: ostream(new tcp::Basic_Sockbuf(host, port))
+	: tcp::Basic_Sockstream(new tcp::Basic_Sockbuf(host, port))
 {
 
 }
 
 tcp::Socket::Socket(int sockfd)
-	: ostream(new tcp::Basic_Sockbuf(sockfd))
+	: tcp::Basic_Sockstream(new tcp::Basic_Sockbuf(sockfd))
 {
 
 }

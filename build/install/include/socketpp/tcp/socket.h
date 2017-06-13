@@ -4,9 +4,9 @@
 #ifndef SOCKET_H
 #define SOCKET_H 1
 
-#include <tcp/basesockbuf.h>
-#include <tcp/basesocket.h>
-#include <tcp/basesockstream.h>
+#include <socketpp/tcp/basesockbuf.h>
+#include <socketpp/tcp/basesocket.h>
+#include <socketpp/tcp/basesockstream.h>
 #include <ostream>
 
 using namespace std;

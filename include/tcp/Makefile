@@ -275,7 +275,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/charlie/Programming/socketpp/build/install
+prefix = /usr/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -288,7 +288,7 @@ top_builddir = ../..
 top_srcdir = ../..
 socketppdir = $(includedir)/socketpp
 tcpdir = $(socketppdir)/tcp
-tcp_HEADERS = basesocket.h basesockbuf.h basesockstream.h server.h
+tcp_HEADERS = basesocket.h basesockbuf.h basesockstream.h server.h socket.h
 all: all-am
 
 .SUFFIXES:
