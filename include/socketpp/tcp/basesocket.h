@@ -25,12 +25,6 @@ protected:
 	int                port;
 	bool              _isConnected;
 	
-	int sends(char*);
-	int sendc(char);
-
-	int reads(char*);
-	int readc(char*);
-
 	
 public:
 	Basic_socket(char* host, int port); // create a new socket class with host and port
@@ -44,6 +38,14 @@ public:
 
 	bool isConnected();                 // true if the socket is connected
 
+       	int sends(char*);
+	int sendc(char);
+
+	int reads(char*);
+	int readc(char*);
+
+
+	
 	void closes();                      // closes the connection
 
 };

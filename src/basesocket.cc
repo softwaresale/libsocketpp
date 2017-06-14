@@ -229,10 +229,10 @@ tcp::Basic_socket::reads()
 */
 
 void
-tcp::Basic_socket::readc(char* buffer)
+tcp::Basic_socket::readc(char* buffer, int size)
 {
 	int bytes;
-	bytes = recv(socketfd, buffer, sizeof(buffer), 0);
+	bytes = recv(socketfd, buffer, size, 0);
 	if (bytes < 0){
 		cerr << "Error reading data" << endl;
 		return -1;
