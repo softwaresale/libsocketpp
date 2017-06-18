@@ -110,10 +110,17 @@ server.lo: server.cc /usr/include/stdc-predef.h \
  /usr/include/bits/confname.h /usr/include/getopt.h /usr/include/netdb.h \
  /usr/include/rpc/netdb.h /usr/include/bits/siginfo.h \
  /usr/include/bits/netdb.h ../include/socketpp/tcp/socket.h \
- ../include/socketpp/tcp/basesockbuf.h \
  ../include/socketpp/tcp/basesocket.h \
- ../include/socketpp/tcp/basesockstream.h \
- ../include/socketpp/tcp/server.h ../include/socketpp/tcp/socket.h
+ ../include/socketpp/tcp/basereadbuf.h /usr/include/c++/6.3.1/vector \
+ /usr/include/c++/6.3.1/bits/stl_construct.h \
+ /usr/include/c++/6.3.1/bits/stl_uninitialized.h \
+ /usr/include/c++/6.3.1/bits/stl_vector.h \
+ /usr/include/c++/6.3.1/bits/stl_bvector.h \
+ /usr/include/c++/6.3.1/bits/vector.tcc \
+ ../include/socketpp/tcp/basewritebuf.h \
+ ../include/socketpp/tcp/basesockin.h \
+ ../include/socketpp/tcp/basesockout.h ../include/socketpp/tcp/server.h \
+ ../include/socketpp/tcp/socket.h
 
 /usr/include/stdc-predef.h:
 
@@ -437,11 +444,27 @@ server.lo: server.cc /usr/include/stdc-predef.h \
 
 ../include/socketpp/tcp/socket.h:
 
-../include/socketpp/tcp/basesockbuf.h:
-
 ../include/socketpp/tcp/basesocket.h:
 
-../include/socketpp/tcp/basesockstream.h:
+../include/socketpp/tcp/basereadbuf.h:
+
+/usr/include/c++/6.3.1/vector:
+
+/usr/include/c++/6.3.1/bits/stl_construct.h:
+
+/usr/include/c++/6.3.1/bits/stl_uninitialized.h:
+
+/usr/include/c++/6.3.1/bits/stl_vector.h:
+
+/usr/include/c++/6.3.1/bits/stl_bvector.h:
+
+/usr/include/c++/6.3.1/bits/vector.tcc:
+
+../include/socketpp/tcp/basewritebuf.h:
+
+../include/socketpp/tcp/basesockin.h:
+
+../include/socketpp/tcp/basesockout.h:
 
 ../include/socketpp/tcp/server.h:
 

@@ -1,22 +1,21 @@
 
-/* The final product */
-
 #ifndef SOCKET_H
 #define SOCKET_H 1
 
-#include <socketpp/tcp/basesockbuf.h>
 #include <socketpp/tcp/basesocket.h>
-#include <socketpp/tcp/basesockstream.h>
+#include <socketpp/tcp/basereadbuf.h>
+#include <socketpp/tcp/basewritebuf.h>
+#include <socketpp/tcp/basesockin.h>
+#include <socketpp/tcp/basesockout.h>
+#include <istream>
 #include <ostream>
-#include <iostream>
 
 using namespace std;
 
 namespace tcp
 {
 
-class Socket : public tcp::Basic_Sockbuf,
-       	       public tcp::Basic_Sockstream
+class Socket : public tcp::basic_socket, public ostream, public istream
 {
 
 private:
@@ -24,10 +23,11 @@ private:
 protected:
 
 public:
-	Socket(char* host, int port);
+	Socket(const char* host, int port);
 	Socket(int sockfd);
+	
 };
-
+		
 };
 
 #endif // SOCKET_H

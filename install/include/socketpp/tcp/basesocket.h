@@ -15,7 +15,7 @@ using namespace std;
 /* Dealing with TCP sockets */
 namespace tcp {
 
-class Basic_socket
+class basic_socket
 {
 
 protected:
@@ -25,25 +25,30 @@ protected:
 	int                port;
 	bool              _isConnected;
 	
-	int sends(char*);
-	int sendc(char);
-
-	char* reads();
-	char  readc();
-
 	
 public:
-	Basic_socket(char* host, int port); // create a new socket class with host and port
-	Basic_socket(int sockd);            // create a socket class from existing socket descriptor
+	basic_socket();
+	basic_socket(const char* host, int port); // create a new socket class with host and port
+	basic_socket(int sockd);            // create a socket class from existing socket descriptor
 	
 	int   getSockfd();                  // returns the socket descriptor
 	char* getLocalhost();               // gets the localhost of the socket
 
-	// int connect(char*, int);
+	int connects(const char*, int);
 	int connects();                      // connects to the server if address already set
 
 	bool isConnected();                 // true if the socket is connected
 
+       	int sends(char*);
+	int sendc(char);
+	int sendBuf(char*, int);
+
+	char* reads();
+	int   readc(char*);
+	int   readBuf(char*, int);
+
+
+	
 	void closes();                      // closes the connection
 
 };

@@ -1,46 +1,38 @@
-#include "include/socketpp/tcp/socket.h"
-#include "include/socketpp/tcp/basesockbuf.h"
+#include <socketpp/tcp/socket.h>
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 using namespace tcp;
 
 int main()
 {
-	///*
-	cout << "Creating socket..." << endl;
-	Socket sock = Socket("192.168.1.98", 8888); // local connection
-	cout << "Created"     << endl;
+	Socket sock("192.168.1.98", 8899);
+	int ret = sock.connects(); // connects to host
+	cout << "client: sock.connects() ret == " << ret << endl;
 	
-	// test Basic_socket member
 	if (!sock.isConnected()){
-		
-		// test iostream func
-		sock.put('c'); // write 'c' to socket
-		
-		cout << sock.getLocalhost() << endl; // test basic_sockstream
-		
-		sock.closes();      // another 
-		
+		cerr << "client: Socket not connected" << endl;
+		return -1;
 	} else {
-		cerr << "Socket not connected" << endl;
+		cout << "client: Socket connected" << endl;
 	}
-	//*/
-	/*
-	Basic_Sockbuf* sockbuf = new Basic_Sockbuf("192.168.1.98", 8888);
-	iostream io(sockbuf);
 	
-	if (sockbuf->isConnected()){
-		
-		io.put('c');
-		char ch = io.get();
-		
-		cout << ch << endl;
-		
-	} else {
-		cerr << "Error" << endl;
+	// write data
+	char ch = 'A';
+	sock.put(ch);
+	sock.sync();
+	cout << "Getting value" << endl;
+	char c = sock.get();
+	if (c == '\377'){
+		cout << "EOF" << endl;
+		sock.closes();
+		return 1;
 	}
-	*/
+		
+	cout << c << endl;
+	
+	sock.closes();
 	
 	return 0;
 }

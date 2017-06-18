@@ -83,7 +83,7 @@ int tcp::Server::binds(int _port){
 
 bool  tcp::Server::isBound() { return this->_isBound; }
 
-tcp::Socket&
+tcp::Socket*
 tcp::Server::accepts(){
 
 	listen(server, 10); // sets the server to listen
@@ -95,7 +95,7 @@ tcp::Server::accepts(){
 
 	tcp::Socket* temp = new tcp::Socket(conn);
 
-	return *temp;
+	return temp;
 
 }
 

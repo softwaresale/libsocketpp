@@ -1,11 +1,13 @@
 
-all: server client
+all: client server
 
-server: server.cc
-	g++ $< lib/libsocketpp.a -I./include -o $@
+client: client.cc lib/libsocketpp.a
+	g++ client.cc lib/libsocketpp.a -g -I./include -o client
 
-client: client.cc
-	g++ $< lib/libsocketpp.a -I./include -o $@
+server: server.cc lib/libsocketpp.a
+	g++ server.cc lib/libsocketpp.a -g -I./include -o server
 
 clean:
-	rm server client
+	rm client server
+
+remake: clean all

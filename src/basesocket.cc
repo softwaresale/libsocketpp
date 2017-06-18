@@ -8,62 +8,63 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <netdb.h>
+#include <errno.h> // THINK ABOUT IMPLEMENTING ERRNO
 #include "../include/socketpp/tcp/basesocket.h"
 
 using namespace std;
 
 /* Basic socket */
 
-/*
-tcp::Basic_socket::Basic_socket()
-{
-
+tcp::basic_socket::basic_socket()
+	: host(NULL),
+	  port(0)
+{	
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
-		cerr << "Error creating socket" << endl;
-		return;
-	}
-	
-	_isConnected = false;
-}
-*/
-
-tcp::Basic_socket::Basic_socket(char* _host, int _port)
-{
-
-	host = _host; // sets the class host variable
-	port = _port; // sets the class port variable
-
-
-	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
-	if (socketfd < 0){
-		cerr << "Error creating socket" << endl;
+		cerr << "basesocket.cc:17:25: Error creating socket descriptor (non-zero return)" << endl;
 		return;
 	}
 	
 	_isConnected = false;
 }
 
-tcp::Basic_socket::Basic_socket(int sockd)
+
+tcp::basic_socket::basic_socket(const char* _host, int _port)
+	: host((char*) _host),
+	  port(_port)
 {
-	_isConnected = true; // socket should be connected
-	socketfd = sockd; // sets the socket descriptor
+	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
+	if (socketfd < 0){
+		cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
+		return;
+		/* Consider making a socket exception */
+	}
+}
+
+tcp::basic_socket::basic_socket(int sockd)
+	: socketfd(sockd)
+{
 }
 
 int
-tcp::Basic_socket::getSockfd()
+tcp::basic_socket::getSockfd()
 {
 	return this->socketfd;
 }
 
 bool
-tcp::Basic_socket::isConnected()
+tcp::basic_socket::isConnected()
 {
-	return _isConnected;
+	int error;
+        socklen_t size = sizeof(error);
+	int ret = getsockopt(socketfd, SOL_SOCKET, SO_ERROR, &error, &size);
+
+	return (ret == 0 && error == 0) ? true : false; // if both are true, then socket is connected
 }
-/*
+
+
 int
-tcp::Basic_socket::connects(char* _host, int _port)
+tcp::basic_socket::connects(const char* _host, int _port)
 {
 
 	addr.sin_family      = AF_INET;         // sets the address's family
@@ -71,33 +72,39 @@ tcp::Basic_socket::connects(char* _host, int _port)
 	addr.sin_addr.s_addr = inet_addr(_host); // sets the address's host
 
 	if ( connect(socketfd, (struct sockaddr*)&addr, sizeof(addr)) < 0){
-		cerr << "Error connecting to server" << endl;
+		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return 1;
 	}
 
 	_isConnected = true;
 	return 0;
 }
-*/
+
 
 int
-tcp::Basic_socket::connects()
+tcp::basic_socket::connects()
 {
 
 	if (host == NULL || port == 0){
-
-		cerr << "Error: host or port not set. Use 'connect(host, port)' instead" << endl;
-		return 1;
+		cerr << "basesocket.cc:connects::84: Host and port not set" << endl;
+		return -1;
 
 	}
+	
+	/*
+	if (isConnected()){
+		cerr << "basesocket.cc:connects::84: Socket already connected" << endl;
+		return -2;
+	}
+	*/
 
 	addr.sin_family      = AF_INET;          // sets the address's family
 	addr.sin_port        = htons(port);      // sets the address's port
 	addr.sin_addr.s_addr = inet_addr(host);  // sets the address's host
 
 	if ( connect(socketfd, (struct sockaddr*)&addr, sizeof(addr)) < 0){
-		cerr << "Error connecting to host" << endl;
-		return 1;
+		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
+		return -1;
 	}
 	
 	_isConnected = true;
@@ -106,21 +113,19 @@ tcp::Basic_socket::connects()
 }
 
 char*
-tcp::Basic_socket::getLocalhost()
+tcp::basic_socket::getLocalhost()
 {
 	
 	struct sockaddr_in localAddress;
 	socklen_t addressLen = sizeof(localAddress);
-
 	getsockname(socketfd, (struct sockaddr*)&localAddress, &addressLen);
-
-	char* addr = inet_ntoa(localAddress.sin_addr);
-
+	char* addr = NULL;
+ 	addr = inet_ntoa(localAddress.sin_addr);
 	return addr; // get the local address
 }
 
 int
-tcp::Basic_socket::sends(char* buffer)
+tcp::basic_socket::sends(char* buffer)
 {
 
 	int bytes;
@@ -150,7 +155,7 @@ tcp::Basic_socket::sends(char* buffer)
 }
 
 int
-tcp::Basic_socket::sendc(char ch)
+tcp::basic_socket::sendc(char ch)
 {
 	int bytes;
 
@@ -163,47 +168,32 @@ tcp::Basic_socket::sendc(char ch)
 	return 0;
 }
 
-/*
-
 int
-tcp::Basic_socket::sends(int ii)
+tcp::basic_socket::sendBuf(char* data, int size)
 {
-
-	int bytes;
-
-	char* in = (char*)&ii;
-
-	//* First, send the size of buffer 
-	int datalen = strlen(in);     // get sizeof buffer
-	int len     = htonl(datalen); // reformat
-
-	bytes = send(socketfd, (char*)&len, sizeof(len), 0); // send the size
+	// make sure connected
+	if (!isConnected()){
+		cerr << "basesocket.cc:sendBuf:164: Socket not connected" << endl;
+		return -2; // not connected
+	}
+	
+	int bytes = send(socketfd, data, size, 0); // get bytes read
 	if (bytes < 0){
-		cerr << "Error sending size of buffer to socket" << endl;
-		return 1;
+		cerr << "basesocket.cc:sendBuf:164: No bytes sent" << endl;
+		return bytes;
 	}
 
-	/* Now acutally send the data 
-
-	bytes = send(socketfd, in, datalen, 0);
-	if (bytes < 0){
-		cerr << "Error writing buffer to socket" << endl;
-		return 1;
-	}
-
-	return 0;
+	return bytes; // return number of bytes sent
 }
-*/
 
-/*
 char*
-tcp::Basic_socket::reads()
+tcp::basic_socket::reads()
 {
 
 	char* buffer;
 	int bytes, buflen;
 
-	/* Read the incoming size 
+	// Read the incoming size 
 	bytes = recv(socketfd, (char*)&buflen, sizeof(buflen), 0);
 	if (bytes < 0){
 		cerr << "Error reading size of data" << endl;
@@ -213,7 +203,7 @@ tcp::Basic_socket::reads()
 
 	buffer = new char[buflen+1]; // create a buffer for reading with room for null terminator
 
-	/* Read the data 
+	//* Read the data 
 
 	bytes = recv(socketfd, buffer, buflen, 0);
 	if (bytes < 0){
@@ -226,23 +216,26 @@ tcp::Basic_socket::reads()
 	return buffer;
 }
 
-*/
-
-void
-tcp::Basic_socket::readc(char* buffer, int size)
+int
+tcp::basic_socket::readc(char* buffer)
 {
-	int bytes;
-	bytes = recv(socketfd, buffer, size, 0);
+	return this->readBuf(buffer, sizeof(buffer));
+}
+
+int
+tcp::basic_socket::readBuf(char* buffer, int size)
+{
+	int bytes = recv(socketfd, buffer, size, 0);
 	if (bytes < 0){
-		cerr << "Error reading data" << endl;
+		cerr << "basesocket.cc:readBuf:225: No bytes read" << endl;
 		return -1;
 	}
 
-	return ch;
+	return bytes;
 }
 
 void
-tcp::Basic_socket::closes()
+tcp::basic_socket::closes()
 {
 	close(socketfd);
 }

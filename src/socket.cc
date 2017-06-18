@@ -1,22 +1,27 @@
 
-#include <socketpp/tcp/socket.h>
 #include <socketpp/tcp/basesocket.h>
-#include <socketpp/tcp/basesockbuf.h>
+#include <socketpp/tcp/basereadbuf.h>
+#include <socketpp/tcp/basewritebuf.h>
+#include <socketpp/tcp/basesockout.h>
+#include <socketpp/tcp/basesockin.h>
 #include <ostream>
-#include <iostream>
+#include <istream>
+#include <socketpp/tcp/socket.h>
 
 using namespace std;
 
-tcp::Socket::Socket(char* host, int port)
-	: tcp::Basic_Sockbuf(host, port),
-       	  tcp::Basic_Sockstream(this)
+tcp::Socket::Socket(const char* host, int port)
+	: tcp::basic_socket(host, port),
+	  istream(new tcp::basic_read_buf(this)),
+	  ostream(new tcp::basic_write_buf(this))
 {
-	// constructor called
+	
 }
 
 tcp::Socket::Socket(int sockfd)
-	: tcp::Basic_Sockbuf(sockfd),
-	  tcp::Basic_Sockstream(this)
+  : tcp::basic_socket(sockfd),
+    istream(new tcp::basic_read_buf(this)),
+    ostream(new tcp::basic_write_buf(this))
 {
 
 }
