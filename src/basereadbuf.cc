@@ -25,6 +25,7 @@ tcp::basic_read_buf::basic_read_buf(basic_socket* _sock)
 streambuf::int_type
 tcp::basic_read_buf::underflow()
 {
+	cout << "basereadbuf.cc:underflow: Calling underflow..." << endl;
 	if (gptr() < egptr()) // buffer not exhausted
 		return traits_type::to_int_type(*gptr());
 
