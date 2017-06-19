@@ -127,8 +127,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
-am_libsocketpp_la_OBJECTS = server.lo basesocket.lo basereadbuf.lo \
-	basewritebuf.lo socket.lo
+am_libsocketpp_la_OBJECTS = server.lo basesocket.lo basesockbuf.lo \
+	socket.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -320,7 +320,7 @@ AM_CPPFLAGS = -I../include/
 AM_CXXFLAGS = -std=c++11
 AM_LDFLAGS = -version-number 2:1:4
 lib_LTLIBRARIES = libsocketpp.la
-libsocketpp_la_SOURCES = server.cc basesocket.cc basereadbuf.cc basewritebuf.cc socket.cc
+libsocketpp_la_SOURCES = server.cc basesocket.cc basesockbuf.cc socket.cc
 all: all-am
 
 .SUFFIXES:
@@ -399,9 +399,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basereadbuf.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesockbuf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesocket.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basewritebuf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/socket.Plo@am__quote@
 

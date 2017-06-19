@@ -10,25 +10,27 @@ int main()
 {
 	
 	Server serv(8899);
-	serv.binds();
+	
+	int ret = serv.binds();
+	cout << "serv.binds() == " << ret << endl;
 	
 	Socket* sock = serv.accepts();
-	if (sock->isConnected()){
-		
-		sock->sync();	
-			
-		char ch = sock->get();
-		cout << ch << endl;
-		
-		sock->put('A');
-		
-		sock->closes();
-		
+	if (!sock->isConnected()) /* not connected */ {
+		cerr << "server: Socket is not connected" << endl;
+		delete sock;
+		serv.closes();
+		return -1;
 	} else {
-		cerr << "server: Socket not connected" << endl;
+		cout << "server: Socket is connected" << endl;
 	}
 	
-	delete sock;
+	// Read data
+	char* buffer = new char[32];
+	sock->read(buffer, sizeof(buffer));
+	
+	cout << "Buffer: " << buffer << endl;
+	
+	sock->closes();
 	
 	serv.closes();
 	

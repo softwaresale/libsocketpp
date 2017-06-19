@@ -94,16 +94,9 @@ socket.lo: socket.cc /usr/include/stdc-predef.h \
  /usr/include/c++/6.3.1/x86_64-redhat-linux/bits/error_constants.h \
  /usr/include/c++/6.3.1/stdexcept \
  /usr/include/c++/6.3.1/bits/streambuf.tcc \
- ../include/socketpp/tcp/basereadbuf.h /usr/include/c++/6.3.1/vector \
- /usr/include/c++/6.3.1/bits/stl_construct.h \
- /usr/include/c++/6.3.1/bits/stl_uninitialized.h \
- /usr/include/c++/6.3.1/bits/stl_vector.h \
- /usr/include/c++/6.3.1/bits/stl_bvector.h \
- /usr/include/c++/6.3.1/bits/vector.tcc \
- ../include/socketpp/tcp/basewritebuf.h \
- ../include/socketpp/tcp/basesockout.h \
- ../include/socketpp/tcp/basesockin.h /usr/include/c++/6.3.1/ostream \
- /usr/include/c++/6.3.1/ios /usr/include/c++/6.3.1/bits/basic_ios.h \
+ ../include/socketpp/tcp/socket.h /usr/include/c++/6.3.1/iostream \
+ /usr/include/c++/6.3.1/ostream /usr/include/c++/6.3.1/ios \
+ /usr/include/c++/6.3.1/bits/basic_ios.h \
  /usr/include/c++/6.3.1/bits/locale_facets.h \
  /usr/include/c++/6.3.1/cwctype /usr/include/wctype.h \
  /usr/include/c++/6.3.1/x86_64-redhat-linux/bits/ctype_base.h \
@@ -112,7 +105,13 @@ socket.lo: socket.cc /usr/include/stdc-predef.h \
  /usr/include/c++/6.3.1/bits/locale_facets.tcc \
  /usr/include/c++/6.3.1/bits/basic_ios.tcc \
  /usr/include/c++/6.3.1/bits/ostream.tcc /usr/include/c++/6.3.1/istream \
- /usr/include/c++/6.3.1/bits/istream.tcc ../include/socketpp/tcp/socket.h
+ /usr/include/c++/6.3.1/bits/istream.tcc \
+ ../include/socketpp/tcp/basesockbuf.h /usr/include/c++/6.3.1/vector \
+ /usr/include/c++/6.3.1/bits/stl_construct.h \
+ /usr/include/c++/6.3.1/bits/stl_uninitialized.h \
+ /usr/include/c++/6.3.1/bits/stl_vector.h \
+ /usr/include/c++/6.3.1/bits/stl_bvector.h \
+ /usr/include/c++/6.3.1/bits/vector.tcc
 
 /usr/include/stdc-predef.h:
 
@@ -392,25 +391,9 @@ socket.lo: socket.cc /usr/include/stdc-predef.h \
 
 /usr/include/c++/6.3.1/bits/streambuf.tcc:
 
-../include/socketpp/tcp/basereadbuf.h:
+../include/socketpp/tcp/socket.h:
 
-/usr/include/c++/6.3.1/vector:
-
-/usr/include/c++/6.3.1/bits/stl_construct.h:
-
-/usr/include/c++/6.3.1/bits/stl_uninitialized.h:
-
-/usr/include/c++/6.3.1/bits/stl_vector.h:
-
-/usr/include/c++/6.3.1/bits/stl_bvector.h:
-
-/usr/include/c++/6.3.1/bits/vector.tcc:
-
-../include/socketpp/tcp/basewritebuf.h:
-
-../include/socketpp/tcp/basesockout.h:
-
-../include/socketpp/tcp/basesockin.h:
+/usr/include/c++/6.3.1/iostream:
 
 /usr/include/c++/6.3.1/ostream:
 
@@ -440,4 +423,16 @@ socket.lo: socket.cc /usr/include/stdc-predef.h \
 
 /usr/include/c++/6.3.1/bits/istream.tcc:
 
-../include/socketpp/tcp/socket.h:
+../include/socketpp/tcp/basesockbuf.h:
+
+/usr/include/c++/6.3.1/vector:
+
+/usr/include/c++/6.3.1/bits/stl_construct.h:
+
+/usr/include/c++/6.3.1/bits/stl_uninitialized.h:
+
+/usr/include/c++/6.3.1/bits/stl_vector.h:
+
+/usr/include/c++/6.3.1/bits/stl_bvector.h:
+
+/usr/include/c++/6.3.1/bits/vector.tcc:

@@ -7,30 +7,24 @@ using namespace tcp;
 
 int main()
 {
-	Socket sock("192.168.1.98", 8899);
-	int ret = sock.connects(); // connects to host
-	cout << "client: sock.connects() ret == " << ret << endl;
+	Socket sock("127.0.0.1", 8899); // create a sock obj
+	int ret = sock.connects();
+	cout << "sock.connects() == " << ret << endl;
 	
 	if (!sock.isConnected()){
-		cerr << "client: Socket not connected" << endl;
-		return -1;
-	} else {
-		cout << "client: Socket connected" << endl;
-	}
-	
-	// write data
-	char ch = 'A';
-	sock.put(ch);
-	sock.sync();
-	cout << "Getting value" << endl;
-	char c = sock.get();
-	if (c == '\377'){
-		cout << "EOF" << endl;
+		cerr << "client: Socket is not connected" << endl;
 		sock.closes();
-		return 1;
-	}
-		
-	cout << c << endl;
+		return -1;
+	} 
+	
+	cout << "Client is connected." << endl;
+	
+	cout << "Writing data" << endl;
+	
+	const char* msg = "Hello World";
+	
+	sock.write(msg, strlen(msg));
+	sock.flush();
 	
 	sock.closes();
 	

@@ -120,7 +120,9 @@ basereadbuf.lo: basereadbuf.cc /usr/include/stdc-predef.h \
  /usr/include/c++/6.3.1/bits/basic_ios.tcc \
  /usr/include/c++/6.3.1/bits/ostream.tcc /usr/include/c++/6.3.1/istream \
  /usr/include/c++/6.3.1/bits/istream.tcc /usr/include/c++/6.3.1/cstring \
- /usr/include/string.h
+ /usr/include/string.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/getopt.h
 
 /usr/include/stdc-predef.h:
 
@@ -465,3 +467,13 @@ basereadbuf.lo: basereadbuf.cc /usr/include/stdc-predef.h \
 /usr/include/c++/6.3.1/cstring:
 
 /usr/include/string.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/environments.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
