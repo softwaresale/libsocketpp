@@ -7,7 +7,7 @@ using namespace tcp;
 
 int main()
 {
-	Socket sock("192.168.1.98", 8899);
+	Socket sock("192.168.1.93", 8899);
 	int ret = sock.connects(); // connects to host
 	cout << "client: sock.connects() ret == " << ret << endl;
 	

@@ -19,21 +19,29 @@ tcp::basic_write_buf::basic_write_buf(basic_socket* _sock)
 streambuf::int_type
 tcp::basic_write_buf::overflow(char ch)
 {
-	if (ch != traits_type::eof()){
+	cout << "Calling overflow..." << endl;
 
+	if (ch != traits_type::eof()){
+		
+		cout << "Asserting value..." << endl;
 		assert(less_equal<char*>()(pptr(), epptr()));
+		cout << "Setting value and bumping" << endl;
 		*pptr() = ch;
 		pbump(1);
 
 		// write data
+		cout << "Getting size of pointers..." << endl;
 		ptrdiff_t size = pptr() - pbase();
 		pbump(-size);
-
+		
+		cout << "Sending buffer..." << endl;
 		int ret = sock->sendBuf(pbase(), size); // should send data
 		if (ret <= 0){
+			cout << "RET: " << ret << endl;
 			cerr << "basewritebuf.cc:overflow: sock send not bytes" << endl;
 			return traits_type::eof();
-		}
+		} 
+		cout << "RET: " << ret << endl;
 
 		return ch;
 		
