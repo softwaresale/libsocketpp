@@ -26,14 +26,13 @@ tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 
 	// set up the write pointers
 	char* base = &buffer.front();
-	setp(base, base + buffer.size() - 1); // -1 to make overflow easier
+	setp(base, base + buffer.size()); // -1 to make overflow easier
 
 }
 
 streambuf::int_type
 tcp::base_sock_buf::underflow()
 {
-	cout << "basereadbuf.cc:underflow: Calling underflow..." << endl;
 	if (gptr() < egptr()){ // buffer not exhausted
 		cout << "basereadbuf.cc:underflow: Buffer not exhausted" << endl;
 		return traits_type::to_int_type(*gptr());
@@ -48,14 +47,8 @@ tcp::base_sock_buf::underflow()
 	}
 
 	// read into the buffer from socket
-	cout << "Reading data into buffer" << endl;
 
-	// try using a system call for this one
-	//int ret = read(sock->getSockfd(), start, buffer.size() - (start - base));
 	int ret = sock->readBuf(start, buffer.size() - (start - base));
-	 //cout << "Socket ID: " << sock->getSockfd() << endl;
-	 //char* charbuffer = new char[32];
-	 //ssize_t ret = read(sock->getSockfd(), charbuffer, 32-1);
 	
 	cout << "RETCODE: " << ret << endl;
 	
@@ -64,13 +57,8 @@ tcp::base_sock_buf::underflow()
 		return traits_type::eof();
 	}
 	
-	cout << "Buffer contents: " << buffer.data() << endl;
-	
 	// set pointers
-	cout << "Setting pointers" << endl;
 	setg(base, start, start + ret);
-	
-	cout << *gptr() << endl;
 
 	return traits_type::to_int_type(*gptr());
 }
@@ -79,24 +67,16 @@ tcp::base_sock_buf::underflow()
 streambuf::int_type
 tcp::base_sock_buf::overflow(char ch)
 {
-	cout << "basesockbuf.cc:overflwo: Calling overflow..." << endl;
-
 	if (ch != traits_type::eof()){
 		
-		cout << "Asserting value..." << endl;
 		assert(less_equal<char*>()(pptr(), epptr()));
-		cout << "Setting value and bumping" << endl;
 		*pptr() = ch;
-		cout << "pptr() = " << ch << endl;
 		pbump(1);
 
 		// write data
-		cout << "Getting size of pointers..." << endl;
 		ptrdiff_t size = pptr() - pbase();
-		cout << "Size: " << size << endl;
 		pbump(-size);
 		
-		cout << "Sending buffer..." << endl;
 		int ret = sock->sendBuf(pbase(), size); // should send data
 		if (ret <= 0){
 			cout << "RET: " << ret << endl;
@@ -116,12 +96,9 @@ tcp::base_sock_buf::overflow(char ch)
 int
 tcp::base_sock_buf::sync()
 {
-	cout << "basesockbuf.cc:sync: Calling sync..." << endl;
 	ptrdiff_t size = pptr() - pbase();
-	cout << "basesockbuf.cc:sync: Size: " << size << endl;
 	pbump(-size);
 	int ret = sock->sendBuf(pbase(), size);
-	cout << "basesockbuf.cc:sync: RET: " << ret << endl;
 	if (ret <= 0){
 		cerr << "basesockbuf.cc:sync: sock sent no bytes" << endl;
 		return traits_type::eof();
