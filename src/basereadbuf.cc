@@ -43,12 +43,25 @@ tcp::basic_read_buf::underflow()
 
 	// read into the buffer from socket
 	cout << "Reading data into buffer" << endl;
-	int ret = sock->readBuf(start, buffer.size() - (start - base));
+
+	char* _buffer = new char[32]; // make a large buffer (note: dynamically allocate this later)
+	// int ret = sock->readBuf(start, buffer.size() - (start - base));
+	int ret = sock->readBuf(_buffer, sizeof(buffer)); // read the buffer into the thing
+
 	if (ret < 0){
 		cerr << "tcp::basic_read_buf:underflow(): sock->readBuf returned lower than 0 value" << endl;
 		return traits_type::eof();
 	}
+	
+	int len = strlen(_buffer);
+	_buffer[len] = '\0'; // null terminate	
+	
+	for (int i = 0; i < strlen(_buffer); i++){
+		buffer.push_back(_buffer[i]); // push each character into the main buffer
+	}
 
+	cout << "Buffer contents: " << buffer.data() << endl;
+	
 	// set pointers
 	cout << "Setting pointers" << endl;
 	setg(base, start, start + ret);
