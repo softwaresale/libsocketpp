@@ -1,7 +1,7 @@
 
 AM_CPPFLAGS = -I../include/
 AM_CXXFLAGS = -std=c++11
-AM_LDFLAGS = -version-number 2:1:4
+AM_LDFLAGS = -version-number 2:2:0
 
 lib_LTLIBRARIES = libsocketpp.la
 
