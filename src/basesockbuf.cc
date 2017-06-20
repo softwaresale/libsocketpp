@@ -17,8 +17,9 @@ using namespace std;
 
 tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 	: sock(_sock),
-	  putback(std::max(8, (int) size_t(1))),
-	  buffer(std::max(256, (int) putback) + putback)
+	  //putback(std::max(8, (int) size_t(1))),
+	  //buffer(std::max(256, (int) putback) + putback)
+	  buffer(256)
 {
 	// set up the read pointers
 	char* end = &buffer.front() + buffer.size();
@@ -37,12 +38,16 @@ tcp::base_sock_buf::underflow()
 		cout << "basereadbuf.cc:underflow: Buffer not exhausted" << endl;
 		return traits_type::to_int_type(*gptr());
 	}
-
+	
+	int putback = gptr() - eback();
+	if (putback > 4)
+		putback = 4;
+	
 	char* base = &buffer.front();
 	char* start = base;
 	
 	if (eback() == base){
-		memmove(base, egptr() - putback, putback); // this little mf is causing a segmentation fault
+		memmove(base, egptr() - putback, putback);
 		start += putback;
 	}
 
@@ -51,6 +56,8 @@ tcp::base_sock_buf::underflow()
 	int ret = sock->readBuf(start, buffer.size() - (start - base));
 	
 	cout << "RETCODE: " << ret << endl;
+	
+	cout << "Buffer: " << start << endl;
 	
 	if (ret <= 0){
 		cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0 value" << endl;

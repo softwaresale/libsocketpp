@@ -12,7 +12,11 @@ int main()
 	
 	const char* msg = "HELLO WORLD. What is up";
 	
-	sock.write(msg, strlen(msg));
+	// size of msg
+	cout << "String size: " << strlen(msg) << endl;
+	
+	sock << msg;
+
 	sock.flush();
 	
 	sock.closes();

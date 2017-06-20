@@ -17,7 +17,7 @@ class base_sock_buf : public streambuf
 private:
         basic_socket* sock;    // internal socket
 	vector<char>  buffer;  // internal character buffer?
-	const size_t  putback; // put back size
+	//const size_t  putback; // put back size
 
 	// hide copy and assignment
 	base_sock_buf(const base_sock_buf&);

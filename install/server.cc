@@ -13,9 +13,9 @@ int main()
 	
 	Socket* sock = serv.accepts();
 	
-	char* buffer = new char[32];
+	char* buffer = new char[23];
 	
-	sock->read(buffer, 32);
+	sock->read(buffer, 23);
 	
 	cout << buffer << endl;
 	
