@@ -1,3 +1,25 @@
+
+
+/*
+ Header for basic_socket
+
+    Copyright (C) 2017  Charlie Sale
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 #ifndef SOCKET_PP
 #define SOCKET_PP 1
 
@@ -10,9 +32,6 @@
 
 using namespace std;
 
-/* Socket class: a class wrapper for TCP/IP sockets in C */
-
-/* Dealing with TCP sockets */
 namespace tcp {
 
 class basic_socket
@@ -40,11 +59,9 @@ public:
 	bool isConnected();                 // true if the socket is connected
 
        	int sends(char*);
-	int sendc(char);
 	int sendBuf(char*, int);
 
 	char* reads();
-	int   readc(char*);
 	int   readBuf(char*, int);
 
 

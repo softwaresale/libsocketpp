@@ -1,4 +1,26 @@
 
+/*
+  This class is a derivation from std::streambuf that allows a stream
+  to interface with a socket. It implements an internal `basic_socket*`
+  that sends and recieves data.
+
+    Copyright (C) 2017  Charlie Sale
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 #include <socketpp/tcp/basesockbuf.h>
 #include <socketpp/tcp/basesocket.h>
 #include <streambuf>
@@ -35,7 +57,6 @@ streambuf::int_type
 tcp::base_sock_buf::underflow()
 {
 	if (gptr() < egptr()){ // buffer not exhausted
-		cout << "basereadbuf.cc:underflow: Buffer not exhausted" << endl;
 		return traits_type::to_int_type(*gptr());
 	}
 	
@@ -55,12 +76,8 @@ tcp::base_sock_buf::underflow()
 
 	int ret = sock->readBuf(start, buffer.size() - (start - base));
 	
-	cout << "RETCODE: " << ret << endl;
-	
-	cout << "Buffer: " << start << endl;
-	
 	if (ret <= 0){
-		cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0 value" << endl;
+		cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0. RET: " << ret << endl;
 		return traits_type::eof();
 	}
 	
@@ -85,17 +102,14 @@ tcp::base_sock_buf::overflow(char ch)
 		pbump(-size);
 		
 		int ret = sock->sendBuf(pbase(), size); // should send data
-		if (ret <= 0){
-			cout << "RET: " << ret << endl;
-			cerr << "basesockbuf.cc:overflow: sock send not bytes" << endl;
+		if (ret <= 0)
+			cerr << "basesockbuf.cc:overflow: sock send not bytes. Ret: " << ret << endl;
 			return traits_type::eof();
 		} 
-		cout << "RET: " << ret << endl;
 
 		return ch;
 		
 	}
-	cerr << "basesockbuf.cc:overflow: Char is EOF" << endl;
 	
 	return traits_type::eof();
 }

@@ -1,3 +1,25 @@
+
+/*
+  This is the base class that contains the basic connection
+  protocols and functions for sending and recieving data  
+
+    Copyright (C) 2017  Charlie Sale
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -136,7 +158,7 @@ tcp::basic_socket::sends(char* buffer)
 
 	bytes = send(socketfd, (char*)&len, sizeof(len), 0); // send the size
 	if (bytes < 0){
-		cerr << "Error sending size of buffer to socket" << endl;
+		cerr << "basesocket.cc:sends: Error sending size of buffer to socket" << endl;
 		return -1;
 	}
 
@@ -144,28 +166,12 @@ tcp::basic_socket::sends(char* buffer)
 
 	bytes = send(socketfd, buffer, datalen, 0);
 	if (bytes < 0){
-		cerr << "Error writing buffer to socket" << endl;
-		return -1;
-	}
-	
-	cout << bytes << " written" << endl;
-
-	return 0;
-
-}
-
-int
-tcp::basic_socket::sendc(char ch)
-{
-	int bytes;
-
-	bytes = send(socketfd, (char*)&ch, sizeof(ch), 0); // send a character
-	if (bytes < 0){
-		cerr << "Error sending data" << endl;
+		cerr << "basesocket.cc:sends: Error writing buffer to socket" << endl;
 		return -1;
 	}
 
 	return 0;
+
 }
 
 int
@@ -196,7 +202,7 @@ tcp::basic_socket::reads()
 	// Read the incoming size 
 	bytes = recv(socketfd, (char*)&buflen, sizeof(buflen), 0);
 	if (bytes < 0){
-		cerr << "Error reading size of data" << endl;
+		cerr << "basesocket.cc:reads: Error reading size of data" << endl;
 		return NULL;
 	}
 	buflen = ntohl(buflen);
@@ -207,19 +213,13 @@ tcp::basic_socket::reads()
 
 	bytes = recv(socketfd, buffer, buflen, 0);
 	if (bytes < 0){
-		cerr << "Error reading data" << endl;
+		cerr << "basesocket.cc:reads: Error reading data" << endl;
 		return NULL;
 	}
 
 	buffer[buflen] = '\0'; // set the null terminator
 
 	return buffer;
-}
-
-int
-tcp::basic_socket::readc(char* buffer)
-{
-	return this->readBuf(buffer, sizeof(buffer));
 }
 
 int
