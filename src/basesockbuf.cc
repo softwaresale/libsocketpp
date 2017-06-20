@@ -41,15 +41,16 @@ tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 	: sock(_sock),
 	  //putback(std::max(8, (int) size_t(1))),
 	  //buffer(std::max(256, (int) putback) + putback)
-	  buffer(256)
+	  buffer(256),
+	  outBuffer(1)
 {
 	// set up the read pointers
 	char* end = &buffer.front() + buffer.size();
 	setg(end, end, end);
 
 	// set up the write pointers
-	char* base = &buffer.front();
-	setp(base, base + buffer.size()); // -1 to make overflow easier
+	char* base = &outBuffer.front();
+	setp(base, base + outBuffer.size()); // -1 to make overflow easier
 
 }
 
@@ -102,14 +103,15 @@ tcp::base_sock_buf::overflow(char ch)
 		pbump(-size);
 		
 		int ret = sock->sendBuf(pbase(), size); // should send data
-		if (ret <= 0)
+		if (ret <= 0){
 			cerr << "basesockbuf.cc:overflow: sock send not bytes. Ret: " << ret << endl;
 			return traits_type::eof();
-		} 
+		}
+		 
 
 		return ch;
-		
 	}
+		
 	
 	return traits_type::eof();
 }
