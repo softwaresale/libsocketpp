@@ -41,16 +41,15 @@ tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 	: sock(_sock),
 	  //putback(std::max(8, (int) size_t(1))),
 	  //buffer(std::max(256, (int) putback) + putback)
-	  buffer(256),
-	  outBuffer(1)
+	  buffer(256)
 {
 	// set up the read pointers
 	char* end = &buffer.front() + buffer.size();
 	setg(end, end, end);
 
 	// set up the write pointers
-	char* base = &outBuffer.front();
-	setp(base, base + outBuffer.size()); // -1 to make overflow easier
+	char* base = &buffer.front();
+	setp(base, base + buffer.size() - 1); // -1 to make overflow easier
 
 }
 
@@ -77,7 +76,7 @@ tcp::base_sock_buf::underflow()
 
 	int ret = sock->readBuf(start, buffer.size() - (start - base));
 	
-	if (ret <= 0){
+	if (ret < 0){
 		cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0. RET: " << ret << endl;
 		return traits_type::eof();
 	}
