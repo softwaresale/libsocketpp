@@ -77,8 +77,10 @@ tcp::basic_socket::getSockfd()
 bool
 tcp::basic_socket::isConnected()
 {
-	int error;
+	int error = 0;
         socklen_t size = sizeof(error);
+	
+	// SEGMENTATION FAULT
 	int ret = getsockopt(socketfd, SOL_SOCKET, SO_ERROR, &error, &size);
 
 	return (ret == 0 && error == 0) ? true : false; // if both are true, then socket is connected

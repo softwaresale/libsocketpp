@@ -19,10 +19,8 @@ int main()
 	const char* msg = "Hello World";
 
 	cout << "String length: " << strlen(msg) << endl;
-	//sock.write(msg, strlen(msg));
-       	//sock.flush();
-	sock.write(msg, strlen(msg));
-	sock.flush();
+	
+	sock << msg << flush;
 
 	sock.closes();
 	

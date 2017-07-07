@@ -117,10 +117,9 @@ tcp::Server::accepts(){
 		// TODO: handle error
 	}
 
-	tcp::Socket* temp = new tcp::Socket(conn);
+	tcp::Socket temp(conn);
 
-	return temp;
-
+	return &temp;
 }
 
 int tcp::Server::acceptfd(){
