@@ -1,4 +1,4 @@
-AC_INIT([socketpp], [2.0], [chucks.8090@gmail.com])
+AC_INIT([libsocketpp], [0.1], [chucks.8090@gmail.com])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 
 AM_PROG_AR

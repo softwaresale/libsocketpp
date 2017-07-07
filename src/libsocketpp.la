@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libsocketpp.so.2'
+dlname='libsocketpp.so.0'
 
 # Names of this library.
-library_names='libsocketpp.so.2.2.0 libsocketpp.so.2 libsocketpp.so'
+library_names='libsocketpp.so.0.1.0 libsocketpp.so.0 libsocketpp.so'
 
 # The name of the static archive.
 old_library='libsocketpp.a'
@@ -23,8 +23,8 @@ dependency_libs=''
 weak_library_names=''
 
 # Version information for libsocketpp.
-current=4
-age=2
+current=1
+age=1
 revision=0
 
 # Is this an already installed library?

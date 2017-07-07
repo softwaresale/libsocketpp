@@ -9,24 +9,26 @@ using namespace tcp;
 int main(int argc, char** argv)
 {
 
-	Server serv(8899);
-	serv.binds();
-	Socket* sock = serv.accepts();
+	Server serv(8889);
 	
-	/*
-	if (!sock->isConnected()){
+	serv.binds();
+	Socket& sock = serv.accepts();
+	
+	
+	if (!sock.isConnected()){
 		cerr << "Ack" << endl;
 		return -1;
 	}
-	*/
+	
 
-	char* buffer = new char[16];
+	const char* msg = "Hello World";
 	
-	sock->get(buffer, 11);
+	sock.write(msg, strlen(msg));
+	sock.flush();
 	
-	cout << buffer << endl;
+	cout << "MSG: " << msg << endl << "MSG LEN: " << strlen(msg) << endl;
 	
-	sock->closes();
+	sock.closes();
 	
 	return 0;
 }

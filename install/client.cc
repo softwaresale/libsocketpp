@@ -8,7 +8,7 @@ using namespace tcp;
 int main()
 {
 
-	Socket sock("192.168.1.98", 8899);
+	Socket sock("192.168.1.98", 8889);
 	sock.connects();
 
 	if (!sock.isConnected()){
@@ -16,11 +16,11 @@ int main()
 		return -1;
 	}
 
-	const char* msg = "Hello World";
-
-	cout << "String length: " << strlen(msg) << endl;
+	char* buffer = new char[12];
 	
-	sock << msg << flush;
+	sock.getline(buffer, 12);
+	
+	cout << "MSG RECV: " << buffer << endl << "MSG LEN: " << strlen(buffer) << endl;
 
 	sock.closes();
 	

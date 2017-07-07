@@ -69,10 +69,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/socketpp
-pkgincludedir = $(includedir)/socketpp
-pkglibdir = $(libdir)/socketpp
-pkglibexecdir = $(libexecdir)/socketpp
+pkgdatadir = $(datadir)/libsocketpp
+pkgincludedir = $(includedir)/libsocketpp
+pkglibdir = $(libdir)/libsocketpp
+pkglibexecdir = $(libexecdir)/libsocketpp
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -217,7 +217,7 @@ CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"socketpp\" -DPACKAGE_TARNAME=\"socketpp\" -DPACKAGE_VERSION=\"0.2\" -DPACKAGE_STRING=\"socketpp\ 0.2\" -DPACKAGE_BUGREPORT=\"chucks.8090@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"socketpp\" -DVERSION=\"0.2\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
+DEFS = -DPACKAGE_NAME=\"libsocketpp\" -DPACKAGE_TARNAME=\"libsocketpp\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"libsocketpp\ 0.1\" -DPACKAGE_BUGREPORT=\"chucks.8090@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libsocketpp\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
 DEPDIR = .deps
 DLLTOOL = false
 DSYMUTIL = 
@@ -252,20 +252,20 @@ OBJDUMP = objdump
 OBJEXT = o
 OTOOL = 
 OTOOL64 = 
-PACKAGE = socketpp
+PACKAGE = libsocketpp
 PACKAGE_BUGREPORT = chucks.8090@gmail.com
-PACKAGE_NAME = socketpp
-PACKAGE_STRING = socketpp 0.2
-PACKAGE_TARNAME = socketpp
+PACKAGE_NAME = libsocketpp
+PACKAGE_STRING = libsocketpp 0.1
+PACKAGE_TARNAME = libsocketpp
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2
+PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.2
+VERSION = 0.1
 abs_builddir = /home/charlie/Programming/socketpp
 abs_srcdir = /home/charlie/Programming/socketpp
 abs_top_builddir = /home/charlie/Programming/socketpp
