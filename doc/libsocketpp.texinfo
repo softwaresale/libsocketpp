@@ -178,6 +178,48 @@ with the server, and the stream is closed.
 
 @end enumerate
 
+The classes in libsocketpp work the same way as this. Here is an example of a client
+program.
+
+@example
+#include <socketpp/tcp/socket.h>
+#include <iostream>
+
+using namespace std;
+using namespace tcp;
+
+int main(int argc, char** argv)
+@{
+  Socket sock("192.168.1.1", 8888);
+  sock.connects();
+
+  sock << "Hello World" << endl;
+
+  sock.closes();
+
+  return 0;
+@}
+
+@end example
+
+Here is a breakdown of what each line does:
+@enumerate
+
+@item
+@code{#include <socketpp/tcp/socket.h>
+#include <iostream>
+}
+
+The first include statement includes the @code{tcp::Socket} class for use in the
+program. The second includes I/O header files for C++.
+
+@item
+@code{using namespace std;
+using namespace tcp;
+}
+
+@end enumerate
+
 
 @node FTP
 @subsection FTP

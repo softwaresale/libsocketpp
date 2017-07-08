@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdfetex 2017.7.7)  8 JUL 2017 12:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdfetex 2017.7.7)  8 JUL 2017 16:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -162,9 +162,9 @@ This is `epsf.tex' v2.7.4 <14 February 2011>
 \defaultparindent=\dimen50
  and turning on texinfo input format.) [1{/usr/share/texlive/texmf-dist/fonts/m
 ap/pdftex/updmap/pdftex.map}] [2]
-(/home/charlie/Programming/socketpp/documentation/libsocketpp.toc) [-1]
-(/home/charlie/Programming/socketpp/documentation/libsocketpp.toc)
-(/home/charlie/Programming/socketpp/documentation/libsocketpp.toc)
+(/home/charlie/Programming/socketpp/doc/libsocketpp.toc) [-1]
+(/home/charlie/Programming/socketpp/doc/libsocketpp.toc)
+(/home/charlie/Programming/socketpp/doc/libsocketpp.toc)
 ./libsocketpp.texinfo:43: This command can appear only in environment @contents
 , not outside of any environment.
 @badenverr ...temp , not @inenvironment @thisenv }
@@ -185,11 +185,11 @@ l.43 @end contents
 Chapter 1
 \openout0 = `libsocketpp.toc'.
 
- (/home/charlie/Programming/socketpp/documentation/libsocketpp.aux)
+ (/home/charlie/Programming/socketpp/doc/libsocketpp.aux)
 \openout1 = `libsocketpp.aux'.
 
-
-Chapter 2 [1]
+ Chapter 2
+[1]
 Overfull \hbox (41.82515pt too wide) in paragraph at lines 85--87
 []@textrm To down-load from github via git, clone the url [][]@texttt https://g
 ithub.com/softwaresale/github.com[][][]@textrm . |
@@ -202,30 +202,27 @@ ithub.com/softwaresale/github.com[][][]@textrm . |
 .@glue 3.65 plus 1.825 minus 1.21666
 .etc.
 
-Chapter 3 [2] Chapter 4 [3] Chapter 5 [4] (Index) [5] [6] ) 
+Chapter 3 [2] [3] Chapter 4 [4] Chapter 5 [5] (Index) [6] [7] ) 
 Here is how much of TeX's memory you used:
- 3237 strings out of 497103
- 33244 string characters out of 6206783
- 66768 words of memory out of 5000000
- 4334 multiletter control sequences out of 15000+600000
+ 3247 strings out of 497103
+ 33211 string characters out of 6206783
+ 67809 words of memory out of 5000000
+ 4344 multiletter control sequences out of 15000+600000
  32778 words of font info for 114 fonts, out of 8000000 for 9000
  51 hyphenation exceptions out of 8191
  16i,6n,16p,347b,596s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest
-): name{A\040Basic\040Tutorial} has been referenced but does not exist, replace
-d by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmtt10.pfb>
-Output written on libsocketpp.pdf (9 pages, 90229 bytes).
+</usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmtt10.pfb>
+Output written on libsocketpp.pdf (10 pages, 95560 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 100 compressed objects within 1 object stream
+ 134 PDF objects out of 1000 (max. 8388607)
+ 110 compressed objects within 2 object streams
  18 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

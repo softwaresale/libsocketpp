@@ -4,7 +4,7 @@
 @numsecentry{Installing libsocketpp}{2.2}{Installing}{2}
 @numchapentry{A Basic Tutorial}{3}{The Basics}{3}
 @numsubsecentry{TCP}{3.0.1}{TCP}{3}
-@numsubsecentry{FTP}{3.0.2}{FTP}{3}
-@numchapentry{An Indepth Tutorial}{4}{An Indepth Tutorial}{4}
-@numchapentry{Extending}{5}{Extending}{5}
-@unnchapentry{Index}{10001}{Index}{6}
+@numsubsecentry{FTP}{3.0.2}{FTP}{4}
+@numchapentry{An Indepth Tutorial}{4}{An Indepth Tutorial}{5}
+@numchapentry{Extending}{5}{Extending}{6}
+@unnchapentry{Index}{10001}{Index}{7}
