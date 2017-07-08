@@ -136,14 +136,14 @@ tcp::basic_socket::connects()
 	return 0;
 }
 
-char*
+const char*
 tcp::basic_socket::getLocalhost()
 {
 	
 	struct sockaddr_in localAddress;
 	socklen_t addressLen = sizeof(localAddress);
 	getsockname(socketfd, (struct sockaddr*)&localAddress, &addressLen);
-	char* addr = NULL;
+	const char* addr = NULL;
  	addr = inet_ntoa(localAddress.sin_addr);
 	return addr; // get the local address
 }
@@ -234,6 +234,58 @@ tcp::basic_socket::readBuf(char* buffer, int size)
 	}
 
 	return bytes;
+}
+
+int
+tcp::basic_socket::setOpt(int level, int option, const void* val)
+{
+	socklen_t size = sizeof(val);
+	return setsockopt(this->socketfd, level, option,
+			  val, size);
+}
+
+int
+tcp::basic_socket::getOpt(int level, int option, void* val)
+{
+	socklen_t size = sizeof(val);
+	return getsockopt(this->socketfd, level, option,
+			  val, &size);
+}
+
+int
+tcp::basic_socket::setReuseAddr(bool var)
+{
+	int _val = (int) var;
+	return this->setOpt(SOL_SOCKET, SO_REUSEADDR, (void*) &_val);
+}
+
+int
+tcp::basic_socket::isReuseAddr()
+{
+	int val = 0;
+	int ret = this->getOpt(SOL_SOCKET, SO_REUSEADDR, &val);
+	if (ret == -1)
+		return ret;
+	else
+		return val;
+}
+
+int
+tcp::basic_socket::setKeepAlive(bool var)
+{
+	int _var = (int) var;
+	return this->setOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &var);
+}
+
+int
+tcp::basic_socket::isKeepAlive()
+{
+	int val = 0;
+	int ret = this->getOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &val);
+	if (ret == -1)
+		return ret;
+	else
+		return val;
 }
 
 void

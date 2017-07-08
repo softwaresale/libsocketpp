@@ -55,6 +55,7 @@ tcp::Socket::Socket(int sockfd)
 ostream&
 send(ostream& out)
 {
+	out << '\n';
 	out.flush();
 	return out;
 }

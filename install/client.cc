@@ -16,16 +16,14 @@ int main()
 		return -1;
 	}
 
-	char* buffer = new char[12];
+	char* buffer = new char[256];
 	
 	char ch;
 	int i;
 	
-	sock.getline(buffer, 16);
+	sock.get(buffer, 256);
 	
-	//cout << "MSG RECV: " << buffer << endl << "MSG LEN: " << strlen(buffer) << endl;
-	
-	cout << buffer << endl;
+	cout << "MSG RECV: " << buffer << endl << "MSG LEN: " << sock.gcount() << endl;
 	
 	sock.closes();
 	

@@ -37,7 +37,7 @@ class base_sock_buf : public streambuf
 private:
         basic_socket* sock;    // internal socket
 	vector<char>  buffer;  // internal character buffer?
-//	vector<char>  outBuffer; // buffer for writing outwards
+	vector<char>  outBuf; // buffer for writing outwards
 	//const size_t  putback; // put back size
 
 	// hide copy and assignment
