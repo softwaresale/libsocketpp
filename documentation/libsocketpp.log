@@ -1,0 +1,231 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdfetex 2017.7.7)  8 JUL 2017 12:09
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**\catcode126=12 \def\normaltilde{~}\catcode126=13 \let~\normaltilde  \input ./
+libsocketpp.texinfo
+(./libsocketpp.texinfo
+(/usr/share/texlive/texmf-local/texmf-compat/tex/texinfo/texinfo.tex
+Loading texinfo [version 2016-02-05.07]:
+\outerhsize=\dimen16
+\outervsize=\dimen17
+\cornerlong=\dimen18
+\cornerthick=\dimen19
+\topandbottommargin=\dimen20
+\bindingoffset=\dimen21
+\normaloffset=\dimen22
+\pagewidth=\dimen23
+\pageheight=\dimen24
+\headlinebox=\box16
+\footlinebox=\box17
+\margin=\insert252
+\EMsimple=\toks13
+\groupbox=\box18
+\groupinvalidhelp=\toks14
+\mil=\dimen25
+\exdentamount=\skip18
+\inmarginspacing=\skip19
+\centerpenalty=\count27
+ pdf,
+\tempnum=\count28
+\lnkcount=\count29
+\filename=\toks15
+\filenamelength=\count30
+\pgn=\count31
+\toksA=\toks16
+\toksB=\toks17
+\toksC=\toks18
+\toksD=\toks19
+\boxA=\box19
+\boxB=\box20
+\countA=\count32
+\nopdfimagehelp=\toks20
+ fonts,
+\sffam=\fam8
+\textleading=\dimen26
+ markup,
+\fontdepth=\count33
+ glyphs,
+\errorbox=\box21
+
+page headings,
+\titlepagetopglue=\skip20
+\titlepagebottomglue=\skip21
+\evenheadline=\toks21
+\oddheadline=\toks22
+\evenfootline=\toks23
+\oddfootline=\toks24
+ tables,
+\tableindent=\dimen27
+\itemindent=\dimen28
+\itemmargin=\dimen29
+\itemmax=\dimen30
+\itemno=\count34
+\multitableparskip=\skip22
+\multitableparindent=\skip23
+\multitablecolspace=\dimen31
+\multitablelinespace=\skip24
+\colcount=\count35
+\everytab=\toks25
+ conditionals,
+\doignorecount=\count36
+ indexing,
+\dummybox=\box22
+\whatsitskip=\skip25
+\whatsitpenalty=\count37
+\entryrightmargin=\dimen32
+\thinshrinkable=\skip26
+\entryindexbox=\box23
+\entrylinedepth=\dimen33
+\secondaryindent=\skip27
+\partialpage=\box24
+\doublecolumnhsize=\dimen34
+\doublecolumntopgap=\dimen35
+\savedtopmark=\toks26
+\savedfirstmark=\toks27
+\balancedcolumns=\box25
+ sectioning,
+\unnumberedno=\count38
+\chapno=\count39
+\secno=\count40
+\subsecno=\count41
+\subsubsecno=\count42
+\appendixno=\count43
+\absseclevel=\count44
+\secbase=\count45
+\chapheadingskip=\skip28
+\secheadingskip=\skip29
+\subsecheadingskip=\skip30
+ toc,
+\tocfile=\write0
+\contentsrightmargin=\skip31
+\savepageno=\count46
+\lastnegativepageno=\count47
+\tocindent=\dimen36
+ environments,
+\lispnarrowing=\skip32
+\envskipamount=\skip33
+\circthick=\dimen37
+\cartouter=\dimen38
+\cartinner=\dimen39
+\normbskip=\skip34
+\normpskip=\skip35
+\normlskip=\skip36
+\lskip=\skip37
+\rskip=\skip38
+\nonfillparindent=\dimen40
+\tabw=\dimen41
+\verbbox=\box26
+
+defuns,
+\defbodyindent=\skip39
+\defargsindent=\skip40
+\deflastargmargin=\skip41
+\defunpenalty=\count48
+\parencount=\count49
+\brackcount=\count50
+ macros,
+\paramno=\count51
+\macname=\toks28
+ cross references,
+\auxfile=\write1
+\savesfregister=\count52
+\toprefbox=\box27
+\printedrefnamebox=\box28
+\infofilenamebox=\box29
+\printedmanualbox=\box30
+ insertions,
+\footnoteno=\count53
+\SAVEfootins=\box31
+\SAVEmargin=\box32
+
+(/usr/share/texlive/texmf-dist/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read1
+\epsfframemargin=\dimen42
+\epsfframethickness=\dimen43
+\epsfrsize=\dimen44
+\epsftmp=\dimen45
+\epsftsize=\dimen46
+\epsfxsize=\dimen47
+\epsfysize=\dimen48
+\pspoints=\dimen49
+)
+\noepsfhelp=\toks29
+ localization,
+\nolanghelp=\toks30
+\countUTFx=\count54
+\countUTFy=\count55
+\countUTFz=\count56
+ formatting,
+\defaultparindent=\dimen50
+ and turning on texinfo input format.) [1{/usr/share/texlive/texmf-dist/fonts/m
+ap/pdftex/updmap/pdftex.map}] [2]
+(/home/charlie/Programming/socketpp/documentation/libsocketpp.toc) [-1]
+(/home/charlie/Programming/socketpp/documentation/libsocketpp.toc)
+(/home/charlie/Programming/socketpp/documentation/libsocketpp.toc)
+./libsocketpp.texinfo:43: This command can appear only in environment @contents
+, not outside of any environment.
+@badenverr ...temp , not @inenvironment @thisenv }
+                                                  
+@checkenv ...@ifx @thisenv @temp @else @badenverr 
+                                                  @fi 
+@\end ...pandafter @checkenv @csname #1@endcsname 
+                                                  @csname E#1@endcsname @end...
+l.43 @end contents
+                  
+? 
+./libsocketpp.texinfo:43: Extra @endgroup.
+@\end ...ndcsname @csname E#1@endcsname @endgroup 
+                                                  @fi 
+l.43 @end contents
+                  
+? 
+Chapter 1
+\openout0 = `libsocketpp.toc'.
+
+ (/home/charlie/Programming/socketpp/documentation/libsocketpp.aux)
+\openout1 = `libsocketpp.aux'.
+
+
+Chapter 2 [1]
+Overfull \hbox (41.82515pt too wide) in paragraph at lines 85--87
+[]@textrm To down-load from github via git, clone the url [][]@texttt https://g
+ithub.com/softwaresale/github.com[][][]@textrm . |
+
+@hbox(7.60416+2.43333)x433.62, glue set - 1.0
+.@hbox(0.0+0.0)x15.0
+.@textrm T
+.@kern-0.91252
+.@textrm o
+.@glue 3.65 plus 1.825 minus 1.21666
+.etc.
+
+Chapter 3 [2] Chapter 4 [3] Chapter 5 [4] (Index) [5] [6] ) 
+Here is how much of TeX's memory you used:
+ 3237 strings out of 497103
+ 33244 string characters out of 6206783
+ 66768 words of memory out of 5000000
+ 4334 multiletter control sequences out of 15000+600000
+ 32778 words of font info for 114 fonts, out of 8000000 for 9000
+ 51 hyphenation exceptions out of 8191
+ 16i,6n,16p,347b,596s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest
+): name{A\040Basic\040Tutorial} has been referenced but does not exist, replace
+d by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmtt10.pfb>
+Output written on libsocketpp.pdf (9 pages, 90229 bytes).
+PDF statistics:
+ 122 PDF objects out of 1000 (max. 8388607)
+ 100 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+

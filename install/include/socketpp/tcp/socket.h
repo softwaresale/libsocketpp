@@ -25,6 +25,7 @@
 #include <socketpp/tcp/basesocket.h>
 #include <iostream>
 #include <socketpp/tcp/basesockbuf.h>
+#include <ostream>
 
 using namespace std;
 
@@ -42,9 +43,13 @@ public:
 	Socket();
 	Socket(const char*, int);
 	Socket(int);
+
+
+
+};
 	
 };
-		
-};
+
+ostream& send(ostream& out);
 
 #endif // SOCKET_H

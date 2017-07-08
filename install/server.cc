@@ -9,7 +9,7 @@ using namespace tcp;
 int main(int argc, char** argv)
 {
 
-	Server serv(8888);
+	Server serv(8899);
 	
 	serv.binds();
 	Socket& sock = serv.accepts();
@@ -23,9 +23,9 @@ int main(int argc, char** argv)
 
 	const char* msg = "Hello World";
 	
-	sock << msg << flush;
+	sock << "Hello World" << send;
 	
-	cout << "MSG: " << msg << endl << "MSG LEN: " << strlen(msg) << endl;
+	//cout << "MSG: " << msg << endl << "MSG LEN: " << strlen(msg) << endl;
 	
 	sock.closes();
 	serv.closes();

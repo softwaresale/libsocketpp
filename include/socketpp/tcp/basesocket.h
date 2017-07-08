@@ -63,8 +63,6 @@ public:
 
 	char* reads();
 	int   readBuf(char*, int);
-
-
 	
 	void closes();                      // closes the connection
 

@@ -1,0 +1,76 @@
+This is libsocketpp.info, produced by makeinfo version 6.1 from
+libsocketpp.texinfo.
+
+This manual is for libsocketpp, 0.1
+
+   Copyright (C) 2017 Charlie Sale
+
+     Permission is granted to ...
+
+
+File: libsocketpp.info,  Node: Top,  Next: Overview,  Up: (dir)
+
+A Guide to Libsocketpp
+**********************
+
+The C++ library libsocketpp is a combination of the C socket system and
+the C++ standard I/O system.  It includes classes for basic use and
+extention.
+
+* Menu:
+
+* Overview::                 An overview of this library
+* Acquiring::                A guide to downloading and installing this package
+* A Basic Tutorial::         A Basic tutorial of how to use libsocketpp
+* An Indepth Tutorial::      A more indepth guide to using libsocketpp
+* Extending::                An overview on how to extending libsocketpp for your own project
+* Index::
+
+
+File: libsocketpp.info,  Node: Overview,  Next: Acquiring,  Prev: Top
+
+1 Overview
+**********
+
+
+File: libsocketpp.info,  Node: Acquiring,  Next: A Basic Tutorial,  Prev: Overview
+
+2 Acquiring
+***********
+
+
+File: libsocketpp.info,  Node: A Basic Tutorial,  Next: An Indepth Tutorial,  Prev: Acquiring
+
+3 A Basic Tutorial
+******************
+
+
+File: libsocketpp.info,  Node: An Indepth Tutorial,  Next: Extending,  Prev: A Basic Tutorial
+
+4 An Indepth Tutotiral
+**********************
+
+
+File: libsocketpp.info,  Node: Extending,  Next: Index,  Prev: An Indepth Tutorial,  Up: Top
+
+5 Extending
+***********
+
+
+File: libsocketpp.info,  Node: Index,  Prev: Extending,  Up: Top
+
+Index
+*****
+
+
+
+Tag Table:
+Node: Top194
+Node: Overview854
+Node: Acquiring950
+Node: A Basic Tutorial1061
+Node: An Indepth Tutorial1197
+Node: Extending1341
+Node: Index1462
+
+End Tag Table

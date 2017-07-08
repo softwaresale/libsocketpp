@@ -1,0 +1,131 @@
+
+\input texinfo
+@settitle A Guide to Libsocketpp 0.1
+@c %**end of header
+
+@copying
+This manual is for libsocketpp, 0.1
+
+Copyright @copyright{} 2017 Charlie Sale
+
+@quotation
+Permission is granted to ...
+@end quotation
+@end copying
+
+@titlepage
+@title A Guide to Libsocketpp
+@subtitle A tutorial to C++ streambased sockets
+@author Charlie Sale
+
+@c Start copyright page
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+
+Published by ...
+
+@end titlepage
+
+@c Start short toc
+
+@ifnottex
+@node Top
+@top A Guide to Libsocketpp
+
+The C++ library libsocketpp is a combination of the C socket system
+and the C++ standard I/O system. It includes classes for basic use
+and extention.
+@end ifnottex
+
+@contents
+
+@end contents
+
+@setchapternewpage on
+
+@c DOC START
+
+@c Overview of project
+@node Overview, Acquiring
+@chapter Overview
+Welcome to libsocketpp, the C++ library for networking sockets. If you don't know
+already, a socket is a connection between two networking hubs like computers and
+modems. Before now, the standard socket system for C++ was the C socket system. Although
+excellent for C, the C socket system was designed for use in the C programming language,
+not C++. One of the key differences between C++ and C is that C++ is object oriented, which
+means that it uses classes and objects. One of the objectives of libsocketpp was to
+integrate the C socket system into an object oriented system built for C++.
+
+Another objective of libsocketpp is to integrate the C socket system into the C++
+standard I/O system. The standard C++ I/O system is built around buffer and stream classes.
+A buffer is a container of data to be moved over a stream, and a stream is a connection
+between two points that sends and recieves data between the two points. The stream writes
+data into and reads data from a buffer. Libsocketpp works on this system because the socket
+sends and recieves data across the internet and stores the data into the buffer.
+
+@node Acquiring, A Basic Tutorial, Overview
+@chapter Acquiring
+@menu
+* Downloading:: Where to download libsocketpp
+* Installing:: How to install libsocketpp
+@end menu
+
+@node Downloading
+@section Downloading libsocketpp
+1libsocketpp can be installed from two places: ftp.gnu.org and github.com.
+
+To download from ftp.gnu.org, do the following:
+@enumerate
+@item
+TODO
+
+@end enumerate
+
+To download from github via git, clone the url
+@email{https://github.com/softwaresale/github.com}.
+
+
+@node Installing
+@section Installing libsocketpp
+
+Libsocketpp uses the standard build process used by GNU. It goes
+as follows:
+
+@enumerate
+@item
+Enter directory that you downloaded socketpp into
+
+@item
+Configure: @code{$ ./configure --prefix=@samp{your-prefix}}
+
+@item
+Compile: @code{$ make}
+
+@item
+Optional check: @
+
+@item
+Install: @code{# make install}
+
+@end enumerate
+
+
+@node A Basic Tutorial, An Indepth Tutorial, Acquiring
+@chapter A Basic Tutorial
+
+
+@node An Indepth Tutorial, Extending, A Basic Tutorial
+@chapter An Indepth Tutorial
+
+
+@node Extending
+@chapter Extending
+
+@c end of doc
+@node Index
+@unnumbered Index
+
+@printindex cp
+
+@bye

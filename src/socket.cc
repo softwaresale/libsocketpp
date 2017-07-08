@@ -51,3 +51,10 @@ tcp::Socket::Socket(int sockfd)
 {
 
 }
+
+ostream&
+send(ostream& out)
+{
+	out.flush();
+	return out;
+}
