@@ -206,17 +206,63 @@ Here is a breakdown of what each line does:
 @enumerate
 
 @item
-@code{#include <socketpp/tcp/socket.h>
+@example
 #include <iostream>
-}
+#include <socketpp/tcp/socket.h>
+@end example
 
 The first include statement includes the @code{tcp::Socket} class for use in the
 program. The second includes I/O header files for C++.
 
 @item
-@code{using namespace std;
+@example
+using namespace std;
 using namespace tcp;
-}
+@end example
+
+These lines declare the usage of namespaces in our program. All of the TCP socket
+classes are found in the namespace @code{tcp}. While neither of these lines are
+necessary, they allow you to write @code{Socket sock} instead of @code{tcp::Socket sock}
+every time you want to declare a Socket class
+
+@item
+@example
+int main(int argc, char** argv) @{
+@end example
+This line is the main entry point to your C function.
+
+@item
+@example
+        Socket sock("192.168.1.1", 8888);
+        sock.connects();
+@end example
+The first one declares a @code{Socket} object called @code{sock}. The constructor
+parameters are the connection values. The string being the host to connect to and
+the integer being the port on which you are going to connect. The next line,
+@code{sock.connects()} connects your socket object to the server with the supplied
+data. The @code{connects} method can also be used to set connection data in the same
+way as done in the constructor.
+
+@item
+@example
+        sock << "Hello World" << endl;
+@end example
+
+This line writes the string @code{"Hello World"} to the server that it connected to.
+This is done in the same manor as you would do when printing text to @code{stdout}
+via cout, meaning you use the formatted output operator, @code{<<}, to write text.
+Take special note of the @code{endl} at the end of the statement.
+@strong{An @code{endl} is required to send any data using the formatted output operator.}
+I will explain why later.
+
+@item
+@example
+        sock.closes();
+        return 0;
+@end example
+
+The line @code{sock.closes();} terminates the connection between the socket and server,
+and the line @code{return 0;} is the standard successful return value from main.
 
 @end enumerate
 

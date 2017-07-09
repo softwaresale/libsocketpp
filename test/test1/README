@@ -1,0 +1,9 @@
+Test one:
+
+1. Have a client connect to a server
+2. Have the client send two sets of information to the server
+3. Read the data on the server and output
+4. Have server send data to client
+5. Have client read data and output data
+
+STATUS: PASSED

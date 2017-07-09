@@ -18,7 +18,8 @@ int main()
 		return -1;
 	}
 	
-	char *msg1, *msg2 = new char[256];
+	char *msg1 = new char[256];
+	char *msg2 = new char[256];
 	const char* msg = "Hello to you client";
 
 	sock.getline(msg1, 256);
