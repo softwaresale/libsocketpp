@@ -1,4 +1,7 @@
-Test one:
+
+Goal: Test out reading and writing strings via formatted operators
+
+Steps/Requirements:
 
 1. Have a client connect to a server
 2. Have the client send two sets of information to the server

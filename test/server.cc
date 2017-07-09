@@ -8,7 +8,13 @@ using namespace tcp;
 
 int main(int argc, char** argv)
 {
-
-
+	Server serv(8888);
+	serv.binds();
+	Socket& sock = serv.accepts();
+	
+	// code here
+	
+	sock.closes();
+	serv.closes();
 	return 0;
 }
