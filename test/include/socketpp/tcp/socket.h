@@ -44,8 +44,9 @@ public:
 	Socket(const char*, int);
 	Socket(int);
 
-
-
+	ostream& operator<<(int  val);
+	istream& operator>>(int& val);
+	
 };
 	
 };

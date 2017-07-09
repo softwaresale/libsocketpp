@@ -1,7 +1,8 @@
 
 [done] *.  Create a basic TCP socket system based off of C++ I/O
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
-[    ] *.  Add `getpeername()` capabilites to basic_socket
+[done] *.  Add `getpeername()` capabilites to basic_socket
+[    ] *.  Override formatted output for integer and numbers
 [    ] *.  Add `getaddrinfo()` support and allow socket to bind to host not 
            default IP
 [    ] *.  Make socket non-blocking

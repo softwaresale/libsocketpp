@@ -127,6 +127,15 @@ public:
 	 */
 	int setKeepAlive(bool var = true);
 	int isKeepAlive();
+
+	/*
+	 * getPeerName(char*)
+	 * ------------------
+	 * Places the peer address into the provided buffer and
+	 * returns the struct sockaddr
+	 *
+	 */
+	char* getPeerName();
 	
 	void closes();                      // closes the connection
 

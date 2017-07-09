@@ -24,6 +24,8 @@
 #include <socketpp/tcp/socket.h>
 #include <iostream>
 #include <socketpp/tcp/basesockbuf.h>
+#include <netinet/in.h>
+#include <cstdint>
 
 using namespace std;
 
@@ -50,6 +52,62 @@ tcp::Socket::Socket(int sockfd)
 	  iostream(new base_sock_buf(this))
 {
 
+}
+
+ostream&
+tcp::Socket::operator<<(int val)
+{
+	int32_t conv = htonl(val);
+	char* data = (char*) &conv;
+	int size = sizeof(conv);
+
+	this->write(data, size);
+	
+	return *this;
+}
+
+ostream&
+tcp::Socket::operator<<(double val)
+{
+	
+	
+	return *this;
+}
+
+ostream&
+tcp::Socket::operator<<(float val)
+{
+	
+	return *this;
+}
+
+istream&
+tcp::Socket::operator>>(int& val)
+{
+	int32_t ret;
+
+	char* data = (char*) &ret;
+	int left = sizeof(ret);
+
+	this->read(data, left); // read the data
+
+	val = ntohl(ret);
+	
+	return *this;
+} 
+
+istream&
+tcp::Socket::operator>>(double& val)
+{
+	
+	return *this;
+}
+
+istream&
+tcp::Socket::operator>>(float& val)
+{
+
+	return *this;
 }
 
 ostream&
