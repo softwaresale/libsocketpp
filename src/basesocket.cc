@@ -190,6 +190,10 @@ tcp::basic_socket::sendBuf(char* data, int size)
 		cerr << "basesocket.cc:sendBuf:164: No bytes sent" << endl;
 		return bytes;
 	}
+	
+	if ((bytes - size) != 0){ /* Not all data sent */
+	    return (bytes - size); // return negative not sent
+	}
 
 	return bytes; // return number of bytes sent
 }
