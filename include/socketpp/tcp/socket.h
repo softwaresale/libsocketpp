@@ -44,8 +44,6 @@ public:
 	Socket(const char*, int);
 	Socket(int);
 
-
-
 };
 	
 };
