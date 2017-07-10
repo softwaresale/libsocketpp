@@ -111,7 +111,9 @@ socket.lo: socket.cc /usr/include/stdc-predef.h \
  /usr/include/c++/6.3.1/bits/stl_uninitialized.h \
  /usr/include/c++/6.3.1/bits/stl_vector.h \
  /usr/include/c++/6.3.1/bits/stl_bvector.h \
- /usr/include/c++/6.3.1/bits/vector.tcc
+ /usr/include/c++/6.3.1/bits/vector.tcc /usr/include/c++/6.3.1/cstring \
+ /usr/include/string.h /usr/include/c++/6.3.1/sstream \
+ /usr/include/c++/6.3.1/bits/sstream.tcc
 
 /usr/include/stdc-predef.h:
 
@@ -436,3 +438,11 @@ socket.lo: socket.cc /usr/include/stdc-predef.h \
 /usr/include/c++/6.3.1/bits/stl_bvector.h:
 
 /usr/include/c++/6.3.1/bits/vector.tcc:
+
+/usr/include/c++/6.3.1/cstring:
+
+/usr/include/string.h:
+
+/usr/include/c++/6.3.1/sstream:
+
+/usr/include/c++/6.3.1/bits/sstream.tcc:

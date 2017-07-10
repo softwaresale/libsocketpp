@@ -44,8 +44,13 @@ public:
 	Socket(const char*, int);
 	Socket(int);
 
-	ostream& operator<<(int  val);
-	istream& operator>>(int& val);
+	ostream& operator<<(int);
+	ostream& operator<<(double);
+	ostream& operator<<(float);
+	
+	istream& operator>>(int&);
+	istream& operator>>(double&);
+	istream& operator>>(float&);
 	
 };
 	

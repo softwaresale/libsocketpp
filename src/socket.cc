@@ -26,6 +26,8 @@
 #include <socketpp/tcp/basesockbuf.h>
 #include <netinet/in.h>
 #include <cstdint>
+#include <cstring>
+#include <sstream>
 
 using namespace std;
 
@@ -69,7 +71,14 @@ tcp::Socket::operator<<(int val)
 ostream&
 tcp::Socket::operator<<(double val)
 {
+	ostringstream str;
+
+	str << val;
+
+	string _str = str.str();
+	const char* buf = _str.c_str();
 	
+	this->write(buf, strlen(buf));
 	
 	return *this;
 }
@@ -77,6 +86,12 @@ tcp::Socket::operator<<(double val)
 ostream&
 tcp::Socket::operator<<(float val)
 {
+	ostringstream _str;
+	_str << val;
+	string str = _str.str();
+	const char* buf = str.c_str();
+	
+	this->write(buf, strlen(buf));
 	
 	return *this;
 }
@@ -99,6 +114,11 @@ tcp::Socket::operator>>(int& val)
 istream&
 tcp::Socket::operator>>(double& val)
 {
+	char* buffer = new char[sizeof(double)];
+
+	this->getline(buffer, sizeof(double)); // read double value into buffer
+
+	val = atof(buffer); // try this...
 	
 	return *this;
 }
@@ -106,7 +126,11 @@ tcp::Socket::operator>>(double& val)
 istream&
 tcp::Socket::operator>>(float& val)
 {
+	char* buffer = new char[sizeof(float)];
+	this->getline(buffer, sizeof(float));
 
+	val = atof(buffer);
+	
 	return *this;
 }
 

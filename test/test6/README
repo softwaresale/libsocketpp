@@ -1,0 +1,10 @@
+Goal: Test the ability to send doubles and floats via formatted I/O
+
+Steps/Requirements:
+1. Each side sends a double
+2. Print each double
+3. Each side sends and prints a float
+
+STATUS: COMPLETE
+
+NOTES: may want to revisit floats?
