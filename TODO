@@ -2,11 +2,9 @@
 [done] *.  Create a basic TCP socket system based off of C++ I/O
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
 [done] *.  Add `getpeername()` capabilites to basic_socket
-[    ] *.  Override formatted output for integer and numbers
+[done] *.  Override formatted output for integer and numbers
+[    ] *.  Write FTP protocol based off of TCP classes
 [    ] *.  Add `getaddrinfo()` support and allow socket to bind to host not 
            default IP
-[    ] *.  Make socket non-blocking
-[    ] *.  Add synchronous non-blocking to tcp::Server (Maybe?)
-[    ] *.  Create a FTP system based off of the TCP system
 [    ] *.  Add UDP support
-[    ] *.  Add SSL integration to make TCPs and FTPs perhapse?
+[    ] *.  Add SSL integration to make TCPs and FTPs perhaps?
