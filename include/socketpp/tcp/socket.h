@@ -47,13 +47,15 @@ public:
 	ostream& operator<<(int);
 	ostream& operator<<(double);
 	ostream& operator<<(float);
-	
+	ostream& operator<<(ifstream&);
+
 	istream& operator>>(int&);
 	istream& operator>>(double&);
 	istream& operator>>(float&);
-	
+	istream& operator>>(ofstream&);
+
 };
-	
+
 };
 
 ostream& send(ostream& out);

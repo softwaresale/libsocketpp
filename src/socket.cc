@@ -1,8 +1,8 @@
 
 /*
   This is one of the main classes generated from libsocketpp. It is a streambases
-  TCP socket class. 
-  
+  TCP socket class.
+
 
     Copyright (C) 2017  Charlie Sale
 
@@ -64,7 +64,7 @@ tcp::Socket::operator<<(int val)
 	int size = sizeof(conv);
 
 	this->write(data, size);
-	
+
 	return *this;
 }
 
@@ -77,9 +77,9 @@ tcp::Socket::operator<<(double val)
 
 	string _str = str.str();
 	const char* buf = _str.c_str();
-	
+
 	this->write(buf, strlen(buf));
-	
+
 	return *this;
 }
 
@@ -90,9 +90,9 @@ tcp::Socket::operator<<(float val)
 	_str << val;
 	string str = _str.str();
 	const char* buf = str.c_str();
-	
+
 	this->write(buf, strlen(buf));
-	
+
 	return *this;
 }
 
@@ -107,9 +107,9 @@ tcp::Socket::operator>>(int& val)
 	this->read(data, left); // read the data
 
 	val = ntohl(ret);
-	
+
 	return *this;
-} 
+}
 
 istream&
 tcp::Socket::operator>>(double& val)
@@ -119,7 +119,7 @@ tcp::Socket::operator>>(double& val)
 	this->getline(buffer, sizeof(double)); // read double value into buffer
 
 	val = atof(buffer); // try this...
-	
+
 	return *this;
 }
 
@@ -130,7 +130,35 @@ tcp::Socket::operator>>(float& val)
 	this->getline(buffer, sizeof(float));
 
 	val = atof(buffer);
-	
+
+	return *this;
+}
+
+istream&
+tcp::Socket::operator>>(ofstream& outstream)
+{
+	char* buffer = new char[512]; //  512 block size
+
+	this->get(buffer, 512);
+
+	outstream << buffer << flush;
+
+	return *this;
+}
+
+ostream&
+tcp::Socket::operator<<(ifstream& instream)
+{
+	int size;
+	instream.seekg(0, ios::end);
+	size = instream.tellg();
+	instream.seekg(0, ios::beg);
+
+	char* buffer = new char[size];
+	instream.read(buffer, size);
+
+	this->write(buffer, size); // write the data out
+
 	return *this;
 }
 

@@ -1,0 +1,10 @@
+Goal: Test the operator capability to write and read from if/ofstreams
+
+Steps/Requirements:
+1. Open a filestream of each type on both ends
+2. Read a file on each side and send it
+3. Read file contents later
+
+STATUS: IN PROGRESS
+
+NOTES:
