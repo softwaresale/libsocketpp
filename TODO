@@ -3,8 +3,14 @@
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
 [done] *.  Add `getpeername()` capabilites to basic_socket
 [done] *.  Override formatted output for integer and numbers
-[    ] *.  Write FTP protocol based off of TCP classes
-[    ] *.  Add `getaddrinfo()` support and allow socket to bind to host not 
+[done] *.  Add file operators for easily writing all data from a file
+[    ] *.  Add compression with gzip or tar
+[    ] *.  Add basic data encryption via crypt.h
+[    ] *.  Add remote procedure calls (rpc)
+[    ] *.  Asynchronous server with virtual handel method?
+[    ] *.  Add `getaddrinfo()` support and allow socket to bind to host not
            default IP
+[    ] *.  Write FTP protocol based off of TCP classes
+[    ] *.  TELNET support?
 [    ] *.  Add UDP support
 [    ] *.  Add SSL integration to make TCPs and FTPs perhaps?

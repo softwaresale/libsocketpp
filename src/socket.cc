@@ -96,6 +96,23 @@ tcp::Socket::operator<<(float val)
 	return *this;
 }
 
+
+ostream&
+tcp::Socket::operator<<(ifstream& instream)
+{
+	int size;
+	instream.seekg(0, ios::end);
+	size = instream.tellg();
+	instream.seekg(0, ios::beg);
+
+	char* buffer = new char[size];
+	instream.read(buffer, size);
+
+	this->write(buffer, size); // write the data out
+
+	return *this;
+}
+
 istream&
 tcp::Socket::operator>>(int& val)
 {
@@ -142,22 +159,6 @@ tcp::Socket::operator>>(ofstream& outstream)
 	this->get(buffer, 512);
 
 	outstream << buffer << flush;
-
-	return *this;
-}
-
-ostream&
-tcp::Socket::operator<<(ifstream& instream)
-{
-	int size;
-	instream.seekg(0, ios::end);
-	size = instream.tellg();
-	instream.seekg(0, ios::beg);
-
-	char* buffer = new char[size];
-	instream.read(buffer, size);
-
-	this->write(buffer, size); // write the data out
 
 	return *this;
 }
