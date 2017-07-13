@@ -97,22 +97,6 @@ tcp::Socket::operator<<(float val)
 }
 
 
-ostream&
-tcp::Socket::operator<<(ifstream& instream)
-{
-	int size;
-	instream.seekg(0, ios::end);
-	size = instream.tellg();
-	instream.seekg(0, ios::beg);
-
-	char* buffer = new char[size];
-	instream.read(buffer, size);
-
-	this->write(buffer, size); // write the data out
-
-	return *this;
-}
-
 istream&
 tcp::Socket::operator>>(int& val)
 {
@@ -147,18 +131,6 @@ tcp::Socket::operator>>(float& val)
 	this->getline(buffer, sizeof(float));
 
 	val = atof(buffer);
-
-	return *this;
-}
-
-istream&
-tcp::Socket::operator>>(ofstream& outstream)
-{
-	char* buffer = new char[512]; //  512 block size
-
-	this->get(buffer, 512);
-
-	outstream << buffer << flush;
 
 	return *this;
 }

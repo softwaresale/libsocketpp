@@ -278,7 +278,7 @@ int
 tcp::basic_socket::setKeepAlive(bool var)
 {
 	int _var = (int) var;
-	return this->setOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &var);
+	return this->setOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &_var);
 }
 
 int

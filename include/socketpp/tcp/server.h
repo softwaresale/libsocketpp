@@ -34,7 +34,8 @@ using namespace std;
 /* Server class: wrapper for C sockets, specifically server */
 
 /* namespace tcp */
-namespace tcp {
+namespace tcp 
+{
 
 class Server {
 

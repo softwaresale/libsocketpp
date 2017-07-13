@@ -3,7 +3,6 @@
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
 [done] *.  Add `getpeername()` capabilites to basic_socket
 [done] *.  Override formatted output for integer and numbers
-[done] *.  Add file operators for easily writing all data from a file
 [    ] *.  Add compression with gzip or tar
 [    ] *.  Add basic data encryption via crypt.h
 [    ] *.  Add remote procedure calls (rpc)
