@@ -2,6 +2,7 @@
 #include <socketpp/tcp/socket.h>
 #include <socketpp/tcp/server.h>
 #include <cstring>
+#include <netinet/tcp.h>
 
 using namespace std;
 using namespace tcp;
@@ -12,21 +13,12 @@ int main(int argc, char** argv)
 	serv.binds();
 	Socket& sock = serv.accepts();
 
+	char* value = new char[16];
 	// code here
-	ofstream out("server_out_test.txt", ios::out);
-	if (!out.is_open()){
-		cout << "of not open" << endl;
-		return -1;
-	}
+	sock.getOpt(SOL_SOCKET, TCP_MD5SIG, (void*) value);
 
-	ifstream in("server_in_test.txt", ios::in);
-	if (!in.is_open()){
-		cout << "if not open" << endl;
-	}
-
-	sock << in << endl;
-	sock >> out;
-
+	cout << "MD5 HASH VALUE: " << value << endl;
+	
 	sock.closes();
 	serv.closes();
 	return 0;

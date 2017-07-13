@@ -15887,7 +15887,8 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-ac_config_files="$ac_config_files Makefile src/Makefile include/Makefile include/socketpp/Makefile include/socketpp/tcp/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile include/Makefile include/socketpp/Makefile include/socketpp/tcp/Makefile test/test1/Makefile test/test2/Makefile test/test3/Makefile test/test4/Makefile test/test5/Makefile test/test6/Makefile test/test7/Makefile"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -17022,6 +17023,13 @@ do
     "include/Makefile") CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
     "include/socketpp/Makefile") CONFIG_FILES="$CONFIG_FILES include/socketpp/Makefile" ;;
     "include/socketpp/tcp/Makefile") CONFIG_FILES="$CONFIG_FILES include/socketpp/tcp/Makefile" ;;
+    "test/test1/Makefile") CONFIG_FILES="$CONFIG_FILES test/test1/Makefile" ;;
+    "test/test2/Makefile") CONFIG_FILES="$CONFIG_FILES test/test2/Makefile" ;;
+    "test/test3/Makefile") CONFIG_FILES="$CONFIG_FILES test/test3/Makefile" ;;
+    "test/test4/Makefile") CONFIG_FILES="$CONFIG_FILES test/test4/Makefile" ;;
+    "test/test5/Makefile") CONFIG_FILES="$CONFIG_FILES test/test5/Makefile" ;;
+    "test/test6/Makefile") CONFIG_FILES="$CONFIG_FILES test/test6/Makefile" ;;
+    "test/test7/Makefile") CONFIG_FILES="$CONFIG_FILES test/test7/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

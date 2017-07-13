@@ -1,10 +1,13 @@
 
 \input texinfo
 @settitle A Guide to Libsocketpp 0.1
+@setfilename libsocketpp.info
 @c %**end of header
 
+@include version.texi
+
 @copying
-This manual is for libsocketpp, 0.1
+This manual is for libsocketpp, @value{VERSION}
 
 Copyright @copyright{} 2017 Charlie Sale
 

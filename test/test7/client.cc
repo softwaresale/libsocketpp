@@ -1,30 +1,30 @@
 #include <iostream>
 #include <socketpp/tcp/socket.h>
 #include <cstring>
+#include <netinet/tcp.h>
 
 using namespace std;
 using namespace tcp;
 
 int main(int argc, char** argv)
 {
-	Socket sock("192.168.1.98", 8888);
+	Socket sock("127.0.0.1", 8888);
 	sock.connects();
 
 	// code here
-	ofstream out("client_out_test.txt", ios::out);
-	if (!out.is_open()){
-		cout << "of not open" << endl;
-		return -1;
+
+      	char* value = new char[16];
+	// code here
+	int ret = sock.getOpt(SOL_SOCKET, TCP_MD5SIG, (char*) value);
+	if(ret == -1){
+		cerr << "Error getting option" << endl;
+		sock.closes();
+		return 0;
 	}
 
-	ifstream in("client_in_test.txt", ios::in);
-	if (!in.is_open()){
-		cout << "if not open" << endl;
-	}
+	cout << "MD5 HASH VALUE: " << value << endl;
 
-	sock >> out;
-	sock << in << endl;
-
+	
 	sock.closes();
 	return 0;
 }

@@ -1,9 +1,8 @@
-Goal: Test the operator capability to write and read from if/ofstreams
+Goal: Test MD5 checksum status to see what happens with the MD5 sum
 
 Steps/Requirements:
-1. Open a filestream of each type on both ends
-2. Read a file on each side and send it
-3. Read file contents later
+1. Use getOption for MD5 sum
+2. Print value
 
 STATUS: IN PROGRESS
 

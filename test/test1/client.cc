@@ -9,7 +9,7 @@ int main()
 {
 
 	Socket sock;
-	sock.connects("192.168.1.98", 8889);
+	sock.connects("127.0.0.1", 8889);
 	
 	if (!sock.isConnected()){
 		cerr << "Socket not connected" << endl;

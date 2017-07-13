@@ -1,0 +1,27 @@
+
+	[0.2.0] -- 2017-07-13
+	---------------------
+	---------------------
+
+	Pre-release
+	
+	ADDED
+	-----
+	- Base for cryptographic exchange (passwords)
+	- Working Socket system with more functionality
+	- Reconfigured build system
+	- Started documentation and test/examples
+
+
+	[0.1.0] -- 2017-06-15
+	---------------------------
+	---------------------------
+
+	Pre-release
+	
+	ADDED
+	-----
+	- Started `tcp::base_socket` class
+	- Started `tcp::base_sock_buf` class
+	- Started `tcp::Socket` class
+	- Started `tcp::Server` class
