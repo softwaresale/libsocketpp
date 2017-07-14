@@ -20,18 +20,19 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
 [done] *.  Add `getpeername()` capabilites to basic_socket
 [done] *.  Override formatted output for integer and numbers
-[    ] *.  Support sending passwords and secure local data
 [    ] *.  Add texinfo automake build proceedure
-[    ] *.  Integrate DejaGNU for test suite 
 [    ] *.  Add compression with zlib?
-[    ] *.  Add basic data encryption via crypt.h
 [    ] *.  Add Asynchronous accept method for Server class
 [    ] *.  Continuously update texinfo docs
 
-Phase 2 -- Implement protocols. Second Major Release (major version 2)
-------------------------------
+Phase 2 -- Implement security protocols Second Major Release (major version 2)
+------------------------------------------------------------------------------
+[    ] *.  Implement TLS
+[    ] *.  Implement data hashing and salting (crypt) for sending passwords
+
+Phase 3 -- Implement protocols. Third Major Release (major version 3)
+----------------------------------------------------------------------
 [    ] *.  UDP
-[    ] *.  TCP
+[    ] *.  FTP
 [    ] *.  TELNET
-[    ] *.  SSL
 [    ] *.  RPC
