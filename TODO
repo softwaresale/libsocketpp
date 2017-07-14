@@ -1,17 +1,22 @@
 
+(Versioning begin at major when package is accepted...)
+
+Phase 1 -- Complete basic Socket I/O functionality. First Release (major version 1)
+-----------------------------------------------------------------
 [done] *.  Create a basic TCP socket system based off of C++ I/O
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
 [done] *.  Add `getpeername()` capabilites to basic_socket
 [done] *.  Override formatted output for integer and numbers
 [    ] *.  Add texinfo automake build proceedure
 [    ] *.  Integrate DejaGNU for test suite 
-[    ] *.  Add compression with gzip or tar
+[    ] *.  Add compression with zlib
 [    ] *.  Add basic data encryption via crypt.h
-[    ] *.  Add remote procedure calls (rpc)
-[    ] *.  Asynchronous server with virtual handel method?
-[    ] *.  Add `getaddrinfo()` support and allow socket to bind to host not
-           default IP
-[    ] *.  Write FTP protocol based off of TCP classes
-[    ] *.  TELNET support?
-[    ] *.  Add UDP support
-[    ] *.  Add SSL integration to make TCPs and FTPs perhaps?
+[    ] *.  Add Asynchronous accept method for Server class
+
+Phase 2 -- Implement protocols. Second Major Release (major version 2)
+------------------------------
+[    ] *.  UDP
+[    ] *.  TCP
+[    ] *.  TELNET
+[    ] *.  SSL
+[    ] *.  RPC
