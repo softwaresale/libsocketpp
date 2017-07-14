@@ -37,8 +37,9 @@ Published by GNU Manual
 @top A Guide to Libsocketpp
 
 The C++ library libsocketpp is a combination of the C socket system
-and the C++ standard I/O system. It includes classes for basic use
-and extention.
+and the C++ standard I/O system. It includes classes for base classes
+for creating your own derivatives of this system.
+
 @end ifnottex
 
 @contents
@@ -67,61 +68,14 @@ between two points that sends and recieves data between the two points. The stre
 data into and reads data from a buffer. Libsocketpp works on this system because the socket
 sends and recieves data across the internet and stores the data into the buffer.
 
-@node Acquiring, A Basic Tutorial, Overview
-@chapter Acquiring
-@menu
-* Downloading:: Where to download libsocketpp
-* Installing:: How to install libsocketpp
-@end menu
 
-@node Downloading
-@section Downloading libsocketpp
-1libsocketpp can be installed from two places: ftp.gnu.org and github.com.
-
-To download from ftp.gnu.org, do the following:
-@enumerate
-@item
-TODO
-
-@end enumerate
-
-To download from github via git, clone the url
-@email{https://github.com/softwaresale/github.com}.
-
-
-@node Installing
-@section Installing libsocketpp
-
-Libsocketpp uses the standard build process used by GNU. It goes
-as follows:
-
-@enumerate
-@item
-Enter directory that you downloaded socketpp into
-
-@item
-Configure: @code{$ ./configure --prefix=@samp{your-prefix}}
-
-@item
-Compile: @code{$ make}
-
-@item
-Optional check: @
-
-@item
-Install: @code{# make install}
-
-@end enumerate
-
-
-@node The Basics, An Indepth Tutorial, Acquiring
+@node The Basics, An Indepth Tutorial, Overview
 @chapter A Basic Tutorial
 
 Now that you have libsocketpp installed and configured, let's cover the basics on usage.
 
 @menu
 * TCP:: Using TCP sockets
-* FTP:: Using FTP with libsocketpp
 @end menu
 
 @node TCP
@@ -269,18 +223,87 @@ and the line @code{return 0;} is the standard successful return value from main.
 
 @end enumerate
 
-
-@node FTP
-@subsection FTP
-
-@c using FTP 
-
 @node An Indepth Tutorial, Extending, The Basics
 @chapter An Indepth Tutorial
 
 
 @node Extending
 @chapter Extending
+
+One of the goals of this project is to make the library extendable for your own usage.
+By this, I mean that the classes are accessable to the user for their own derivatives
+of them. Here is an overview of what each base class does and tips/hints on how to 
+extend them for your own purposes.
+
+@subsection @code{tcp::basic_socket} : @code{socketpp/tcp/basesocket.h}
+
+The most important base class in this project is the class @code{tcp::basic_socket}.
+This class contains all basic socket functionality. This includes connection, getting
+and setting options, sending and recieving data, getting internal data, and closing
+the connection. Keep in mind that this class is a true base class, so all methods
+except for the constructors are @code{protected}. If you want to use this class, it
+needs to be derived. For example:
+
+@example
+
+#include <socketpp/tcp/basesocket.h>
+
+class MyClass : public tcp::basic_socket 
+{
+private:
+    int var;
+    
+public:
+    MyClass() : tcp::basic_socket()
+    { }
+    
+    int foobar(){ return 1; }
+    
+    int closes(){ cout << "I am closed"; close(this->socketfd); }
+};
+
+@end example
+
+In this mini example, a class called @code{MyClass} that inherites @code{tcp::basic_socket}
+is created. It creates it's own private data, calls the parent constructor, adds its own
+method (@code{foobar}), and overrides a method (@code{closes}). By extending this class, you
+get all basic socket functionality in your own class. 
+
+@end subsection
+
+@subsection @code{tcp::base_sock_buf} : @code{socketpp/tcp/basesockbuf.h}
+
+This base class inherits from the @code{std::streambuf} class, which is the class that tells
+a stream how to handle the I/O buffer. Inside of this class, there is an internal @code{basic_socket}
+object that is used for reading and writing internal data, which will be talked about later. Another
+important thing to remember is that the @code{base_sock_buf} class's copy and assignment constructors
+are protected, so using them as a standalone class will probably be a pain. 
+
+The @code{base_sock_buf} class has three important methods: @code{underflow}, @code{overflow}, and 
+@code{sync}. These methods are the basics for reading and writing data over sockets. 
+
+Lets start with the @code{underflow} method. This method is used in reading
+data from a socket. When an @code{istream} calls a read call and the internal @code{sockbuf}
+is empty, then the @code{istream} calls the underflow command to repopulate the buffer with
+data. This will make the interal @code{basic_socket} object read more data and place it into
+the interal buffer so that there is data to be read by the user. In short, the internal buffer
+"underflows", so the @code{streambuf} must refill the buffer with more data.
+
+The next method is @code{overflow}. This function can be seen as the opposite as underflow. An
+@code{ostream} calls this method when the internal write buffer is full, or it "overflows". This
+causes the stream to empty the data and write it to a location. In this case, the internal socket
+object sends all of the written data over the connection. 
+
+To call an overflow call without waiting to fill up the buffer, the @code{flush} method can be called,
+which empties what ever is in the buffer at the moment. The flush functionality is defined in the function
+@code{sync}. This is used very often in this class.
+
+These three functions are the majority of this base class. If you have any development to do on this
+class, these function are where it will happen. 
+
+
+
+@end subsection
 
 @c end of doc
 @node Index

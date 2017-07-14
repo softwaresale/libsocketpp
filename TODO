@@ -1,4 +1,17 @@
 
+This file contains steps to be taken and features to be added to the program.
+    Copyright (C) 2017 Charlie Sale
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
 (Versioning begin at major when package is accepted...)
 
 Phase 1 -- Complete basic Socket I/O functionality. First Release (major version 1)
@@ -7,11 +20,13 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
 [done] *.  Add `getpeername()` capabilites to basic_socket
 [done] *.  Override formatted output for integer and numbers
+[    ] *.  Support sending passwords and secure local data
 [    ] *.  Add texinfo automake build proceedure
 [    ] *.  Integrate DejaGNU for test suite 
-[    ] *.  Add compression with zlib
+[    ] *.  Add compression with zlib?
 [    ] *.  Add basic data encryption via crypt.h
 [    ] *.  Add Asynchronous accept method for Server class
+[    ] *.  Continuously update texinfo docs
 
 Phase 2 -- Implement protocols. Second Major Release (major version 2)
 ------------------------------
