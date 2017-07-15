@@ -38,7 +38,7 @@ class basic_socket
 {
 
 private:
-        char* newSalt();
+        
         
 protected:
 	int                socketfd;
@@ -50,7 +50,23 @@ protected:
         int                isSecure; // whether or not in secure mode
         int                hashExchanged; // if exchangeHashes() has been executed
         
-        
+public:
+        /*
+	 * Constructors:
+	 * -------------
+	 * basic_socket()                      --> constructs a basic socket object
+	 * basic_socket(const char*, int)      --> creates a socket object with 
+         *                                         connection data
+         * basic_socket(const char*, int, int) --> same as before, but if last
+         *                                         value is true, connects
+	 * basic_socket(int)                   --> creates a socket object around a 
+                                                   socket descriptor
+	 */
+	basic_socket();
+	basic_socket(const char*, int);
+        basic_socket(const char*, int, int);
+	basic_socket(int);
+    
 	/*
 	 * getSockFd
 	 * ---------
@@ -64,6 +80,13 @@ protected:
 	 * Returns a string containing the local IP address of the machine
 	 */
 	const char* getLocalhost(); 
+        
+        /*
+         * getLocalPort()
+         * --------------
+         * Returns the port currently being used
+         */
+        int getLocalPort();
 
 	/*
 	 * connects(const char*, int) --> connects to server with given data
@@ -73,24 +96,6 @@ protected:
 	 */
 	int connects(const char*, int);
 	int connects();                      
-        
-        /*
-         * setSecure(bool)
-         * ----------------------
-         * if true, the connection between two connections will
-         * be set to secure mode. This will send a randomly generated
-         * salt to the other connection. After this, passwords can
-         * be sent securly. After false, data will be sent 
-         */
-        int setSecure(bool var = true);
-        
-        /*
-         * sendSalt()
-         * ----------
-         * exchange salt with other connection. Each side sends its own
-         * salt to the other
-         */
-        int exchangeSalt();
         
 	/*
 	 * isConnected()
@@ -121,43 +126,6 @@ protected:
 	char* reads();
 	int   readBuf(char*, int);
         
-        /*
-         *  hashData(const char*)
-         *  ---------------------
-         *  returns the md5/sha1 (choose this later) hash of data
-         */
-        char* hashData(const char*);
-        
-        /*
-         * encrypt(const char*)
-         * --------------------
-         * encrypts a hash with the current salt and returns the
-         * result
-         * 
-         */
-        char* encrypt(const char*);
-        
-        /*
-         * cmdData(const char*)
-         * --------------------
-         * compares the first buffer (should be plain text) and
-         * compares it to the salted hash in the second value.
-         * Returns standard boolean: 0 (false), !0 (true)
-         */
-        int cmpData(const char*, const char*);
-        
-        /*
-         * sendBufEncrypted(const char*, int);
-         * -----------------------------------
-         * Sends encrypted data to the client.
-         * Just like, sendBuf, but sends encrypted
-         * data instead. Note: if hashExchanged is
-         * not set, then func will return -1
-         * 
-         */
-        int sendBufEncrypted(const char*, int);
-        
-        
 	int setOpt(int, int, const void*);
 	int getOpt(int, int, void*);
 
@@ -185,20 +153,6 @@ protected:
 	char* getPeerName();
 	
 	void closes();                      // closes the connection
-	
-public:
-	/*
-	 * Constructors:
-	 * -------------
-	 * basic_socket()                 --> constructs a basic socket object
-	 * basic_socket(const char*, int) --> creates a socket object with 
-                                              connection data
-	 * basic_socket(int)              --> creates a socket object around a 
-                                              socket descriptor
-	 */
-	basic_socket();
-	basic_socket(const char*, int);
-	basic_socket(int);
 
 };
         

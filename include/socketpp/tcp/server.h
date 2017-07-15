@@ -53,7 +53,7 @@ public:
 	int binds(int _port);            // binds address with data
 	
 	bool isBound();                  // true if server is bound, false if not
-
+        
 	tcp::Socket& accepts();           // accepts a socket connection and returns a socket
 	int          acceptfd();          // returns the connected socket descriptor
 

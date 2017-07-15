@@ -1,0 +1,258 @@
+
+test/test1/client.cc,16
+int main(8,116
+
+test/test1/server.cc,16
+int main(9,149
+
+test/client.cc,16
+int main(8,116
+
+test/test6/client.cc,16
+int main(9,135
+
+test/test6/server.cc,17
+int main(10,168
+
+test/server.cc,16
+int main(9,149
+
+test/test3/client.cc,16
+int main(8,116
+
+test/test3/server.cc,16
+int main(9,149
+
+test/test4/client.cc,16
+int main(8,116
+
+test/test4/server.cc,16
+int main(9,149
+
+test/test2/client.cc,16
+int main(8,116
+
+test/test2/server.cc,16
+int main(9,149
+
+test/test8/client.cc,16
+int main(8,116
+
+test/test8/server.cc,16
+int main(9,149
+
+test/test5/client.cc,16
+int main(9,140
+
+test/test5/server.cc,16
+int main(9,149
+
+test/test7/client.cc,16
+int main(9,141
+
+test/test7/server.cc,17
+int main(10,174
+
+src/server.cc,261
+tcp::Server::Server(42,1262
+tcp::Server::Server(52,1460
+int tcp::Server::binds(64,1677
+int tcp::Server::binds(86,2099
+bool  tcp::Server::isBound(108,2531
+tcp::Server::accepts(111,2601
+int tcp::Server::acceptfd(125,2886
+void tcp::Server::closes(137,3159
+
+src/socket.cc,303
+tcp::Socket::Socket(38,1210
+tcp::Socket::Socket(45,1357
+tcp::Socket::Socket(52,1477
+tcp::Socket::operator<<(60,1586
+tcp::Socket::operator<<(72,1759
+tcp::Socket::operator<<(87,1952
+tcp::Socket::operator>>(101,2144
+tcp::Socket::operator>>(116,2339
+tcp::Socket::operator>>(128,2559
+send(139,2727
+
+src/basesocket.cc,777
+tcp::basic_socket::basic_socket(40,1172
+tcp::basic_socket::basic_socket(54,1461
+tcp::basic_socket::basic_socket(66,1807
+tcp::basic_socket::getSockfd(72,1878
+tcp::basic_socket::isConnected(78,1943
+tcp::basic_socket::connects(91,2233
+tcp::basic_socket::connects(109,2727
+tcp::basic_socket::getLocalhost(140,3447
+tcp::basic_socket::sends(152,3750
+tcp::basic_socket::sendBuf(180,4331
+tcp::basic_socket::reads(202,4860
+tcp::basic_socket::readBuf(232,5473
+tcp::basic_socket::setOpt(244,5690
+tcp::basic_socket::getOpt(252,5863
+tcp::basic_socket::setReuseAddr(260,6031
+tcp::basic_socket::isReuseAddr(267,6168
+tcp::basic_socket::setKeepAlive(278,6331
+tcp::basic_socket::isKeepAlive(285,6468
+tcp::basic_socket::getPeerName(296,6641
+tcp::basic_socket::closes(321,7254
+
+src/basesockbuf.cc,155
+tcp::base_sock_buf::base_sock_buf(40,1185
+tcp::base_sock_buf::underflow(58,1637
+tcp::base_sock_buf::overflow(93,2357
+tcp::base_sock_buf::sync(120,2836
+
+test/include/socketpp/tcp/basesocket.h,767
+#define SOCKET_PP 24,744
+using namespace std;33,900
+class basic_socket37,939
+	int                socketfd;41,972
+	struct sockaddr_in addr;42,1002
+	char*              host;43,1028
+	int                port;44,1054
+	bool              _isConnected;45,1080
+	basic_socket(58,1510
+	basic_socket(59,1527
+	basic_socket(60,1560
+	int   getSockfd(67,1675
+	const char* getLocalhost(74,1807
+	int connects(82,2119
+	int connects(83,2152
+	bool isConnected(90,2279
+       	int sends(97,2415
+	int sendBuf(104,2544
+	char* reads(111,2662
+	int   readBuf(112,2678
+	int setOpt(114,2707
+	int getOpt(115,2743
+	int setReuseAddr(122,2945
+	int isReuseAddr(123,2981
+	int setKeepAlive(128,3047
+	int isKeepAlive(129,3083
+	char* getPeerName(138,3252
+	void closes(140,3276
+
+test/include/socketpp/tcp/basesockbuf.h,306
+#define BASESOCKBUF_H 23,746
+using namespace std;29,848
+class base_sock_buf 34,887
+        basic_socket* sock;38,938
+	vector<char>  buffer;39,988
+	vector<char>  outBuf;40,1042
+	base_sock_buf(44,1169
+	int_type overflow(48,1268
+	int_type underflow(49,1297
+	int sync(50,1320
+	base_sock_buf(53,1343
+
+test/include/socketpp/tcp/socket.h,232
+#define SOCKET_H 23,736
+using namespace std;30,871
+class Socket 35,910
+	Socket(43,1000
+	Socket(44,1011
+	Socket(45,1038
+	ostream& operator<<(int)47,1053
+	ostream& operator<<(double)48,1080
+	ostream& operator<<(float)49,1110
+
+test/include/socketpp/tcp/server.h,318
+#define SERVER_PP23,739
+using namespace std;32,892
+class Server 40,1016
+	int                server,43,1043
+	int                server, conn;43,1043
+	struct sockaddr_in addr;44,1077
+	int                port;45,1103
+	Server(49,1175
+	Server(50,1250
+	int binds(52,1323
+	int binds(53,1417
+	bool isBound(55,1480
+
+include/socketpp/logging/logging.h,103
+#define LOGGING_H 5,58
+	INFO,9,94
+	WARNING,10,101
+	ERROR11,111
+} Status_t;12,118
+class Log14,131
+
+include/socketpp/tcp/basesocket.h,1141
+#define SOCKET_PP 24,744
+using namespace std;33,900
+class basic_socket37,939
+        char* newSalt(41,970
+	int                socketfd;44,1015
+	struct sockaddr_in addr;45,1045
+	char*              host;46,1071
+	int                port;47,1097
+        char*              salt;48,1123
+        char*              cliSalt;49,1178
+        int                isSecure;50,1232
+        int                hashExchanged;51,1302
+	int   getSockfd(59,1497
+	const char* getLocalhost(66,1629
+	int connects(74,1941
+	int connects(75,1974
+        int setSecure(85,2367
+        int exchangeSalt(93,2584
+	bool isConnected(100,2708
+       	int sends(107,2852
+	int sendBuf(114,2981
+	char* reads(121,3099
+	int   readBuf(122,3115
+        char* hashData(129,3309
+        char* encrypt(138,3537
+        int cmpData(147,3854
+        int sendBufEncrypted(158,4233
+	int setOpt(161,4299
+	int getOpt(162,4335
+	int setReuseAddr(169,4537
+	int isReuseAddr(170,4573
+	int setKeepAlive(175,4639
+	int isKeepAlive(176,4675
+	char* getPeerName(185,4844
+	void closes(187,4868
+	basic_socket(199,5325
+	basic_socket(200,5342
+	basic_socket(201,5375
+
+include/socketpp/tcp/basesockbuf.h,306
+#define BASESOCKBUF_H 23,746
+using namespace std;29,848
+class base_sock_buf 34,887
+        basic_socket* sock;38,938
+	vector<char>  buffer;39,988
+	vector<char>  outBuf;40,1042
+	base_sock_buf(44,1169
+	int_type overflow(48,1268
+	int_type underflow(49,1297
+	int sync(50,1320
+	base_sock_buf(53,1343
+
+include/socketpp/tcp/socket.h,232
+#define SOCKET_H 23,736
+using namespace std;30,871
+class Socket 35,910
+	Socket(43,1000
+	Socket(44,1011
+	Socket(45,1038
+	ostream& operator<<(int)47,1053
+	ostream& operator<<(double)48,1080
+	ostream& operator<<(float)49,1110
+
+include/socketpp/tcp/server.h,318
+#define SERVER_PP23,739
+using namespace std;32,892
+class Server 40,1016
+	int                server,43,1043
+	int                server, conn;43,1043
+	struct sockaddr_in addr;44,1077
+	int                port;45,1103
+	Server(49,1175
+	Server(50,1250
+	int binds(52,1323
+	int binds(53,1417
+	bool isBound(55,1480

@@ -61,6 +61,27 @@ tcp::basic_socket::basic_socket(const char* _host, int _port)
 		return;
 		/* Consider making a socket exception */
 	}
+	
+	
+}
+
+
+tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
+	: host((char*) _host),
+	  port(_port)
+{
+	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
+	if (socketfd < 0){
+		cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
+		return;
+		/* Consider making a socket exception */
+	}
+	
+	if (conn){
+                int ret = this->connects();
+                if (ret == -1)
+                        cerr << "basesocket.cc:69: Error connecting to server" << endl;
+        }
 }
 
 tcp::basic_socket::basic_socket(int sockd)
@@ -146,6 +167,12 @@ tcp::basic_socket::getLocalhost()
 	const char* addr = NULL;
  	addr = inet_ntoa(localAddress.sin_addr);
 	return addr; // get the local address
+}
+
+int
+tcp::basic_socket::getLocalPort()
+{
+        return this->port;
 }
 
 int

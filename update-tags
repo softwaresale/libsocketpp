@@ -1,0 +1,6 @@
+#! /bin/bash
+
+rm -f TAGS
+
+find . -name "*.cc" -print | xargs etags -a
+find . -name "*.h"  -print | xargs etags -a
