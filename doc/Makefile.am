@@ -1,2 +1,2 @@
 
-dist_data_DATA = libsocketpp.texi
+info_TEXINFOS = libsocketpp.texi

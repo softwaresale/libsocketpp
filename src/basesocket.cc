@@ -46,8 +46,6 @@ tcp::basic_socket::basic_socket()
 		cerr << "basesocket.cc:17:25: Error creating socket descriptor (non-zero return)" << endl;
 		return;
 	}
-	
-	_isConnected = false;
 }
 
 
@@ -121,7 +119,6 @@ tcp::basic_socket::connects(const char* _host, int _port)
 		return 1;
 	}
 
-	_isConnected = true;
 	return 0;
 }
 
@@ -151,8 +148,6 @@ tcp::basic_socket::connects()
 		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return -1;
 	}
-	
-	_isConnected = true;
 
 	return 0;
 }

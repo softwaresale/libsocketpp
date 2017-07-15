@@ -325,7 +325,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 SUBDIRS = src include doc .
-dist_noinst_DATA = TODO README.md README NEWS ChangeLog AUTHORS COPYING INSTALL
+dist_noinst_DATA = TODO README.md README NEWS ChangeLog AUTHORS COPYING INSTALL LICENSE
 all: all-recursive
 
 .SUFFIXES:
