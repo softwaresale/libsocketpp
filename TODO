@@ -22,7 +22,7 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Override formatted output for integer and numbers
 [done] *.  Add `getPort()` function
 [done] *.  Make socket connect in basic_socket constructor
-[    ] *.  Add reuseAddress and keepAlive options on server
+[done] *.  Add reuseAddress and keepAlive options on server
 [    ] *   Write exception and errno values
 [done] *.  Add texinfo automake build proceedure
 [    ] *.  Add compression with zlib?

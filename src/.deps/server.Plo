@@ -112,8 +112,8 @@ server.lo: server.cc /usr/include/stdc-predef.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/confname.h /usr/include/getopt.h /usr/include/netdb.h \
  /usr/include/rpc/netdb.h /usr/include/bits/siginfo.h \
- /usr/include/bits/netdb.h ../include/socketpp/tcp/socket.h \
- ../include/socketpp/tcp/basesocket.h \
+ /usr/include/bits/netdb.h /usr/include/netinet/tcp.h \
+ ../include/socketpp/tcp/socket.h ../include/socketpp/tcp/basesocket.h \
  ../include/socketpp/tcp/basesockbuf.h /usr/include/c++/7/vector \
  /usr/include/c++/7/bits/stl_construct.h \
  /usr/include/c++/7/bits/stl_uninitialized.h \
@@ -472,6 +472,8 @@ server.lo: server.cc /usr/include/stdc-predef.h \
 /usr/include/bits/siginfo.h:
 
 /usr/include/bits/netdb.h:
+
+/usr/include/netinet/tcp.h:
 
 ../include/socketpp/tcp/socket.h:
 

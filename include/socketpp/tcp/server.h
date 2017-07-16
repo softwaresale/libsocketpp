@@ -53,7 +53,13 @@ public:
 	int binds(int _port);            // binds address with data
 	
 	bool isBound();                  // true if server is bound, false if not
-        
+
+	int setReuseAddr(bool var = true);
+	int isReuseAddr();
+
+	int setKeepAlive(bool var = true);
+	int isKeepAlive();
+
 	tcp::Socket& accepts();           // accepts a socket connection and returns a socket
 	int          acceptfd();          // returns the connected socket descriptor
 

@@ -33,6 +33,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <netdb.h>
+#include <netinet/tcp.h>
 #include "../include/socketpp/tcp/socket.h"
 #include "../include/socketpp/tcp/server.h"
 
@@ -109,6 +110,44 @@ int tcp::Server::binds(int _port){
 }
 
 bool  tcp::Server::isBound() { return this->_isBound; }
+
+int
+tcp::Server::setKeepAlive(bool var)
+{
+	int _var = (int) var;
+	return setsockopt(this->server, SOL_SOCKET, SO_KEEPALIVE, &_var, sizeof(int));
+}
+
+int
+tcp::Server::isKeepAlive()
+{
+	int status = 0;
+	socklen_t len = (socklen_t) sizeof(status);
+	int ret = getsockopt(this->server, SOL_SOCKET, SO_KEEPALIVE, (void*)&status, &len);
+	if (ret == -1)
+		return ret;
+	else
+		return status; // should be flag
+}
+
+int
+tcp::Server::setReuseAddr(bool var)
+{
+	int _var = (int) var;
+	return setsockopt(this->server, SOL_SOCKET, SO_REUSEADDR, &_var, sizeof(int));
+}
+
+int
+tcp::Server::isReuseAddr()
+{
+	int val = 0;
+	socklen_t len = (socklen_t) sizeof(val);
+	int ret = getsockopt(this->server, SOL_SOCKET, SO_REUSEADDR, (void*)&val, &len);
+	if (ret == -1)
+		return ret;
+	else
+		return val;
+}
 
 tcp::Socket&
 tcp::Server::accepts(){
