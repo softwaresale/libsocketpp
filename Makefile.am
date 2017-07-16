@@ -2,3 +2,5 @@
 SUBDIRS = src include doc .
 
 dist_noinst_DATA = TODO README.md README NEWS ChangeLog AUTHORS COPYING INSTALL LICENSE
+
+EXTRA_DIST = test

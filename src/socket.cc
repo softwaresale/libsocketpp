@@ -1,7 +1,7 @@
 
 /*
-  This is one of the main classes generated from libsocketpp. It is a streambases
-  TCP socket class.
+  This is one of the main classes generated from libsocketpp. It is a 
+  streambases TCP socket class.
 
 
     Copyright (C) 2017  Charlie Sale
@@ -37,7 +37,8 @@ using namespace std;
 * supporting class */
 tcp::Socket::Socket()
 	: basic_socket(),
-	  iostream(new base_sock_buf(this)) /* Using the already instantiated basic_socket part of self */
+	  iostream(new base_sock_buf(this))
+	  /* Using the already instantiated basic_socket part of self */
 {
 
 }

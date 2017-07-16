@@ -80,6 +80,7 @@ tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
                 if (ret == -1)
                         cerr << "basesocket.cc:69: Error connecting to server" << endl;
         }
+
 }
 
 tcp::basic_socket::basic_socket(int sockd)
@@ -132,7 +133,7 @@ tcp::basic_socket::connects()
 		return -1;
 
 	}
-	
+
 	/*
 	if (isConnected()){
 		cerr << "basesocket.cc:connects::84: Socket already connected" << endl;
@@ -148,7 +149,7 @@ tcp::basic_socket::connects()
 		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return -1;
 	}
-
+	
 	return 0;
 }
 

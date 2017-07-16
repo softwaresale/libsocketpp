@@ -51,7 +51,7 @@ public:
 	istream& operator>>(int&);
 	istream& operator>>(double&);
 	istream& operator>>(float&);
-
+	
 };
 
 }

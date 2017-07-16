@@ -21,10 +21,10 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add `getpeername()` capabilites to basic_socket
 [done] *.  Override formatted output for integer and numbers
 [done] *.  Add `getPort()` function
-[    ] *.  Make socket connect in basic_socket constructor
+[done] *.  Make socket connect in basic_socket constructor
 [    ] *.  Add reuseAddress and keepAlive options on server
 [    ] *   Write exception and errno values
-[    ] *.  Add texinfo automake build proceedure
+[done] *.  Add texinfo automake build proceedure
 [    ] *.  Add compression with zlib?
 [    ] *.  Add Asynchronous accept method for Server class
 [    ] *.  Continuously update texinfo docs

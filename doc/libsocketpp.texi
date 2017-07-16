@@ -44,14 +44,12 @@ for creating your own derivatives of this system.
 
 @contents
 
-@end contents
-
 @setchapternewpage on
 
 @c DOC START
 
 @c Overview of project
-@node Overview, Acquiring
+@node Overview, The Basics
 @chapter Overview
 Welcome to libsocketpp, the C++ library for networking sockets. If you don't know
 already, a socket is a connection between two networking hubs like computers and
@@ -79,7 +77,7 @@ Now that you have libsocketpp installed and configured, let's cover the basics o
 @end menu
 
 @node TCP
-@subsection TCP
+@section TCP
 
 The primary socket set used in libsocketpp is the TCP socket.
 If you don't know already, TCP sockets are streambased, which
@@ -235,7 +233,7 @@ By this, I mean that the classes are accessable to the user for their own deriva
 of them. Here is an overview of what each base class does and tips/hints on how to 
 extend them for your own purposes.
 
-@subsection @code{tcp::basic_socket} : @code{socketpp/tcp/basesocket.h}
+@section @code{tcp::basic_socket} : @code{socketpp/tcp/basesocket.h}
 
 The most important base class in this project is the class @code{tcp::basic_socket}.
 This class contains all basic socket functionality. This includes connection, getting
@@ -246,21 +244,21 @@ needs to be derived. For example:
 
 @example
 
-#include <socketpp/tcp/basesocket.h>
-
-class MyClass : public tcp::basic_socket 
-{
-private:
-    int var;
-    
-public:
-    MyClass() : tcp::basic_socket()
-    { }
-    
-    int foobar(){ return 1; }
-    
-    int closes(){ cout << "I am closed"; close(this->socketfd); }
-};
+#include <socketpp/tcp/basesocket.h>              
+                                                  
+class MyClass : public tcp::basic_socket          
+@{                                                 
+private:                                          
+    int var;                                      
+                                                  
+public:                                           
+    MyClass() : tcp::basic_socket()               
+    @{ @}                                           
+                                                  
+    int foobar()@{ return 1; @}                     
+                                                  
+    int closes()@{ cout << "I am closed"; close(this->socketfd); @} 
+@};                                                                
 
 @end example
 
@@ -269,9 +267,7 @@ is created. It creates it's own private data, calls the parent constructor, adds
 method (@code{foobar}), and overrides a method (@code{closes}). By extending this class, you
 get all basic socket functionality in your own class. 
 
-@end subsection
-
-@subsection @code{tcp::base_sock_buf} : @code{socketpp/tcp/basesockbuf.h}
+@section @code{tcp::base_sock_buf} : @code{socketpp/tcp/basesockbuf.h}
 
 This base class inherits from the @code{std::streambuf} class, which is the class that tells
 a stream how to handle the I/O buffer. Inside of this class, there is an internal @code{basic_socket}
@@ -300,10 +296,6 @@ which empties what ever is in the buffer at the moment. The flush functionality 
 
 These three functions are the majority of this base class. If you have any development to do on this
 class, these function are where it will happen. 
-
-
-
-@end subsection
 
 @c end of doc
 @node Index

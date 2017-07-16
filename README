@@ -6,6 +6,11 @@ user usability and extension for your own libsocketpp derivative.
 In short, the main classes to use are tcp::Socket and tcp::Server. All classes that have
 the prefix base_ are going to be used as derivatives, not public use classes.
 
+All source files are in the dir `src/`
+All headers are in `include/socketpp/`
+All documentation files are found in `doc/`
+Examples and testing can be found in `test/`
+
 For a tutorial, build the texinfo manual in your prefered format. Read the INSTALL guide
 to find out how to build your selected format. PDF or html are reconmended.
 
