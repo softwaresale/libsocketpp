@@ -32,6 +32,7 @@
 #include <netdb.h>
 #include <errno.h> // THINK ABOUT IMPLEMENTING ERRNO
 #include "../include/socketpp/tcp/basesocket.h"
+#include <sockexe.h>
 
 using namespace std;
 
@@ -43,8 +44,9 @@ tcp::basic_socket::basic_socket()
 {	
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
-		cerr << "basesocket.cc:17:25: Error creating socket descriptor (non-zero return)" << endl;
-		return;
+		// cerr << "basesocket.cc:17:25: Error creating socket descriptor (non-zero return)" << endl;
+		// set errno
+		throw new ctor_exe_t(); // throw constructor exception
 	}
 }
 
@@ -55,9 +57,8 @@ tcp::basic_socket::basic_socket(const char* _host, int _port)
 {
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
-		cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
-		return;
-		/* Consider making a socket exception */
+		// cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
+		throw new ctor_exe_t(); // throw constructor exception
 	}
 	
 	
@@ -70,16 +71,15 @@ tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
 {
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
-		cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
-		return;
-		/* Consider making a socket exception */
+		// cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
+		throw new ctor_exe_t(); // throw constructor exception
 	}
 	
 	if (conn){
-                int ret = this->connects();
-                if (ret == -1)
-                        cerr << "basesocket.cc:69: Error connecting to server" << endl;
-        }
+        int ret = this->connects();
+        if (ret == -1)
+			// cerr << "basesocket.cc:69: Error connecting to server" << endl;
+    }
 
 }
 
@@ -116,7 +116,7 @@ tcp::basic_socket::connects(const char* _host, int _port)
 	addr.sin_addr.s_addr = inet_addr(_host); // sets the address's host
 
 	if ( connect(socketfd, (struct sockaddr*)&addr, sizeof(addr)) < 0){
-		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
+		//cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return 1;
 	}
 
@@ -129,7 +129,7 @@ tcp::basic_socket::connects()
 {
 
 	if (host == NULL || port == 0){
-		cerr << "basesocket.cc:connects::84: Host and port not set" << endl;
+		//cerr << "basesocket.cc:connects::84: Host and port not set" << endl;
 		return -1;
 
 	}
@@ -146,7 +146,7 @@ tcp::basic_socket::connects()
 	addr.sin_addr.s_addr = inet_addr(host);  // sets the address's host
 
 	if ( connect(socketfd, (struct sockaddr*)&addr, sizeof(addr)) < 0){
-		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
+		//cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return -1;
 	}
 	
@@ -183,7 +183,7 @@ tcp::basic_socket::sends(char* buffer)
 
 	bytes = send(socketfd, (char*)&len, sizeof(len), 0); // send the size
 	if (bytes < 0){
-		cerr << "basesocket.cc:sends: Error sending size of buffer to socket" << endl;
+		//cerr << "basesocket.cc:sends: Error sending size of buffer to socket" << endl;
 		return -1;
 	}
 
@@ -191,7 +191,7 @@ tcp::basic_socket::sends(char* buffer)
 
 	bytes = send(socketfd, buffer, datalen, 0);
 	if (bytes < 0){
-		cerr << "basesocket.cc:sends: Error writing buffer to socket" << endl;
+		//cerr << "basesocket.cc:sends: Error writing buffer to socket" << endl;
 		return -1;
 	}
 
@@ -204,13 +204,13 @@ tcp::basic_socket::sendBuf(char* data, int size)
 {
 	// make sure connected
 	if (!isConnected()){
-		cerr << "basesocket.cc:sendBuf:164: Socket not connected" << endl;
+		//cerr << "basesocket.cc:sendBuf:164: Socket not connected" << endl;
 		return -2; // not connected
 	}
 	
 	int bytes = send(socketfd, data, size, 0); // get bytes read
 	if (bytes < 0){
-		cerr << "basesocket.cc:sendBuf:164: No bytes sent" << endl;
+		//cerr << "basesocket.cc:sendBuf:164: No bytes sent" << endl;
 		return bytes;
 	}
 	
@@ -231,7 +231,7 @@ tcp::basic_socket::reads()
 	// Read the incoming size 
 	bytes = recv(socketfd, (char*)&buflen, sizeof(buflen), 0);
 	if (bytes < 0){
-		cerr << "basesocket.cc:reads: Error reading size of data" << endl;
+		//cerr << "basesocket.cc:reads: Error reading size of data" << endl;
 		return NULL;
 	}
 	buflen = ntohl(buflen);
@@ -242,7 +242,7 @@ tcp::basic_socket::reads()
 
 	bytes = recv(socketfd, buffer, buflen, 0);
 	if (bytes < 0){
-		cerr << "basesocket.cc:reads: Error reading data" << endl;
+		//cerr << "basesocket.cc:reads: Error reading data" << endl;
 		return NULL;
 	}
 
@@ -256,7 +256,7 @@ tcp::basic_socket::readBuf(char* buffer, int size)
 {
 	int bytes = recv(socketfd, buffer, size, 0);
 	if (bytes < 0){
-		cerr << "basesocket.cc:readBuf:225: No bytes read" << endl;
+		//cerr << "basesocket.cc:readBuf:225: No bytes read" << endl;
 		return -1;
 	}
 
@@ -323,7 +323,7 @@ tcp::basic_socket::getPeerName()
 	
 	int ret = getpeername(this->socketfd, (struct sockaddr*) &info, &len);
 	if (ret == -1){
-		cerr << "basesocket.cc:301: getpeername returned -1" << endl;
+		//cerr << "basesocket.cc:301: getpeername returned -1" << endl;
 		return NULL;
 	}
 
@@ -333,7 +333,7 @@ tcp::basic_socket::getPeerName()
 	       	struct sockaddr_in* addr = (struct sockaddr_in*) &info;
 		addrstr = inet_ntoa(addr->sin_addr);
 	} else {
-		cerr << "basesocket.cc:301: getPeerName does not support AF_INET6" << endl;
+		//cerr << "basesocket.cc:301: getPeerName does not support AF_INET6" << endl;
 		return NULL;
 	}
 	

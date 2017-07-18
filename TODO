@@ -23,33 +23,35 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add `getPort()` function
 [done] *.  Make socket connect in basic_socket constructor
 [done] *.  Add reuseAddress and keepAlive options on server
-[    ] *   Write exception and errno values
+[done] *   Write exception for constructors (errno already supplied: use default C socket values)
 [done] *.  Add texinfo automake build proceedure
 [    ] *.  Add compression with zlib?
 [    ] *.  Add Asynchronous accept method for Server class
 [    ] *.  Continuously update texinfo docs
 
-Phase 2 -- Implement security protocols Second Major Release (major version 2.x.x)
-----------------------------------------------------------------------------------
-[    ] *.  Implement security protocols
-[    ]          *. Options: GNU TLS, GNU SASL, GSS
-
-Phase 3 -- Implement shell interface of library. Third Major release (major version 3.x.x)
+Phase 2 -- Implement shell interface of library. Second Major release (major version 2.x.x)
 -------------------------------------------------------------------------------------------
 [    ] *.  Create `socketpp` command, which opens up a command shell for creating sockets
-[    ] *.  Socket commands
+[    ] *.  Socket/Server commands
 [    ]          *. `server` -- creates a new server
 [    ]          *. `socket` -- creates a new socket
 [    ]          *. `binds/connects` -- binds/connects each specific socket
 [    ]          *. `send/recv` -- send and recieve functionality
 [    ]          *. `quit` -- close function
 
-Phase 4 -- Implement socketpp shell language, `sockp`. Fourth Major release (major version 4.x.x)
+Phase 3 -- Implement socketpp shell language, `sockp`. Third Major release (major version 3.x.x)
 ----------------------------------------------------------------------------------------
 [    ] *.  Use bison to create an interpreter
 [    ] *.       *. Use file extension '.spp'
 [    ] *.  Functionality for socket creation, usage, etc.
-[    ] *.  Make emacs mode for shell language
+[    ] *.  Make emacs mode for shell language in elisp
+
+Phase 4 -- Implement security protocols Fourth Major Release (major version 4.x.x)
+----------------------------------------------------------------------------------
+[    ] *.  Implement security protocols
+[    ]          *. Options: GNU TLS, GNU SASL, *GSS*
+[    ] *.  Add new exceptions
+
 
 Future -- Implement standard internet protocols
 -------------------------------------------------------------------------------------------
