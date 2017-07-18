@@ -25,8 +25,6 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add reuseAddress and keepAlive options on server
 [done] *   Write exception for constructors (errno already supplied: use default C socket values)
 [done] *.  Add texinfo automake build proceedure
-[    ] *.  Add compression with zlib?
-[    ] *.  Add Asynchronous accept method for Server class
 [    ] *.  Continuously update texinfo docs
 
 Phase 2 -- Implement shell interface of library. Second Major release (major version 2.x.x)
@@ -51,6 +49,8 @@ Phase 4 -- Implement security protocols Fourth Major Release (major version 4.x.
 [    ] *.  Implement security protocols
 [    ]          *. Options: GNU TLS, GNU SASL, *GSS*
 [    ] *.  Add new exceptions
+[    ] *.  Add compression with zlib?
+[    ] *.  Add Asynchronous accept method for Server class
 
 
 Future -- Implement standard internet protocols
