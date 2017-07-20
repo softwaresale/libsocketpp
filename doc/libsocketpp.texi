@@ -17,8 +17,8 @@ Permission is granted to GNU
 @end copying
 
 @titlepage
-@title A Guide to Libsocketpp
-@subtitle A tutorial to C++ streambased sockets
+@title Socketpp
+@subtitle A tutorial to C++ streambased sockets and accompanying tools
 @author Charlie Sale
 
 @c Start copyright page
@@ -36,9 +36,16 @@ Published by GNU Manual
 @node Top
 @top A Guide to Libsocketpp
 
-The C++ library libsocketpp is a combination of the C socket system
-and the C++ standard I/O system. It includes classes for base classes
-for creating your own derivatives of this system.
+The C++ Library @code{libsocketpp} contains multiple top level and base classes
+built on top of the C++ standard I/O system. This allows the user of the
+library to use sockets like they would use cout or cin.
+
+The program @code{sockp} is a shell interface for the socketpp library.
+The purpose of this program is to allow socket functionality in the terminal,
+where it might be useful.
+
+The scriping language @code{socki} is an interpreter for a scriping language that
+allows shell socket functionality, but in a script instead of direct user input.
 
 @end ifnottex
 
@@ -48,254 +55,191 @@ for creating your own derivatives of this system.
 
 @c DOC START
 
-@c Overview of project
-@node Overview, The Basics
+@node Overview, Tutorial
 @chapter Overview
-Welcome to libsocketpp, the C++ library for networking sockets. If you don't know
-already, a socket is a connection between two networking hubs like computers and
-modems. Before now, the standard socket system for C++ was the C socket system. Although
-excellent for C, the C socket system was designed for use in the C programming language,
-not C++. One of the key differences between C++ and C is that C++ is object oriented, which
-means that it uses classes and objects. One of the objectives of libsocketpp was to
-integrate the C socket system into an object oriented system built for C++.
 
-Another objective of libsocketpp is to integrate the C socket system into the C++
-standard I/O system. The standard C++ I/O system is built around buffer and stream classes.
-A buffer is a container of data to be moved over a stream, and a stream is a connection
-between two points that sends and recieves data between the two points. The stream writes
-data into and reads data from a buffer. Libsocketpp works on this system because the socket
-sends and recieves data across the internet and stores the data into the buffer.
+Welcome to Libsocketpp, the C++ socket library based on the standard C++ I/O system. Because it
+is built on top of the standard C++ I/O system, sockets behave the same way as an @code{istream}
+or @code{ostream} would work. Lets go over what that means exactly.
 
+By saying that libsocketpp is built on top of the C++ standard I/O system, I mean that it inherits
+standard classes included in the standard C++ library that are built for I/O functionality. Classes
+like @code{cout} and @code{cin} are built on the same systems. The specific classes that libsocketpp
+are built on are @code{streambuf}, which is a typedef of @code{basic_streambuf}, and
+@code{iostream}, which is a typedef of @code{basic_iostream}. Let's cover what these classes do,
+and then how they relate to libsocketpp.
 
-@node The Basics, An Indepth Tutorial, Overview
-@chapter A Basic Tutorial
+Let's start with the class @code{iostream}. This class is whats known as a stream. A stream is a
+device that formats and transports data over a connection. This means that it physically reads
+and writes data between two places. The class @code{iostream} both reads and writes data via
+methods inherited from @code{istream} and @code{ostream}. As said earlier, a stream only moves
+data, which means that we are missing a part of the system: the buffer.
 
-Now that you have libsocketpp installed and configured, let's cover the basics on usage.
+A buffer, embodied in the class @code{streambuf}, is the location in memory in which data is stored
+to retrieved for sending and recieving. When a stream writes data, it retrieves data from the the
+buffer and outputs it to the destination. Conversly, when a stream reads data, it places retrieved
+data into the buffer. Once this read data is placed in the buffer, said data can be returned to the
+user.
+
+In order for a stream to use a buffer, a buffer is usually passed into it's constructor. In
+libsocketpp, both the buffer and stream are combined into one class for easy usage.
+
+A question that you might have is ``How does this I/O system relate to sockets?`` Well, the
+type of socket primarily used in this library is a Transmission Control Protocol (TCP) socket.
+A TCP socket is itself a stream. This means that data is transfered over a connection through
+blocking read and write commands. Because TCP is a stream, it fits perfectly into the C++ I/O
+system.
+
+@c TODO talk about what can and can't do
+
+@node Tutorial, Extending, Overview
+@chapter Tutorial
+
+Let's now talk about how to use this library.
 
 @menu
-* TCP:: Using TCP sockets
+* Acquring and Installing: Getting. How to get and install this package
+* Compiling:: How to compile programs with this library
+* Including:: Which files to include in your program
+* Handling Errors: Errors. About errors in libsocketpp
+* Constructors, Connecting, and Binding: Ctors. How to create useable objects and connect them
+* Accepting Connections: Accepting. How to acccept connection from a server and user them
+* Sending and Recieving Data: Sendrecv. How to properly send and recieve data across sockets
+* Setting Options: Opts. How to set socket options.
+* Closing Connections: Closing. How to close a connection
 @end menu
 
-@node TCP
-@section TCP
+@node Getting
+@section Acquring and Installing
 
-The primary socket set used in libsocketpp is the TCP socket.
-If you don't know already, TCP sockets are streambased, which
-means it fits perfectly into this streambased library. The
-TCP socket process goes as such:
+@menu
+* Acquring::
+* Installing::
+@end menu
 
-SERVER:
+@node Acquring
+@subsection Acquiring
+
+@c TODO fix this
+
+@c end Acquiring
+
+@node Installing
+@subsection Installing
+
+Because this package follows standard GNU build proceedures, install with the following steps:
 @enumerate
 @item
-A socket descriptor is created
+@code{$ cd @example{libsocketpp-dir}}
 
 @item
-The socket descriptor is bound to a port
+@code{$ ./configure --prefix=@option{install-prefix}}
 
 @item
-The socket descriptor then calls a blocking
-process to listen for incoming socket connections.
+@code{$ make}
 
 @item
-Once a connection is found, a socket descriptor
-representing the accepted client is then returned
-for use.
-
-@item
-With that socket descriptor, a stream is set up
-between the server and now connected. Now, data
-can be sent to and from each connected member
-via blocking read and write calls.
-
-@item
-Eventually, either the server or client will
-disconnect, terminating the stream.
+@code{# make install}
 
 @end enumerate
 
-CLIENT:
-@enumerate
-@item
-A socket descriptor is created
+@c end Installing
 
-@item
-The socket descriptor then connectes
-to the host and port on which a server is bound.
+@c end Getting
 
-@item
-Once the client is connected, it can now send
-and recieve data with the server via the same
-blocking calls implemented by the server.
+@node Compiling
+@section Compiling
 
-@item
-Eventually, the socket will terminate it's connection
-with the server, and the stream is closed.
+This library installs both a static and dynamic library. If you want to keep dependencies down or want
+to have a very portable program/library, copy the static library
+(@file{@example{prefix}/lib/libsocketpp.a}) into your project directory and compile it it by doing
 
-@end enumerate
+@code{$ g++ file.cc libsocketpp.a -o executable}.
 
-The classes in libsocketpp work the same way as this. Here is an example of a client
-program.
+If you want to compile with the dynamic library, then compile with the flag @code{-lsocketpp}. This
+is assuming that your prefix is part of the standard library serach path of ld.
 
+@c end Compiling
+
+@node Including
+@section Including
+
+All libsocketpp headers are found in the directory @file{socketpp/} in your prefix include directory.
+From there, classes are broken down by specific function or protocol. Both the @code{Socket} and
+@code{Server} classes are found int the @file{tcp/} directory. Note that these subdirectories
+correspond with the classes namespace. This means the @code{Socket} is part of the namespace
+@code{tcp}.
+
+For example:
 @example
 #include <socketpp/tcp/socket.h>
-#include <iostream>
+#include <socketpp/tcp/server.h>
 
-using namespace std;
-using namespace tcp;
+/* The rest of your project here */
 
-int main(int argc, char** argv)
-@{
-  Socket sock("192.168.1.1", 8888);
-  sock.connects();
+@end example
 
-  sock << "Hello World" << endl;
+@c end Including
 
-  sock.closes();
+@node Errors
+@section Handling Errors
+Errors in socketpp are fairly low level. Most functions return an integer value for testing if they
+do not already return some sort of other data type. Generally, a function will return a negative
+value (i.e -1). On success, most functions return @code{0} on success, so to test, you can write:
 
-  return 0;
+@example
+int ret = socket_function();
+if (ret != 0)@{
+   // handle error  
 @}
-
 @end example
 
-Here is a breakdown of what each line does:
-@enumerate
+For more specific error handling, all standard C socket @code{errno} values are still set. There
+are no new @code{errno} values set by this library: they just recycle what would already be set
+by the standard system. Look at the errno documentation at the website
+@indicateurl{http://www.virtsync.com/c-error-codes-include-errno}. This contains the number and
+a brief description about each errno error value.
 
-@item
-@example
-#include <iostream>
-#include <socketpp/tcp/socket.h>
-@end example
+The constructors for @code{tcp::Socket} and @code{tcp::Server} both throw the @code{ctor_exe_t}
+exception when calling their constructors. The constructor does not inherently throw the exception,
+but if an error in encountered, it will abort and dump the core. Because of this, it is reconmended
+that all constructor calls are acompnaied with a try/catch block.
 
-The first include statement includes the @code{tcp::Socket} class for use in the
-program. The second includes I/O header files for C++.
+@c end Errors
 
-@item
-@example
-using namespace std;
-using namespace tcp;
-@end example
+@node Ctors
+@section Constructors, Connecting, and Binding
 
-These lines declare the usage of namespaces in our program. All of the TCP socket
-classes are found in the namespace @code{tcp}. While neither of these lines are
-necessary, they allow you to write @code{Socket sock} instead of @code{tcp::Socket sock}
-every time you want to declare a Socket class
+Now, let's get into the actual classes and methods of libsocketpp.
 
-@item
-@example
-int main(int argc, char** argv) @{
-@end example
-This line is the main entry point to your C function.
+@c end Ctors
 
-@item
-@example
-        Socket sock("192.168.1.1", 8888);
-        sock.connects();
-@end example
-The first one declares a @code{Socket} object called @code{sock}. The constructor
-parameters are the connection values. The string being the host to connect to and
-the integer being the port on which you are going to connect. The next line,
-@code{sock.connects()} connects your socket object to the server with the supplied
-data. The @code{connects} method can also be used to set connection data in the same
-way as done in the constructor.
+@node Accepting
+@section Accepting Connections
 
-@item
-@example
-        sock << "Hello World" << endl;
-@end example
+@c end Accepting
 
-This line writes the string @code{"Hello World"} to the server that it connected to.
-This is done in the same manor as you would do when printing text to @code{stdout}
-via cout, meaning you use the formatted output operator, @code{<<}, to write text.
-Take special note of the @code{endl} at the end of the statement.
-@strong{An @code{endl} is required to send any data using the formatted output operator.}
-I will explain why later.
+@node Sendrecv
+@section Sending and Recieving Data
 
-@item
-@example
-        sock.closes();
-        return 0;
-@end example
+@c end Sendrecv
 
-The line @code{sock.closes();} terminates the connection between the socket and server,
-and the line @code{return 0;} is the standard successful return value from main.
+@node Opts
+@section Setting Options
 
-@end enumerate
+@c end Opts
 
-@node An Indepth Tutorial, Extending, The Basics
-@chapter An Indepth Tutorial
+@node Closing
+@section Closing Connections
 
+@c end Closing
 
-@node Extending
+@c end Tutorial
+
+@node Extending, Index, Tutorial
 @chapter Extending
 
-One of the goals of this project is to make the library extendable for your own usage.
-By this, I mean that the classes are accessable to the user for their own derivatives
-of them. Here is an overview of what each base class does and tips/hints on how to 
-extend them for your own purposes.
-
-@section @code{tcp::basic_socket} : @code{socketpp/tcp/basesocket.h}
-
-The most important base class in this project is the class @code{tcp::basic_socket}.
-This class contains all basic socket functionality. This includes connection, getting
-and setting options, sending and recieving data, getting internal data, and closing
-the connection. Keep in mind that this class is a true base class, so all methods
-except for the constructors are @code{protected}. If you want to use this class, it
-needs to be derived. For example:
-
-@example
-
-#include <socketpp/tcp/basesocket.h>              
-                                                  
-class MyClass : public tcp::basic_socket          
-@{                                                 
-private:                                          
-    int var;                                      
-                                                  
-public:                                           
-    MyClass() : tcp::basic_socket()               
-    @{ @}                                           
-                                                  
-    int foobar()@{ return 1; @}                     
-                                                  
-    int closes()@{ cout << "I am closed"; close(this->socketfd); @} 
-@};                                                                
-
-@end example
-
-In this mini example, a class called @code{MyClass} that inherites @code{tcp::basic_socket}
-is created. It creates it's own private data, calls the parent constructor, adds its own
-method (@code{foobar}), and overrides a method (@code{closes}). By extending this class, you
-get all basic socket functionality in your own class. 
-
-@section @code{tcp::base_sock_buf} : @code{socketpp/tcp/basesockbuf.h}
-
-This base class inherits from the @code{std::streambuf} class, which is the class that tells
-a stream how to handle the I/O buffer. Inside of this class, there is an internal @code{basic_socket}
-object that is used for reading and writing internal data, which will be talked about later. Another
-important thing to remember is that the @code{base_sock_buf} class's copy and assignment constructors
-are protected, so using them as a standalone class will probably be a pain. 
-
-The @code{base_sock_buf} class has three important methods: @code{underflow}, @code{overflow}, and 
-@code{sync}. These methods are the basics for reading and writing data over sockets. 
-
-Lets start with the @code{underflow} method. This method is used in reading
-data from a socket. When an @code{istream} calls a read call and the internal @code{sockbuf}
-is empty, then the @code{istream} calls the underflow command to repopulate the buffer with
-data. This will make the interal @code{basic_socket} object read more data and place it into
-the interal buffer so that there is data to be read by the user. In short, the internal buffer
-"underflows", so the @code{streambuf} must refill the buffer with more data.
-
-The next method is @code{overflow}. This function can be seen as the opposite as underflow. An
-@code{ostream} calls this method when the internal write buffer is full, or it "overflows". This
-causes the stream to empty the data and write it to a location. In this case, the internal socket
-object sends all of the written data over the connection. 
-
-To call an overflow call without waiting to fill up the buffer, the @code{flush} method can be called,
-which empties what ever is in the buffer at the moment. The flush functionality is defined in the function
-@code{sync}. This is used very often in this class.
-
-These three functions are the majority of this base class. If you have any development to do on this
-class, these function are where it will happen. 
+@c end Extending
 
 @c end of doc
 @node Index
