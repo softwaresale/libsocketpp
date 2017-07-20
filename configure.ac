@@ -11,6 +11,8 @@ LT_INIT
 
 AC_PROG_CXX([g++])
 
+AC_CONFIG_HEADERS([include/socketpp/tcp/config.h])
+
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
