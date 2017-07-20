@@ -29,7 +29,7 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 
 Phase 2 -- Implement shell interface of library. Second Major release (major version 2.x.x)
 -------------------------------------------------------------------------------------------
-[    ] *.  Create `socketpp` command, which opens up a command shell for creating sockets
+[    ] *.  Create `sockpp` command, which opens up a command shell for creating sockets
 [    ] *.  Socket/Server commands
 [    ]          *. `server` -- creates a new server
 [    ]          *. `socket` -- creates a new socket
@@ -39,7 +39,7 @@ Phase 2 -- Implement shell interface of library. Second Major release (major ver
 
 Phase 3 -- Implement socketpp shell language, `sockp`. Third Major release (major version 3.x.x)
 ----------------------------------------------------------------------------------------
-[    ] *.  Use bison to create an interpreter
+[    ] *.  Use bison to create an interpreter called `socki`
 [    ] *.       *. Use file extension '.spp'
 [    ] *.  Functionality for socket creation, usage, etc.
 [    ] *.  Make emacs mode for shell language in elisp
@@ -51,6 +51,7 @@ Phase 4 -- Implement security protocols Fourth Major Release (major version 4.x.
 [    ] *.  Add new exceptions
 [    ] *.  Add compression with zlib?
 [    ] *.  Add Asynchronous accept method for Server class
+[    ] *.  Create an object stream for sending base objects
 
 
 Future -- Implement standard internet protocols
