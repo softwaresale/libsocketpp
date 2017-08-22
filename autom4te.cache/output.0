@@ -764,8 +764,8 @@ enable_option_checking
 enable_silent_rules
 enable_dependency_tracking
 enable_maintainer_mode
-enable_shared
 enable_static
+enable_shared
 with_pic
 enable_fast_install
 with_aix_soname
@@ -1414,8 +1414,8 @@ Optional Features:
   --enable-maintainer-mode 
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
+  --enable-static@<:@=PKGS@:>@  build static libraries @<:@default=no@:>@
   --enable-shared@<:@=PKGS@:>@  build shared libraries @<:@default=yes@:>@
-  --enable-static@<:@=PKGS@:>@  build static libraries @<:@default=yes@:>@
   --enable-fast-install@<:@=PKGS@:>@ 
                           optimize for fast installation @<:@default=yes@:>@
   --disable-libtool-lock  avoid locking (might break parallel builds)
@@ -7880,6 +7880,35 @@ done
 
 
 # Set options
+@%:@ Check whether --enable-static was given.
+if test "${enable_static+set}" = set; then :
+  enableval=$enable_static; p=${PACKAGE-default}
+    case $enableval in
+    yes) enable_static=yes ;;
+    no) enable_static=no ;;
+    *)
+     enable_static=no
+      # Look at the argument we got.  We use all the common list separators.
+      lt_save_ifs=$IFS; IFS=$IFS$PATH_SEPARATOR,
+      for pkg in $enableval; do
+	IFS=$lt_save_ifs
+	if test "X$pkg" = "X$p"; then
+	  enable_static=yes
+	fi
+      done
+      IFS=$lt_save_ifs
+      ;;
+    esac
+else
+  enable_static=no
+fi
+
+
+    
+    
+    
+    
+
 
 
 
@@ -7920,37 +7949,7 @@ fi
 
 
 
-  @%:@ Check whether --enable-static was given.
-if test "${enable_static+set}" = set; then :
-  enableval=$enable_static; p=${PACKAGE-default}
-    case $enableval in
-    yes) enable_static=yes ;;
-    no) enable_static=no ;;
-    *)
-     enable_static=no
-      # Look at the argument we got.  We use all the common list separators.
-      lt_save_ifs=$IFS; IFS=$IFS$PATH_SEPARATOR,
-      for pkg in $enableval; do
-	IFS=$lt_save_ifs
-	if test "X$pkg" = "X$p"; then
-	  enable_static=yes
-	fi
-      done
-      IFS=$lt_save_ifs
-      ;;
-    esac
-else
-  enable_static=yes
-fi
-
-
-    
-    
-    
-    
-
-
-
+  
   
 @%:@ Check whether --with-pic was given.
 if test "${with_pic+set}" = set; then :
@@ -16637,8 +16636,8 @@ double_quote_subst='$double_quote_subst'
 delay_variable_subst='$delay_variable_subst'
 macro_version='`$ECHO "$macro_version" | $SED "$delay_single_quote_subst"`'
 macro_revision='`$ECHO "$macro_revision" | $SED "$delay_single_quote_subst"`'
-enable_shared='`$ECHO "$enable_shared" | $SED "$delay_single_quote_subst"`'
 enable_static='`$ECHO "$enable_static" | $SED "$delay_single_quote_subst"`'
+enable_shared='`$ECHO "$enable_shared" | $SED "$delay_single_quote_subst"`'
 pic_mode='`$ECHO "$pic_mode" | $SED "$delay_single_quote_subst"`'
 enable_fast_install='`$ECHO "$enable_fast_install" | $SED "$delay_single_quote_subst"`'
 shared_archive_member_spec='`$ECHO "$shared_archive_member_spec" | $SED "$delay_single_quote_subst"`'
@@ -17602,11 +17601,11 @@ available_tags='CXX '
 macro_version=$macro_version
 macro_revision=$macro_revision
 
-# Whether or not to build shared libraries.
-build_libtool_libs=$enable_shared
-
 # Whether or not to build static libraries.
 build_old_libs=$enable_static
+
+# Whether or not to build shared libraries.
+build_libtool_libs=$enable_shared
 
 # What type of objects to build.
 pic_mode=$pic_mode

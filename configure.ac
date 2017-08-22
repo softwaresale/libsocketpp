@@ -7,7 +7,7 @@ AM_MAINTAINER_MODE
 
 # AC_SUBST([CONFIG_STATUS_DEPENDENCIES], ['$(top_srcdir)/version.sh'])
 
-LT_INIT
+LT_INIT([disable-static])
 
 AC_PROG_CXX([g++])
 

@@ -196,13 +196,13 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/charlie/Programming/socketpp/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/charlie/Programming/libsocketpp/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/charlie/Programming/socketpp/missing autoconf
-AUTOHEADER = ${SHELL} /home/charlie/Programming/socketpp/missing autoheader
-AUTOMAKE = ${SHELL} /home/charlie/Programming/socketpp/missing automake-1.15
+AUTOCONF = ${SHELL} /home/charlie/Programming/libsocketpp/missing autoconf
+AUTOHEADER = ${SHELL} /home/charlie/Programming/libsocketpp/missing autoheader
+AUTOMAKE = ${SHELL} /home/charlie/Programming/libsocketpp/missing automake-1.15
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -241,7 +241,7 @@ LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/charlie/Programming/socketpp/missing makeinfo
+MAKEINFO = ${SHELL} /home/charlie/Programming/libsocketpp/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -264,10 +264,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 0.2
-abs_builddir = /home/charlie/Programming/socketpp/src
-abs_srcdir = /home/charlie/Programming/socketpp/src
-abs_top_builddir = /home/charlie/Programming/socketpp
-abs_top_srcdir = /home/charlie/Programming/socketpp
+abs_builddir = /home/charlie/Programming/libsocketpp/src
+abs_srcdir = /home/charlie/Programming/libsocketpp/src
+abs_top_builddir = /home/charlie/Programming/libsocketpp
+abs_top_srcdir = /home/charlie/Programming/libsocketpp
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -297,7 +297,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/charlie/Programming/socketpp/install-sh
+install_sh = ${SHELL} /home/charlie/Programming/libsocketpp/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -306,7 +306,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/charlie/Programming/socketpp/test
+prefix = /home/charlie/install_test
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -581,7 +581,8 @@ install-dvi: install-dvi-am
 install-dvi-am:
 
 install-exec-am: install-libLTLIBRARIES
-
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) install-exec-hook
 install-html: install-html-am
 
 install-html-am:
@@ -622,7 +623,7 @@ ps-am:
 
 uninstall-am: uninstall-libLTLIBRARIES
 
-.MAKE: install-am install-strip
+.MAKE: install-am install-exec-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
 	clean-libLTLIBRARIES clean-libtool cscopelist-am ctags \
@@ -630,16 +631,20 @@ uninstall-am: uninstall-libLTLIBRARIES
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-libLTLIBRARIES install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-libLTLIBRARIES
+	install-exec-am install-exec-hook install-html install-html-am \
+	install-info install-info-am install-libLTLIBRARIES \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am uninstall-libLTLIBRARIES
 
 .PRECIOUS: Makefile
 
+
+install-exec-hook:
+	@(cd $(DESTDIR)$(libdir) && $(RM) $(lib_LTLIBRARIES))
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
