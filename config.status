@@ -431,7 +431,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/charlie/Programming/libsocketpp'
+ac_pwd='/home/charlie/Programming/libsocketpp-devel'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/usr/bin/mkdir -p'
@@ -933,12 +933,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/usr/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]="strip"
-S["install_sh"]="${SHELL} /home/charlie/Programming/libsocketpp/install-sh"
-S["MAKEINFO"]="${SHELL} /home/charlie/Programming/libsocketpp/missing makeinfo"
-S["AUTOHEADER"]="${SHELL} /home/charlie/Programming/libsocketpp/missing autoheader"
-S["AUTOMAKE"]="${SHELL} /home/charlie/Programming/libsocketpp/missing automake-1.15"
-S["AUTOCONF"]="${SHELL} /home/charlie/Programming/libsocketpp/missing autoconf"
-S["ACLOCAL"]="${SHELL} /home/charlie/Programming/libsocketpp/missing aclocal-1.15"
+S["install_sh"]="${SHELL} /home/charlie/Programming/libsocketpp-devel/install-sh"
+S["MAKEINFO"]="${SHELL} /home/charlie/Programming/libsocketpp-devel/missing makeinfo"
+S["AUTOHEADER"]="${SHELL} /home/charlie/Programming/libsocketpp-devel/missing autoheader"
+S["AUTOMAKE"]="${SHELL} /home/charlie/Programming/libsocketpp-devel/missing automake-1.15"
+S["AUTOCONF"]="${SHELL} /home/charlie/Programming/libsocketpp-devel/missing autoconf"
+S["ACLOCAL"]="${SHELL} /home/charlie/Programming/libsocketpp-devel/missing aclocal-1.15"
 S["VERSION"]="0.2"
 S["PACKAGE"]="libsocketpp"
 S["CYGPATH_W"]="echo"
