@@ -78,6 +78,38 @@ http::http_base::dumpHead()
     return str.str();
 }
 
+string
+http::http_base::toString()
+{
+    ostringstream str;
 
+    // dump cmd line
+    vector<string>::iterator cmdit;
+    for (cmdit = cmd_line.begin();
+         cmdit != cmd_line.end();
+         cmdit++) {
+
+        str << *cmdit << " "; // write each command and a space
+    }
+
+    str << "\n"; // write a new line
+
+    // dump header
+    vector<pair<string, string>>::iterator headit;
+    for (headit =  header_data.begin();
+         headit != header_data.end();
+         headit++){
+
+        pair<string, string> p = *headit;
+        str << p.first << ": " << p.second << "\n";
+    }
+
+    str << "\n";
+
+    // dump body
+    str << this->body << CRLF;
+
+    return str.str();
+}
 
 

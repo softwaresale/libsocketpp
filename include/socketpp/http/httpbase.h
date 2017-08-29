@@ -35,6 +35,7 @@ public:
         http_base();
 
 
+        string toString();
         void setHeaderData(string, string);
         void setBody(string);
         string dumpHead();
