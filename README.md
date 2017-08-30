@@ -1,7 +1,20 @@
-# socketpp
+# libsocketpp
 This is a collection of C++ classes for networking with TCP sockets
 
+This is part of the hosting of the libsocketpp fedora package.
+
 ## Installation
+
+On fedora package:
+```
+sudo dnf install libsocketpp
+```
+or 
+```
+sudo yum install libsocketpp
+```
+
+From source...
 ```
 ./configure <prefix>
 make
