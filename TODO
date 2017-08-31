@@ -27,31 +27,16 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add texinfo automake build proceedure
 [    ] *.  Continuously update texinfo docs
 
-Phase 2 -- Implement shell interface of library. Second Major release (major version 2.x.x)
--------------------------------------------------------------------------------------------
-[    ] *.  Create `sockpp` command, which opens up a command shell for creating sockets
-[    ] *.  Socket/Server commands
-[    ]          *. `server` -- creates a new server
-[    ]          *. `socket` -- creates a new socket
-[    ]          *. `binds/connects` -- binds/connects each specific socket
-[    ]          *. `send/recv` -- send and recieve functionality
-[    ]          *. `quit` -- close function
-
-Phase 3 -- Implement socketpp shell language, `sockp`. Third Major release (major version 3.x.x)
-----------------------------------------------------------------------------------------
-[    ] *.  Use bison to create an interpreter called `socki`
-[    ] *.       *. Use file extension '.spp'
-[    ] *.  Functionality for socket creation, usage, etc.
-[    ] *.  Make emacs mode for shell language in elisp
-
-Phase 4 -- Implement security protocols Fourth Major Release (major version 4.x.x)
+Phase 2 -- Implement security protocols Fourth Major Release (major version 2.x.x)
 ----------------------------------------------------------------------------------
+[    ] *.  Implement Http request/response library
+[    ] *.  Add compatibility for other HTTP request/reqpose libraries
+[    ] *.  Add compression with zlib
+[    ] *.  Add new exceptions
 [    ] *.  Implement security protocols
 [    ]          *. Options: GNU TLS, GNU SASL, *GSS*
-[    ] *.  Add new exceptions
-[    ] *.  Add compression with zlib?
 [    ] *.  Add Asynchronous accept method for Server class
-[    ] *.  Create an object stream for sending base objects
+[    ] *.  Create an object stream for sending objects
 
 
 Future -- Implement standard internet protocols
