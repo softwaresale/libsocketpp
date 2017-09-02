@@ -12,16 +12,14 @@ using namespace std;
 // enumeration of HTTP request commands
 typedef enum
 {
-
-        GET,
-        POST,
-        HEAD,
-        PUT,
-        DELETE,
-        CONNECT,
-        OPTIONS,
-        TRACE
-
+        GET = 0,
+        POST = 1,
+        HEAD = 2,
+        PUT = 3,
+        DELETE = 4,
+        CONNECT = 5,
+        OPTIONS = 6,
+        TRACE = 7
 } http_cmd_t;
 
 namespace http
@@ -36,6 +34,7 @@ protected:
 
 public:
         http_request();
+        http_request(string);
 
         void setCmd(http_cmd_t);
         void setURI(string);
