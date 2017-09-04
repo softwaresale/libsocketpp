@@ -128,7 +128,7 @@ am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
 am_libsocketpp_la_OBJECTS = server.lo basesocket.lo basesockbuf.lo \
-	socket.lo
+	socket.lo httpbase.lo httprequest.lo httpresponse.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -196,13 +196,13 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/charlie/Programming/libsocketpp-devel/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/charlie/Programming/libsocketpp/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/charlie/Programming/libsocketpp-devel/missing autoconf
-AUTOHEADER = ${SHELL} /home/charlie/Programming/libsocketpp-devel/missing autoheader
-AUTOMAKE = ${SHELL} /home/charlie/Programming/libsocketpp-devel/missing automake-1.15
+AUTOCONF = ${SHELL} /home/charlie/Programming/libsocketpp/missing autoconf
+AUTOHEADER = ${SHELL} /home/charlie/Programming/libsocketpp/missing autoheader
+AUTOMAKE = ${SHELL} /home/charlie/Programming/libsocketpp/missing automake-1.15
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -241,7 +241,7 @@ LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/charlie/Programming/libsocketpp-devel/missing makeinfo
+MAKEINFO = ${SHELL} /home/charlie/Programming/libsocketpp/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -264,10 +264,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 VERSION = 0.2
-abs_builddir = /home/charlie/Programming/libsocketpp-devel/src
-abs_srcdir = /home/charlie/Programming/libsocketpp-devel/src
-abs_top_builddir = /home/charlie/Programming/libsocketpp-devel
-abs_top_srcdir = /home/charlie/Programming/libsocketpp-devel
+abs_builddir = /home/charlie/Programming/libsocketpp/src
+abs_srcdir = /home/charlie/Programming/libsocketpp/src
+abs_top_builddir = /home/charlie/Programming/libsocketpp
+abs_top_srcdir = /home/charlie/Programming/libsocketpp
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -297,7 +297,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/charlie/Programming/libsocketpp-devel/install-sh
+install_sh = ${SHELL} /home/charlie/Programming/libsocketpp/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -306,7 +306,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/charlie/install_test
+prefix = /home/charlie/Programming/libsocketpp/test
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -321,7 +321,14 @@ AM_CPPFLAGS = -I../include/
 AM_CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic
 AM_LDFLAGS = -version-number 0:1:1 -lcrypt -lpthread
 lib_LTLIBRARIES = libsocketpp.la
-libsocketpp_la_SOURCES = server.cc basesocket.cc basesockbuf.cc socket.cc
+libsocketpp_la_SOURCES = server.cc \
+			 basesocket.cc \
+			 basesockbuf.cc \
+			 socket.cc \
+			 httpbase.cc \
+			 httprequest.cc \
+			 httpresponse.cc
+
 all: all-am
 
 .SUFFIXES:
@@ -402,6 +409,9 @@ distclean-compile:
 
 include ./$(DEPDIR)/basesockbuf.Plo
 include ./$(DEPDIR)/basesocket.Plo
+include ./$(DEPDIR)/httpbase.Plo
+include ./$(DEPDIR)/httprequest.Plo
+include ./$(DEPDIR)/httpresponse.Plo
 include ./$(DEPDIR)/server.Plo
 include ./$(DEPDIR)/socket.Plo
 

@@ -6,9 +6,8 @@
 
 using namespace std;
 
-static string*
-__commands =
-  {
+static string
+__commands[8] = {
     "GET",
     "POST",
     "HEAD",
@@ -17,15 +16,19 @@ __commands =
     "CONNECT",
     "OPTIONS",
     "TRACE"
-  }
+  };
 
 http::http_request::http_request()
+    : http::http_base()
 {
     this->setCmdData("_version", "HTTP/1.1");
 }
 
 http::http_request::http_request(string request)
+    : http::http_base(request)
 {
+    // skip all of this parsing that probably wont work anyways
+    /*
     istringstream istr(request);
 
     char* cmdLine = new char[256]; // try to set a more dynamic value
@@ -36,7 +39,7 @@ http::http_request::http_request(string request)
     char* header_type = new char[16];
     type.get(header_type, 16, " ");
 
-    if (string(header_type) != "HTTP/1.1") /* Not a response */ {
+    if (string(header_type) != "HTTP/1.1") /* Not a response  {
 
         // parse out data
         int ctr = 0;
@@ -98,16 +101,17 @@ http::http_request::http_request(string request)
 
 
     // everything parsed
+    */
 }
 
 void
 http::http_request::setCmd(http_cmd_t cmd)
 {
-    string cmd;
+    string _cmd;
 
-    cmd = __commands[cmd];
+    _cmd = __commands[cmd];
 
-    this->setCmdData("command", cmd);
+    this->setCmdData("command", _cmd);
 }
 
 void

@@ -130,7 +130,7 @@ Let's now talk about how to use this library.
 Because this package follows standard GNU build proceedures, install with the following steps:
 @enumerate
 @item
-@code{$ cd @example{libsocketpp-dir}}
+@code{$ cd @file{libsocketpp-dir}}
 
 @item
 @code{$ ./configure --prefix=@option{install-prefix}}
@@ -152,7 +152,7 @@ Because this package follows standard GNU build proceedures, install with the fo
 
 This library installs both a static and dynamic library. If you want to keep dependencies down or want
 to have a very portable program/library, copy the static library
-(@file{@example{prefix}/lib/libsocketpp.a}) into your project directory and compile it it by doing
+(@file{@option{prefix}/lib/libsocketpp.a}) into your project directory and compile it it by doing
 
 @code{$ g++ file.cc libsocketpp.a -o executable}.
 

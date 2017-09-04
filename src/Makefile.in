@@ -128,7 +128,7 @@ am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
 am_libsocketpp_la_OBJECTS = server.lo basesocket.lo basesockbuf.lo \
-	socket.lo
+	socket.lo httpbase.lo httprequest.lo httpresponse.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -321,7 +321,14 @@ AM_CPPFLAGS = -I../include/
 AM_CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic
 AM_LDFLAGS = -version-number 0:1:1 -lcrypt -lpthread
 lib_LTLIBRARIES = libsocketpp.la
-libsocketpp_la_SOURCES = server.cc basesocket.cc basesockbuf.cc socket.cc
+libsocketpp_la_SOURCES = server.cc \
+			 basesocket.cc \
+			 basesockbuf.cc \
+			 socket.cc \
+			 httpbase.cc \
+			 httprequest.cc \
+			 httpresponse.cc
+
 all: all-am
 
 .SUFFIXES:
@@ -402,6 +409,9 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesockbuf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesocket.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/httpbase.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/httprequest.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/httpresponse.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/socket.Plo@am__quote@
 

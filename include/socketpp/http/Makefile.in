@@ -88,13 +88,12 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = include/logging
+subdir = include/socketpp/http
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-DIST_COMMON = $(srcdir)/Makefile.am $(logging_HEADERS) \
-	$(am__DIST_COMMON)
+DIST_COMMON = $(srcdir)/Makefile.am $(http_HEADERS) $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
@@ -144,8 +143,8 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(loggingdir)"
-HEADERS = $(logging_HEADERS)
+am__installdirs = "$(DESTDIR)$(httpdir)"
+HEADERS = $(http_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -211,6 +210,7 @@ LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
+MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
@@ -287,13 +287,12 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-socketppdir = $(includedir)/socketpp
-loggingdir = $(socketppdir)/logging
-logging_HEADERS = logging.h
+httpdir = $(includedir)/socketpp/http
+http_HEADERS = httpbase.h httpresponse.h httprequest.h
 all: all-am
 
 .SUFFIXES:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -302,9 +301,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign include/logging/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu include/socketpp/http/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign include/logging/Makefile
+	  $(AUTOMAKE) --gnu include/socketpp/http/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -317,9 +316,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
@@ -328,27 +327,27 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-loggingHEADERS: $(logging_HEADERS)
+install-httpHEADERS: $(http_HEADERS)
 	@$(NORMAL_INSTALL)
-	@list='$(logging_HEADERS)'; test -n "$(loggingdir)" || list=; \
+	@list='$(http_HEADERS)'; test -n "$(httpdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(loggingdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(loggingdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(httpdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(httpdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(loggingdir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(loggingdir)" || exit $$?; \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(httpdir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(httpdir)" || exit $$?; \
 	done
 
-uninstall-loggingHEADERS:
+uninstall-httpHEADERS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(logging_HEADERS)'; test -n "$(loggingdir)" || list=; \
+	@list='$(http_HEADERS)'; test -n "$(httpdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(loggingdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(httpdir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -436,7 +435,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(loggingdir)"; do \
+	for dir in "$(DESTDIR)$(httpdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -489,7 +488,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-loggingHEADERS
+install-data-am: install-httpHEADERS
 
 install-dvi: install-dvi-am
 
@@ -533,7 +532,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-loggingHEADERS
+uninstall-am: uninstall-httpHEADERS
 
 .MAKE: install-am install-strip
 
@@ -543,13 +542,12 @@ uninstall-am: uninstall-loggingHEADERS
 	dvi-am html html-am info info-am install install-am \
 	install-data install-data-am install-dvi install-dvi-am \
 	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-loggingHEADERS \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-loggingHEADERS
+	install-httpHEADERS install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am uninstall-httpHEADERS
 
 .PRECIOUS: Makefile
 

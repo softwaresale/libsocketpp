@@ -9,6 +9,13 @@
 using namespace std;
 
 http::http_base::http_base()
+    : isDataSet(0)
+{
+}
+
+http::http_base::http_base(string _data)
+    : isDataSet(1),
+      data(_data)
 {
 }
 
@@ -60,7 +67,7 @@ http::http_base::setHeaderData(string key, string value)
     this->header_data.push_back({key, value});
 }
 
-void
+string
 http::http_base::dumpHead()
 {
 
@@ -81,6 +88,9 @@ http::http_base::dumpHead()
 string
 http::http_base::toString()
 {
+    if (isDataSet)
+        return this->data;
+
     ostringstream str;
 
     // dump cmd line
@@ -107,7 +117,7 @@ http::http_base::toString()
     str << "\n";
 
     // dump body
-    str << this->body << CRLF;
+    str << this->body << "\r\n";
 
     return str.str();
 }
