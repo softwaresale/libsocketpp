@@ -11,13 +11,10 @@ This manual is for libsocketpp, @value{VERSION}
 
 Copyright @copyright{} 2017 Charlie Sale
 
-@quotation
-Permission is granted to GNU
-@end quotation
 @end copying
 
 @titlepage
-@title Socketpp
+@title Libsocketpp
 @subtitle A tutorial to C++ streambased sockets and accompanying tools
 @author Charlie Sale
 
@@ -107,6 +104,7 @@ Let's now talk about how to use this library.
 * Sending and Recieving Data: Sendrecv. How to properly send and recieve data across sockets
 * Setting Options: Opts. How to set socket options.
 * Closing Connections: Closing. How to close a connection
+* License:: License for this document
 @end menu
 
 @node Getting
@@ -124,13 +122,13 @@ Let's now talk about how to use this library.
 
 @c end Acquiring
 
-@node Installing
+@node Installing, Compiling, Acquring
 @subsection Installing
 
 Because this package follows standard GNU build proceedures, install with the following steps:
 @enumerate
 @item
-@code{$ cd @example{libsocketpp-dir}}
+@code{$ cd @option{libsocketpp-dir}}
 
 @item
 @code{$ ./configure --prefix=@option{install-prefix}}
@@ -147,12 +145,12 @@ Because this package follows standard GNU build proceedures, install with the fo
 
 @c end Getting
 
-@node Compiling
+@node Compiling, Including, Installing
 @section Compiling
 
 This library installs both a static and dynamic library. If you want to keep dependencies down or want
 to have a very portable program/library, copy the static library
-(@file{@example{prefix}/lib/libsocketpp.a}) into your project directory and compile it it by doing
+(@file{@option{prefix}/lib/libsocketpp.a}) into your project directory and compile it it by doing
 
 @code{$ g++ file.cc libsocketpp.a -o executable}.
 
@@ -161,7 +159,7 @@ is assuming that your prefix is part of the standard library serach path of ld.
 
 @c end Compiling
 
-@node Including
+@node Including, Errors, Compiling
 @section Including
 
 All libsocketpp headers are found in the directory @file{socketpp/} in your prefix include directory.
@@ -181,7 +179,7 @@ For example:
 
 @c end Including
 
-@node Errors
+@node Errors, Ctors, Including
 @section Handling Errors
 Errors in socketpp are fairly low level. Most functions return an integer value for testing if they
 do not already return some sort of other data type. Generally, a function will return a negative
@@ -207,39 +205,43 @@ that all constructor calls are acompnaied with a try/catch block.
 
 @c end Errors
 
-@node Ctors
+@node Ctors, Accepting, Errors
 @section Constructors, Connecting, and Binding
 
 Now, let's get into the actual classes and methods of libsocketpp.
 
 @c end Ctors
 
-@node Accepting
+@node Accepting, Sendrecv, Ctors
 @section Accepting Connections
 
 @c end Accepting
 
-@node Sendrecv
+@node Sendrecv, Opts, Accepting
 @section Sending and Recieving Data
 
 @c end Sendrecv
 
-@node Opts
+@node Opts, Closing, Sendrecv
 @section Setting Options
 
 @c end Opts
 
-@node Closing
+@node Closing, Extending, Opts
 @section Closing Connections
 
 @c end Closing
 
 @c end Tutorial
 
-@node Extending, Index, Tutorial
+@node Extending, License, Tutorial
 @chapter Extending
 
 @c end Extending
+
+@node License, Index, Extending
+@chapter License
+@include fdl.texi
 
 @c end of doc
 @node Index
