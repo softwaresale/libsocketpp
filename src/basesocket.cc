@@ -67,7 +67,8 @@ tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
 	: host((char*) _host),
 	  port(_port)
 {
-	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
+	socketfd = socket(AF_INET, SOCK_STREAM, 0); /
+/ creates the new socket
 	if (socketfd < 0){
 		// cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
 		throw new ctor_exe_t(); // throw constructor exception
