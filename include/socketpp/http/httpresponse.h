@@ -47,9 +47,7 @@ namespace socketpp::http
     string getStatusText();
 
     void setStatusCode(int);
-    int  getStatusCode();
-
-    in
+    int  getStatusCode(); 
 
   };
 

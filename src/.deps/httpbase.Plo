@@ -70,7 +70,9 @@ httpbase.lo: httpbase.cc /usr/include/stdc-predef.h \
  /usr/include/c++/7/initializer_list \
  /usr/include/c++/7/bits/basic_string.h \
  /usr/include/c++/7/ext/alloc_traits.h \
- /usr/include/c++/7/bits/alloc_traits.h \
+ /usr/include/c++/7/bits/alloc_traits.h /usr/include/c++/7/string_view \
+ /usr/include/c++/7/limits /usr/include/c++/7/bits/functional_hash.h \
+ /usr/include/c++/7/bits/string_view.tcc \
  /usr/include/c++/7/ext/string_conversions.h /usr/include/c++/7/cstdlib \
  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
@@ -85,7 +87,6 @@ httpbase.lo: httpbase.cc /usr/include/stdc-predef.h \
  /usr/include/bits/errno.h /usr/include/linux/errno.h \
  /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
  /usr/include/asm-generic/errno-base.h \
- /usr/include/c++/7/bits/functional_hash.h \
  /usr/include/c++/7/bits/basic_string.tcc \
  /usr/include/c++/7/bits/locale_classes.tcc \
  /usr/include/c++/7/system_error \
@@ -108,6 +109,8 @@ httpbase.lo: httpbase.cc /usr/include/stdc-predef.h \
  /usr/include/c++/7/bits/invoke.h /usr/include/c++/7/ext/aligned_buffer.h \
  /usr/include/c++/7/bits/hashtable.h \
  /usr/include/c++/7/bits/hashtable_policy.h \
+ /usr/include/c++/7/bits/node_handle.h /usr/include/c++/7/optional \
+ /usr/include/c++/7/bits/enable_special_members.h \
  /usr/include/c++/7/bits/unordered_map.h /usr/include/c++/7/vector \
  /usr/include/c++/7/bits/stl_construct.h \
  /usr/include/c++/7/bits/stl_uninitialized.h \
@@ -322,6 +325,14 @@ httpbase.lo: httpbase.cc /usr/include/stdc-predef.h \
 
 /usr/include/c++/7/bits/alloc_traits.h:
 
+/usr/include/c++/7/string_view:
+
+/usr/include/c++/7/limits:
+
+/usr/include/c++/7/bits/functional_hash.h:
+
+/usr/include/c++/7/bits/string_view.tcc:
+
 /usr/include/c++/7/ext/string_conversions.h:
 
 /usr/include/c++/7/cstdlib:
@@ -377,8 +388,6 @@ httpbase.lo: httpbase.cc /usr/include/stdc-predef.h \
 /usr/include/asm-generic/errno.h:
 
 /usr/include/asm-generic/errno-base.h:
-
-/usr/include/c++/7/bits/functional_hash.h:
 
 /usr/include/c++/7/bits/basic_string.tcc:
 
@@ -437,6 +446,12 @@ httpbase.lo: httpbase.cc /usr/include/stdc-predef.h \
 /usr/include/c++/7/bits/hashtable.h:
 
 /usr/include/c++/7/bits/hashtable_policy.h:
+
+/usr/include/c++/7/bits/node_handle.h:
+
+/usr/include/c++/7/optional:
+
+/usr/include/c++/7/bits/enable_special_members.h:
 
 /usr/include/c++/7/bits/unordered_map.h:
 

@@ -166,8 +166,8 @@ of the namespace 'tcp'.
      #include <socketpp/tcp/socket.h>
      #include <socketpp/tcp/server.h>
 
-     // so you don't have to type tcp:: everytime
-     using namespace tcp;
+     // so you don't have to type socketpp::tcp:: everytime
+     using namespace socketpp::tcp;
 
      /* The rest of your project here */
 
@@ -191,7 +191,7 @@ you can write:
 
      // or even easier
      int ret = socket_function();
-     if (!ret)
+     if (ret)
         // handle error
 
 
@@ -202,11 +202,12 @@ system.  Look at the errno documentation at the website
 'http://www.virtsync.com/c-error-codes-include-errno'.  This contains
 the number and a brief description about each errno error value.
 
-   The constructors for 'tcp::Socket' and 'tcp::Server' both throw the
-'ctor_exe_t' exception when calling their constructors.  The constructor
-does not inherently throw the exception, but if an error in encountered,
-it will abort and dump the core.  Because of this, it is reconmended
-that all constructor calls are acompnaied with a try/catch block.
+   The constructors for 'socketpp::tcp::Socket' and
+'socketpp::tcp::Server' both throw the 'ctor_exe_t' exception when
+calling their constructors.  The constructor does not inherently throw
+the exception, but if an error in encountered, it will abort and dump
+the core.  Because of this, it is reconmended that all constructor calls
+are acompnaied with a try/catch block.
 
 
 File: libsocketpp.info,  Node: Ctors,  Next: Accepting,  Prev: Errors
@@ -216,18 +217,19 @@ File: libsocketpp.info,  Node: Ctors,  Next: Accepting,  Prev: Errors
 
 Now, let's get into the actual classes and methods of libsocketpp.
 
-   Let's start with the 'tcp::Socket' class.  This class is the main
-class to use when making connections to servers.
+   Let's start with the 'socketpp::tcp::Socket' class.  This class is
+the main class to use when making connections to servers.
 
-   The first thing to do when using a 'tcp::Socket' is to instantiate an
-object and connect to a server.  Here is an example of how to do that:
+   The first thing to do when using a 'socketpp::tcp::Socket' is to
+instantiate an object and connect to a server.  Here is an example of
+how to do that:
 
    'test.cc'
 
      #include <socketpp/tcp/socket.h>
      #include <iostream>
 
-     using namespace tcp;
+     using namespace socketpp::tcp;
 
      int main()
      {
@@ -256,14 +258,14 @@ line:
           #include <socketpp/tcp/socket.h>
           #include <iostream>
 
-          using namespace tcp;
+          using namespace socketpp::tcp;
 
-     These two lines include the 'tcp::Socket' class and tell the
-     processor to use the 'tcp' namespace as a prefix to all classes and
-     methods if necessary.  The 'using namespace tcp' is not necessary,
-     but is easier to use.  However, if you are working on a large
-     project, it may be a good idea to not use the using clause in order
-     to separate out classes.  It's up to you.
+     These two lines include the 'socketpp::tcp::Socket' class and tell
+     the processor to use the 'tcp' namespace as a prefix to all classes
+     and methods if necessary.  The 'using namespace tcp' is not
+     necessary, but is easier to use.  However, if you are working on a
+     large project, it may be a good idea to not use the using clause in
+     order to separate out classes.  It's up to you.
 
   2. 
           int main()
@@ -289,21 +291,22 @@ line:
             sock->closes();
 
      This is the meat of the program.  Lets start with the 'Socket
-     sock;' line.  This line is the constructor for the 'tcp::Socket'
-     class.  Note that, because of the 'using' statement, the 'tcp::' is
-     omitted.  The constructor used in this program is the simple
-     constructor; all it does is create on object, nothing more.  There
-     are multiple constructors, however.  One variant of the constructor
-     is 'Socket(const char*, int)'.  This constructor gives the socket
-     data to connect to the server.  *TODO: CHECK THE ACCURACY OF THE
-     PREVIOUS STATEMENT*. The try catch block around the constructor
-     catchs the chance of the constructor failing.  There is another
-     constructor, 'Socket(const char*, int, int);', where if the final
-     integer is non-zero (true), then the socket will connect in the
-     constructor.  The final constructor is the 'Socket(int);'
-     constructor.  This constructor takes a socket descriptor as a
-     parameter.  This means that you can pass a C socket descriptor to
-     the constructor and the Socket class will represent the descriptor.
+     sock;' line.  This line is the constructor for the
+     'socketpp::tcp::Socket' class.  Note that, because of the 'using'
+     statement, the 'socketpp::tcp::' is omitted.  The constructor used
+     in this program is the simple constructor; all it does is create on
+     object, nothing more.  There are multiple constructors, however.
+     One variant of the constructor is 'Socket(const char*, int)'.  This
+     constructor gives the socket data to connect to the server.  *TODO:
+     CHECK THE ACCURACY OF THE PREVIOUS STATEMENT*. The try catch block
+     around the constructor catchs the chance of the constructor
+     failing.  There is another constructor, 'Socket(const char*, int,
+     int);', where if the final integer is non-zero (true), then the
+     socket will connect in the constructor.  The final constructor is
+     the 'Socket(int);' constructor.  This constructor takes a socket
+     descriptor as a parameter.  This means that you can pass a C socket
+     descriptor to the constructor and the Socket class will represent
+     the descriptor.
 
      Next, let's go over the 'sock.connects("127.0.0.1", 8888);' line.
      This function is a blocking call that connects the socket object to
@@ -329,9 +332,9 @@ File: libsocketpp.info,  Node: Accepting,  Next: Sendrecv,  Prev: Ctors
 2.6 Accepting Connections
 =========================
 
-Next, let's talk about the 'tcp::Server' class.  This class is a simple
-blocking server that accepts 'tcp::Socket' objects.  Here's a basic
-example:
+Next, let's talk about the 'socketpp::tcp::Server' class.  This class is
+a simple blocking server that accepts 'socketpp::tcp::Socket' objects.
+Here's a basic example:
 
    'test.cc'
 
@@ -342,10 +345,10 @@ example:
      int main()
      {
 
-       tcp::Server serv(8888);
+       socketpp::tcp::Server serv(8888);
        serv.binds();
 
-       tcp::Socket& sock = serv.accepts();
+       socketpp::tcp::Socket& sock = serv.accepts();
 
        sock.closes();
        serv.closes();
@@ -358,23 +361,23 @@ example:
 
   1. At the start of the program, there are the same include statements
      as before, except this time the 'socketpp/tcp/server.h' file is
-     included.  This file contains the 'tcp::Server' class.  Also,
-     something to note is that in this example, I did not add a 'using'
-     statement.  This is to show variety of how to write these programs.
-     Also, you can see that there is another 'main' method.
+     included.  This file contains the 'socketpp::tcp::Server' class.
+     Also, something to note is that in this example, I did not add a
+     'using' statement.  This is to show variety of how to write these
+     programs.  Also, you can see that there is another 'main' method.
 
   2. 
-            tcp::Server serv(8888);
+            socketpp::tcp::Server serv(8888);
             serv.binds();
 
-            tcp::Socket& sock = serv.accepts();
+            socketpp::tcp::Socket& sock = serv.accepts();
 
      Here is the critical code of the program.  It starts with the
-     constructor which makes a new 'tcp::Server' object.  Note that in
-     the constructor's parameters, there is an integer value.  This
-     value is the port on which the server will server.  Similarly to
-     the constructor in 'tcp::Socket', the connection data for the
-     server can either be given in the constructor or the
+     constructor which makes a new 'socketpp::tcp::Server' object.  Note
+     that in the constructor's parameters, there is an integer value.
+     This value is the port on which the server will server.  Similarly
+     to the constructor in 'socketpp::tcp::Socket', the connection data
+     for the server can either be given in the constructor or the
      'Server::binds()' method.
 
      Next, the line 'serv.binds();' is a blocking call that binds the
@@ -427,7 +430,7 @@ can proceed to send and recieve data.
      #include <socketpp/tcp/server.h>
 
      using namespace std;
-     using namespace tcp;
+     using namespace socketpp::tcp;
 
      int main()
      {
@@ -466,6 +469,7 @@ can proceed to send and recieve data.
      #include <socketpp/tcp/socket.h>
 
      using namespace std;
+     using namespace socketpp::tcp;
 
      int main()
      {
@@ -475,7 +479,7 @@ can proceed to send and recieve data.
 
        try {
 
-           sock = new tcp::Socket("127.0.0.1", 8888, 1);
+           sock = new socketpp::tcp::Socket("127.0.0.1", 8888, 1);
 
        } catch (ctor_exe_t& e) {
          cout << e.what() << endl;
@@ -1017,14 +1021,14 @@ Node: Acquring4186
 Node: Installing4295
 Node: Compiling4618
 Node: Including5273
-Node: Errors5965
-Node: Ctors7305
-Node: Accepting11525
-Node: Sendrecv14321
-Node: Opts16605
-Node: Closing16718
-Node: Extending16840
-Node: License16942
-Node: Index41993
+Node: Errors5985
+Node: Ctors7344
+Node: Accepting11638
+Node: Sendrecv14522
+Node: Opts16862
+Node: Closing16975
+Node: Extending17097
+Node: License17199
+Node: Index42250
 
 End Tag Table

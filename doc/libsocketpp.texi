@@ -172,8 +172,8 @@ For example:
 #include <socketpp/tcp/socket.h>
 #include <socketpp/tcp/server.h>
 
-// so you don't have to type tcp:: everytime
-using namespace tcp;
+// so you don't have to type socketpp::tcp:: everytime
+using namespace socketpp::tcp;
 
 /* The rest of your project here */
 
@@ -195,7 +195,7 @@ if (ret != 0)@{
 
 // or even easier
 int ret = socket_function();
-if (!ret)
+if (ret)
    // handle error
 
 @end example
@@ -206,7 +206,7 @@ by the standard system. Look at the errno documentation at the website
 @indicateurl{http://www.virtsync.com/c-error-codes-include-errno}. This contains the number and
 a brief description about each errno error value.
 
-The constructors for @code{tcp::Socket} and @code{tcp::Server} both throw the @code{ctor_exe_t}
+The constructors for @code{socketpp::tcp::Socket} and @code{socketpp::tcp::Server} both throw the @code{ctor_exe_t}
 exception when calling their constructors. The constructor does not inherently throw the exception,
 but if an error in encountered, it will abort and dump the core. Because of this, it is reconmended
 that all constructor calls are acompnaied with a try/catch block.
@@ -218,10 +218,10 @@ that all constructor calls are acompnaied with a try/catch block.
 
 Now, let's get into the actual classes and methods of libsocketpp.
 
-Let's start with the @code{tcp::Socket} class. This class is the main class to use when making connections
+Let's start with the @code{socketpp::tcp::Socket} class. This class is the main class to use when making connections
 to servers.
 
-The first thing to do when using a @code{tcp::Socket} is to instantiate an object and connect to a server.
+The first thing to do when using a @code{socketpp::tcp::Socket} is to instantiate an object and connect to a server.
 Here is an example of how to do that:
 
 @file{test.cc}
@@ -230,7 +230,7 @@ Here is an example of how to do that:
 #include <socketpp/tcp/socket.h>
 #include <iostream>
 
-using namespace tcp;
+using namespace socketpp::tcp;
 
 int main()
 @{
@@ -263,10 +263,10 @@ this simple program line by line:
 #include <socketpp/tcp/socket.h>
 #include <iostream>
 
-using namespace tcp;
+using namespace socketpp::tcp;
 
 @end example
-These two lines include the @code{tcp::Socket} class and tell the processor to use the @code{tcp} namespace as a
+These two lines include the @code{socketpp::tcp::Socket} class and tell the processor to use the @code{tcp} namespace as a
 prefix to all classes and methods if necessary. The @code{using namespace tcp} is not necessary, but is easier to
 use. However, if you are working on a large project, it may be a good idea to not use the using clause in order to
 separate out classes. It's up to you.
@@ -300,7 +300,7 @@ not be new to you. However, if you are not, then give it a google search.
 
 @end example
 This is the meat of the program. Lets start with the @code{Socket sock;} line. This line is the constructor for the
-@code{tcp::Socket} class. Note that, because of the @code{using} statement, the @code{tcp::} is omitted. The constructor
+@code{socketpp::tcp::Socket} class. Note that, because of the @code{using} statement, the @code{socketpp::tcp::} is omitted. The constructor
 used in this program is the simple constructor; all it does is create on object, nothing more. There are multiple constructors,
 however. One variant of the constructor is @code{Socket(const char*, int)}. This constructor gives the socket data to connect
 to the server. @strong{TODO: CHECK THE ACCURACY OF THE PREVIOUS STATEMENT}. The try catch block around the constructor catchs
@@ -326,7 +326,7 @@ If you really want, you can double check @code{errno} to check if an error has o
 @node Accepting, Sendrecv, Ctors
 @section Accepting Connections
 
-Next, let's talk about the @code{tcp::Server} class. This class is a simple blocking server that accepts @code{tcp::Socket} objects.
+Next, let's talk about the @code{socketpp::tcp::Server} class. This class is a simple blocking server that accepts @code{socketpp::tcp::Socket} objects.
 Here's a basic example:
 
 @file{test.cc}
@@ -339,10 +339,10 @@ Here's a basic example:
 int main()
 @{
 
-  tcp::Server serv(8888);
+  socketpp::tcp::Server serv(8888);
   serv.binds();
 
-  tcp::Socket& sock = serv.accepts();
+  socketpp::tcp::Socket& sock = serv.accepts();
 
   sock.closes();
   serv.closes();
@@ -358,21 +358,21 @@ Yet again, let's go through this line by line:
 
 @item
 At the start of the program, there are the same include statements as before, except this time the @code{socketpp/tcp/server.h} file is
-included. This file contains the @code{tcp::Server} class. Also, something to note is that in this example, I did not add a @code{using}
+included. This file contains the @code{socketpp::tcp::Server} class. Also, something to note is that in this example, I did not add a @code{using}
 statement. This is to show variety of how to write these programs. Also, you can see that there is another @code{main} method.
 
 @item
 @example
 
-  tcp::Server serv(8888);
+  socketpp::tcp::Server serv(8888);
   serv.binds();
 
-  tcp::Socket& sock = serv.accepts();
+  socketpp::tcp::Socket& sock = serv.accepts();
 
 @end example
-Here is the critical code of the program. It starts with the constructor which makes a new @code{tcp::Server} object. Note that in the
+Here is the critical code of the program. It starts with the constructor which makes a new @code{socketpp::tcp::Server} object. Note that in the
 constructor's parameters, there is an integer value. This value is the port on which the server will server. Similarly to the constructor
-in @code{tcp::Socket}, the connection data for the server can either be given in the constructor or the @code{Server::binds()} method.
+in @code{socketpp::tcp::Socket}, the connection data for the server can either be given in the constructor or the @code{Server::binds()} method.
 
 Next, the line @code{serv.binds();} is a blocking call that binds the server to the port. It is now server, but not listening. This means
 that it will not actually accept connections yet. This call returns 0 on success and !0 on failure. Check errno for a more detailed error
@@ -412,7 +412,7 @@ Here is an example of sending and recieving data:
 #include <socketpp/tcp/server.h>
 
 using namespace std;
-using namespace tcp;
+using namespace socketpp::tcp;
 
 int main()
 @{
@@ -453,6 +453,7 @@ int main()
 #include <socketpp/tcp/socket.h>
 
 using namespace std;
+using namespace socketpp::tcp;
 
 int main()
 @{
@@ -462,7 +463,7 @@ int main()
 
   try @{
 
-      sock = new tcp::Socket("127.0.0.1", 8888, 1);
+      sock = new socketpp::tcp::Socket("127.0.0.1", 8888, 1);
 
   @} catch (ctor_exe_t& e) @{
     cout << e.what() << endl;

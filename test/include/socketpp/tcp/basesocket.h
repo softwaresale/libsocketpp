@@ -32,7 +32,8 @@
 
 using namespace std;
 
-namespace tcp {
+namespace socketpp::tcp
+{
 
 class basic_socket
 {
