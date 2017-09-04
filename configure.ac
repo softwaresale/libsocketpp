@@ -1,4 +1,4 @@
-AC_INIT([libsocketpp], [0.2], [chucks.8090@gmail.com])
+AC_INIT([libsocketpp], [1.0], [chucks.8090@gmail.com])
 AM_INIT_AUTOMAKE([gnu -Wall -Werror])
 
 AM_PROG_AR
@@ -17,7 +17,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	include/socketpp/Makefile
 	include/socketpp/tcp/Makefile
-  include/socketpp/http/Makefile
+        include/socketpp/http/Makefile
 	doc/Makefile
 ])
 

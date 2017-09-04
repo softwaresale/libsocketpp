@@ -185,7 +185,8 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
-am__DIST_COMMON = $(srcdir)/Makefile.in mdate-sh texinfo.tex
+am__DIST_COMMON = $(libsocketpp_TEXINFOS) $(srcdir)/Makefile.in \
+	mdate-sh texinfo.tex
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -308,7 +309,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-info_TEXINFOS = libsocketpp.texi
+info_TEXINFOS = libsocketpp.texi 
+libsocketpp_TEXINFOS = fdl.texi
 all: all-am
 
 .SUFFIXES:
@@ -392,10 +394,10 @@ clean-libtool:
 	else \
 	  rm -rf $(@:.html=.htp); exit 1; \
 	fi
-$(srcdir)/libsocketpp.info: libsocketpp.texi $(srcdir)/version.texi
-libsocketpp.dvi: libsocketpp.texi $(srcdir)/version.texi
-libsocketpp.pdf: libsocketpp.texi $(srcdir)/version.texi
-libsocketpp.html: libsocketpp.texi $(srcdir)/version.texi
+$(srcdir)/libsocketpp.info: libsocketpp.texi $(srcdir)/version.texi $(libsocketpp_TEXINFOS)
+libsocketpp.dvi: libsocketpp.texi $(srcdir)/version.texi $(libsocketpp_TEXINFOS)
+libsocketpp.pdf: libsocketpp.texi $(srcdir)/version.texi $(libsocketpp_TEXINFOS)
+libsocketpp.html: libsocketpp.texi $(srcdir)/version.texi $(libsocketpp_TEXINFOS)
 $(srcdir)/version.texi: @MAINTAINER_MODE_TRUE@ $(srcdir)/stamp-vti
 $(srcdir)/stamp-vti: libsocketpp.texi $(top_srcdir)/configure
 	@(dir=.; test -f ./libsocketpp.texi || dir=$(srcdir); \

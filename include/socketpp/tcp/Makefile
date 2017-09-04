@@ -184,7 +184,7 @@ CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"libsocketpp\" -DPACKAGE_TARNAME=\"libsocketpp\" -DPACKAGE_VERSION=\"0.2\" -DPACKAGE_STRING=\"libsocketpp\ 0.2\" -DPACKAGE_BUGREPORT=\"chucks.8090@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libsocketpp\" -DVERSION=\"0.2\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
+DEFS = -DPACKAGE_NAME=\"libsocketpp\" -DPACKAGE_TARNAME=\"libsocketpp\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"libsocketpp\ 1.0\" -DPACKAGE_BUGREPORT=\"chucks.8090@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libsocketpp\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\"
 DEPDIR = .deps
 DLLTOOL = false
 DSYMUTIL = 
@@ -223,17 +223,17 @@ OTOOL64 =
 PACKAGE = libsocketpp
 PACKAGE_BUGREPORT = chucks.8090@gmail.com
 PACKAGE_NAME = libsocketpp
-PACKAGE_STRING = libsocketpp 0.2
+PACKAGE_STRING = libsocketpp 1.0
 PACKAGE_TARNAME = libsocketpp
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2
+PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.2
+VERSION = 1.0
 abs_builddir = /home/charlie/Programming/libsocketpp/include/socketpp/tcp
 abs_srcdir = /home/charlie/Programming/libsocketpp/include/socketpp/tcp
 abs_top_builddir = /home/charlie/Programming/libsocketpp
@@ -276,7 +276,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/charlie/Programming/libsocketpp/test
+prefix = /usr/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -289,7 +289,7 @@ top_builddir = ../../..
 top_srcdir = ../../..
 socketppdir = $(includedir)/socketpp
 tcpdir = $(socketppdir)/tcp
-tcp_HEADERS = basesocket.h server.h basesockbuf.h socket.h
+tcp_HEADERS = basesocket.h server.h basesockbuf.h socket.h sockexe.h
 all: all-am
 
 .SUFFIXES:
