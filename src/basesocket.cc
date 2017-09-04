@@ -31,8 +31,8 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <errno.h> // THINK ABOUT IMPLEMENTING ERRNO
-#include "../include/socketpp/tcp/basesocket.h"
-#include <sockexe.h>
+#include <socketpp/tcp/basesocket.h>
+#include <socketpp/tcp/sockexe.h>
 
 using namespace std;
 
@@ -60,8 +60,6 @@ tcp::basic_socket::basic_socket(const char* _host, int _port)
 		// cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
 		throw new ctor_exe_t(); // throw constructor exception
 	}
-	
-	
 }
 
 
@@ -78,7 +76,7 @@ tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
 	if (conn){
         int ret = this->connects();
         if (ret == -1)
-			// cerr << "basesocket.cc:69: Error connecting to server" << endl;
+          cerr << "basesocket.cc:69: Error connecting to server" << endl;
     }
 
 }
