@@ -96,6 +96,7 @@ Let's now talk about how to use this library.
 * Sending and Recieving Data: Sendrecv. How to properly send and recieve data across sockets
 * Setting Options: Opts. How to set socket options.
 * Closing Connections: Closing. How to close a connection
+<<<<<<< HEAD
 * License:: License for this document
 
 
@@ -161,6 +162,72 @@ are found int the 'tcp/' directory.  Note that these subdirectories
 correspond with the classes namespace.  This means the 'Socket' is part
 of the namespace 'tcp'.
 
+=======
+
+
+File: libsocketpp.info,  Node: Getting,  Next: Compiling,  Up: Tutorial
+
+2.1 Acquring and Installing
+===========================
+
+* Menu:
+
+* Acquring::
+* Installing::
+
+
+File: libsocketpp.info,  Node: Acquring,  Next: Installing,  Up: Getting
+
+2.1.1 Acquiring
+---------------
+
+
+File: libsocketpp.info,  Node: Installing,  Prev: Acquring,  Up: Getting
+
+2.1.2 Installing
+----------------
+
+Because this package follows standard GNU build proceedures, install
+with the following steps:
+  1. '$ cd libsocketpp-dir'
+
+  2. '$ ./configure --prefix=install-prefix'
+
+  3. '$ make'
+
+  4. '# make install'
+
+
+File: libsocketpp.info,  Node: Compiling,  Next: Including,  Prev: Getting,  Up: Tutorial
+
+2.2 Compiling
+=============
+
+This library installs both a static and dynamic library.  If you want to
+keep dependencies down or want to have a very portable program/library,
+copy the static library ('prefix/lib/libsocketpp.a') into your project
+directory and compile it it by doing
+
+   '$ g++ file.cc libsocketpp.a -o executable'.
+
+   If you want to compile with the dynamic library, then compile with
+the flag '-lsocketpp'.  This is assuming that your prefix is part of the
+standard library serach path of ld.
+
+
+File: libsocketpp.info,  Node: Including,  Next: Errors,  Prev: Compiling,  Up: Tutorial
+
+2.3 Including
+=============
+
+All libsocketpp headers are found in the directory 'socketpp/' in your
+prefix include directory.  From there, classes are broken down by
+specific function or protocol.  Both the 'Socket' and 'Server' classes
+are found int the 'tcp/' directory.  Note that these subdirectories
+correspond with the classes namespace.  This means the 'Socket' is part
+of the namespace 'tcp'.
+
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
    For example:
      #include <socketpp/tcp/socket.h>
      #include <socketpp/tcp/server.h>
@@ -169,7 +236,11 @@ of the namespace 'tcp'.
 
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Errors,  Next: Ctors,  Prev: Including
+=======
+File: libsocketpp.info,  Node: Errors,  Next: Ctors,  Prev: Including,  Up: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 2.4 Handling Errors
 ===================
@@ -199,7 +270,11 @@ it will abort and dump the core.  Because of this, it is reconmended
 that all constructor calls are acompnaied with a try/catch block.
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Ctors,  Next: Accepting,  Prev: Errors
+=======
+File: libsocketpp.info,  Node: Ctors,  Next: Accepting,  Prev: Errors,  Up: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 2.5 Constructors, Connecting, and Binding
 =========================================
@@ -207,35 +282,56 @@ File: libsocketpp.info,  Node: Ctors,  Next: Accepting,  Prev: Errors
 Now, let's get into the actual classes and methods of libsocketpp.
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Accepting,  Next: Sendrecv,  Prev: Ctors
+=======
+File: libsocketpp.info,  Node: Accepting,  Next: Sendrecv,  Prev: Ctors,  Up: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 2.6 Accepting Connections
 =========================
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Sendrecv,  Next: Opts,  Prev: Accepting
+=======
+File: libsocketpp.info,  Node: Sendrecv,  Next: Opts,  Prev: Accepting,  Up: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 2.7 Sending and Recieving Data
 ==============================
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Opts,  Next: Closing,  Prev: Sendrecv
+=======
+File: libsocketpp.info,  Node: Opts,  Next: Closing,  Prev: Sendrecv,  Up: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 2.8 Setting Options
 ===================
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Closing,  Next: Extending,  Prev: Opts
+=======
+File: libsocketpp.info,  Node: Closing,  Prev: Opts,  Up: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 2.9 Closing Connections
 =======================
 
 
+<<<<<<< HEAD
 File: libsocketpp.info,  Node: Extending,  Next: License,  Prev: Tutorial
+=======
+File: libsocketpp.info,  Node: Extending,  Next: Index,  Prev: Tutorial
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 3 Extending
 ***********
 
+<<<<<<< HEAD
 
 File: libsocketpp.info,  Node: License,  Next: Index,  Prev: Extending
 
@@ -718,6 +814,8 @@ recommend releasing these examples in parallel under your choice of free
 software license, such as the GNU General Public License, to permit
 their use in free software.
 
+=======
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 File: libsocketpp.info,  Node: Index,  Prev: License,  Up: Top
 
@@ -727,6 +825,7 @@ Index
 
 
 Tag Table:
+<<<<<<< HEAD
 Node: Top156
 Node: Overview885
 Node: Tutorial3148
@@ -744,5 +843,23 @@ Node: Closing7624
 Node: Extending7746
 Node: License7848
 Node: Index32899
+=======
+Node: Top191
+Node: Overview908
+Node: Tutorial3171
+Node: Getting3953
+Node: Acquring4123
+Node: Installing4232
+Node: Compiling4551
+Node: Including5156
+Node: Errors5786
+Node: Ctors7043
+Node: Accepting7284
+Node: Sendrecv7427
+Node: Opts7579
+Node: Closing7707
+Node: Extending7826
+Node: Index7926
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 End Tag Table

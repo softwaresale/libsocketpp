@@ -1,0 +1,5 @@
+-I/home/charlie/Programming/libsocketpp/include
+-I/usr/include
+-I/usr/include/c++/7/
+-I/usr/local/include
+-std=c++11

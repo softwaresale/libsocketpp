@@ -17,6 +17,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	include/socketpp/Makefile
 	include/socketpp/tcp/Makefile
+  include/socketpp/http/Makefile
 	doc/Makefile
 ])
 

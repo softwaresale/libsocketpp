@@ -128,7 +128,11 @@ Let's now talk about how to use this library.
 Because this package follows standard GNU build proceedures, install with the following steps:
 @enumerate
 @item
+<<<<<<< HEAD
 @code{$ cd @option{libsocketpp-dir}}
+=======
+@code{$ cd @file{libsocketpp-dir}}
+>>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 @item
 @code{$ ./configure --prefix=@option{install-prefix}}
