@@ -36,22 +36,26 @@ using namespace std;
 * and iostream directly and uses base_sock_buf as a
 * supporting class */
 tcp::Socket::Socket()
-	: basic_socket(),
+	: tcp::basic_socket(),
 	  iostream(new base_sock_buf(this))
 	  /* Using the already instantiated basic_socket part of self */
 {
-
 }
 
 tcp::Socket::Socket(const char* host, int port)
-	: basic_socket(host, port),
+	: tcp::basic_socket(host, port),
 	  iostream(new base_sock_buf(this))
 {
+}
 
+tcp::Socket::Socket(const char* host, int port, int conn)
+  : tcp::basic_socket(host, port, conn),
+    iostream(new base_sock_buf(this))
+{
 }
 
 tcp::Socket::Socket(int sockfd)
-	: basic_socket(sockfd),
+	: tcp::basic_socket(sockfd),
 	  iostream(new base_sock_buf(this))
 {
 

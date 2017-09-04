@@ -87,8 +87,6 @@ A TCP socket is itself a stream. This means that data is transfered over a conne
 blocking read and write commands. Because TCP is a stream, it fits perfectly into the C++ I/O
 system.
 
-@c TODO talk about what can and can't do
-
 @node Tutorial, Extending, Overview
 @chapter Tutorial
 
@@ -111,8 +109,8 @@ Let's now talk about how to use this library.
 @section Acquring and Installing
 
 @menu
-* Acquring::
-* Installing::
+* Acquring:: Where to download the package
+* Installing:: How to install it
 @end menu
 
 @node Acquring
@@ -128,14 +126,10 @@ Let's now talk about how to use this library.
 Because this package follows standard GNU build proceedures, install with the following steps:
 @enumerate
 @item
-<<<<<<< HEAD
-@code{$ cd @option{libsocketpp-dir}}
-=======
 @code{$ cd @file{libsocketpp-dir}}
->>>>>>> 9d7cb02dd0f2e546f141ebfeb3187f3fcf620833
 
 @item
-@code{$ ./configure --prefix=@option{install-prefix}}
+@code{$ ./configure --prefix=@file{install-prefix}}
 
 @item
 @code{$ make}
@@ -159,7 +153,8 @@ to have a very portable program/library, copy the static library
 @code{$ g++ file.cc libsocketpp.a -o executable}.
 
 If you want to compile with the dynamic library, then compile with the flag @code{-lsocketpp}. This
-is assuming that your prefix is part of the standard library serach path of ld.
+is assuming that your prefix is part of the standard library serach path of ld. If something goes
+wrong here, then try running @code{# ldconfig}.
 
 @c end Compiling
 
@@ -176,6 +171,9 @@ For example:
 @example
 #include <socketpp/tcp/socket.h>
 #include <socketpp/tcp/server.h>
+
+// so you don't have to type tcp:: everytime
+using namespace tcp;
 
 /* The rest of your project here */
 
@@ -194,6 +192,12 @@ int ret = socket_function();
 if (ret != 0)@{
    // handle error  
 @}
+
+// or even easier
+int ret = socket_function();
+if (!ret)
+   // handle error
+
 @end example
 
 For more specific error handling, all standard C socket @code{errno} values are still set. There
@@ -214,15 +218,278 @@ that all constructor calls are acompnaied with a try/catch block.
 
 Now, let's get into the actual classes and methods of libsocketpp.
 
+Let's start with the @code{tcp::Socket} class. This class is the main class to use when making connections
+to servers.
+
+The first thing to do when using a @code{tcp::Socket} is to instantiate an object and connect to a server.
+Here is an example of how to do that:
+
+@file{test.cc}
+@example
+
+#include <socketpp/tcp/socket.h>
+#include <iostream>
+
+using namespace tcp;
+
+int main()
+@{
+  
+  
+  Socket* sock;
+  try @{
+    sock = new Socket();
+  @} catch (ctor_exe_t& e) @{
+    cerr << e.what() << endl;
+  @}
+
+  sock->connects("127.0.0.1", 8888);
+
+  sock->closes();
+
+  return 0;
+@}
+
+@end example
+
+In this example, a simple socket object is created and connects to @code{localhost} on port 8888. Lets go through
+this simple program line by line:
+
+@enumerate
+
+@item
+@example
+
+#include <socketpp/tcp/socket.h>
+#include <iostream>
+
+using namespace tcp;
+
+@end example
+These two lines include the @code{tcp::Socket} class and tell the processor to use the @code{tcp} namespace as a
+prefix to all classes and methods if necessary. The @code{using namespace tcp} is not necessary, but is easier to
+use. However, if you are working on a large project, it may be a good idea to not use the using clause in order to
+separate out classes. It's up to you.
+
+@item
+@example
+
+int main()
+@{
+  ...
+
+  return 0;
+@}
+@end example
+This is simply the main method, or the main entry point of the program. If you are a seasoned C developer, this should
+not be new to you. However, if you are not, then give it a google search.
+
+@item
+@example
+
+  Socket* sock;
+  try @{
+    sock = new Socket();
+  @} catch (ctor_exe_t& e) @{
+    cerr << e.what() << endl;
+  @}
+
+  sock->connects("127.0.0.1", 8888);
+
+  sock->closes();
+
+@end example
+This is the meat of the program. Lets start with the @code{Socket sock;} line. This line is the constructor for the
+@code{tcp::Socket} class. Note that, because of the @code{using} statement, the @code{tcp::} is omitted. The constructor
+used in this program is the simple constructor; all it does is create on object, nothing more. There are multiple constructors,
+however. One variant of the constructor is @code{Socket(const char*, int)}. This constructor gives the socket data to connect
+to the server. @strong{TODO: CHECK THE ACCURACY OF THE PREVIOUS STATEMENT}. The try catch block around the constructor catchs
+the chance of the constructor failing. There is another constructor, @code{Socket(const char*, int, int);}, where if the final
+integer is non-zero (true), then the socket will connect in the constructor. The final constructor is the @code{Socket(int);}
+constructor. This constructor takes a socket descriptor as a parameter. This means that you can pass a C socket descriptor to the
+constructor and the Socket class will represent the descriptor.
+
+Next, let's go over the @code{sock.connects("127.0.0.1", 8888);} line. This function is a blocking call that connects the socket
+object to the server. The parameters of the function are a string representing the host and an integer representing the port on
+which the server is serving. Note: this function is a blocking call, so it will not terminate until it connects to the server.
+There is a variety of the function that is @code{Socket::connects();}. This function uses the data set from the @code{Socket(const char*, int);}
+constructor to connect to the server. This function returns an integer value on return. If the function fails, it should return
+-1; on success, 0. Upon failure, you can check @code{errno} for a more detailed cause of the error.
+
+Finally, the @code{sock.closes();} method terminates the connection. It only returns void because the command rarely ever fails.
+If you really want, you can double check @code{errno} to check if an error has occured.
+
+@end enumerate
+
 @c end Ctors
 
 @node Accepting, Sendrecv, Ctors
 @section Accepting Connections
 
+Next, let's talk about the @code{tcp::Server} class. This class is a simple blocking server that accepts @code{tcp::Socket} objects.
+Here's a basic example:
+
+@file{test.cc}
+@example
+
+#include <iostream>
+#include <socketpp/tcp/server.h>
+#include <socketpp/tcp/socket.h>
+
+int main()
+@{
+
+  tcp::Server serv(8888);
+  serv.binds();
+
+  tcp::Socket& sock = serv.accepts();
+
+  sock.closes();
+  serv.closes();
+
+  return 0;
+@}
+
+@end example
+
+Yet again, let's go through this line by line:
+
+@enumerate
+
+@item
+At the start of the program, there are the same include statements as before, except this time the @code{socketpp/tcp/server.h} file is
+included. This file contains the @code{tcp::Server} class. Also, something to note is that in this example, I did not add a @code{using}
+statement. This is to show variety of how to write these programs. Also, you can see that there is another @code{main} method.
+
+@item
+@example
+
+  tcp::Server serv(8888);
+  serv.binds();
+
+  tcp::Socket& sock = serv.accepts();
+
+@end example
+Here is the critical code of the program. It starts with the constructor which makes a new @code{tcp::Server} object. Note that in the
+constructor's parameters, there is an integer value. This value is the port on which the server will server. Similarly to the constructor
+in @code{tcp::Socket}, the connection data for the server can either be given in the constructor or the @code{Server::binds()} method.
+
+Next, the line @code{serv.binds();} is a blocking call that binds the server to the port. It is now server, but not listening. This means
+that it will not actually accept connections yet. This call returns 0 on success and !0 on failure. Check errno for a more detailed error
+report.
+
+Now, we get into the the @code{Server::accepts()} method. This method is a blocking call that listens for connections. This means that until
+a connection is recieved, the function does not terminate. Please take special note to the way the @code{Socket} class is written.
+@strong{The amperstand (&) is necessary after the Socket type}. Without it, you will get an error. This is because the way that @code{iostream}
+class are derived. The @code{iostream} copy constructor is deleted, so the returned object must be returned as a pointer. You can check that
+this function succeeded by testing the @code{Socket::isConnected()} function, which returns true or false based on if it is connected or not.
+
+@end enumerate
+
+A final method worth noting is the @code{Server::acceptFd()} function. Instead of returning a Socket object, the function returns the raw
+socket descriptor. 
+
 @c end Accepting
 
 @node Sendrecv, Opts, Accepting
 @section Sending and Recieving Data
+
+Next, lets go over sending and recieving data. TCP connections are streams, which means that as one connection sends data, the other must
+recieve data. This is in contrast to UDP sockets, which simply broadcast their data. In short, this means that if one side of your program
+is sending data, the other mush be recieving.
+
+The first step before sending or recieving data is making sure that your connections are established. See the previous sections for info on
+connecting to hosts. A good habit to make is checking that your sockets are properly connected before doing anything. Use the
+@code{Socket::isConnected()} meothod for doing this. Once this is done, you can proceed to send and recieve data.
+
+Here is an example of sending and recieving data:
+
+@file{server.cc}
+@example
+
+#include <iostream>
+#include <socketpp/tcp/socket.h>
+#include <socketpp/tcp/server.h>
+
+using namespace std;
+using namespace tcp;
+
+int main()
+@{
+
+  // create and bind server
+  Server serv;
+  serv.binds(8888);
+
+  // accept connection
+  Socket& sock = serv.accepts();
+
+  // make sure socket is connected
+  if (!sock.isConnected())
+     return -1;
+
+  // read data
+  char* buffer = new char[32];
+  sock.get(buffer, 32);
+
+  // print message
+  cout << "Message from client: " << buffer << endl;
+
+  // clean up
+  delete buffer;
+  sock.closes();
+  serv.closes();
+
+  return 0;
+@}
+
+@end example
+
+@file{client.cc}
+@example
+
+
+#include <iostream>
+#include <socketpp/tcp/socket.h>
+
+using namespace std;
+
+int main()
+@{
+
+  // create and bind server
+  Socket* sock;
+
+  try @{
+
+      sock = new tcp::Socket("127.0.0.1", 8888, 1);
+
+  @} catch (ctor_exe_t& e) @{
+    cout << e.what() << endl;
+  @}
+  
+
+  // make sure socket is connected
+  if (!sock->isConnected())
+     return -1;
+
+  // send data
+  sock << "Hello World" << endl;
+
+  sock.closes();
+
+  return 0;
+@}
+
+@end example
+
+The output should be:
+@file{output}
+@example
+Message from client: Hello World
+@end example
+
+Lets go over what is going on in these programs.
 
 @c end Sendrecv
 

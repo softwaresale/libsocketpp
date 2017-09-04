@@ -42,6 +42,7 @@ protected:
 public:
 	Socket();
 	Socket(const char*, int);
+  Socket(const char*, int, int);
 	Socket(int);
 
 	ostream& operator<<(int);
