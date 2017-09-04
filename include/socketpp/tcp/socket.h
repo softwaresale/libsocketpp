@@ -29,10 +29,10 @@
 
 using namespace std;
 
-namespace tcp
+namespace socketpp::tcp
 {
 
-class Socket : public tcp::basic_socket, public iostream
+class Socket : public socketpp::tcp::basic_socket, public iostream
 {
 
 private:
@@ -42,6 +42,7 @@ protected:
 public:
 	Socket();
 	Socket(const char*, int);
+  Socket(const char*, int, int);
 	Socket(int);
 
 	ostream& operator<<(int);

@@ -37,7 +37,7 @@
 
 using namespace std;
 
-tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
+socketpp::tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 	: sock(_sock),
 	  //putback(std::max(8, (int) size_t(1))),
 	  //buffer(std::max(256, (int) putback) + putback)
@@ -55,7 +55,7 @@ tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 }
 
 streambuf::int_type
-tcp::base_sock_buf::underflow()
+socketpp::tcp::base_sock_buf::underflow()
 {
 	if (gptr() < egptr()){ // buffer not exhausted
 		return traits_type::to_int_type(*gptr());
@@ -78,7 +78,7 @@ tcp::base_sock_buf::underflow()
 	int ret = sock->readBuf(start, buffer.size() - (start - base));
 	
 	if (ret < 0){
-		cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0. RET: " << ret << endl;
+		cerr << "socketpp::tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0. RET: " << ret << endl;
 		return traits_type::eof();
 	}
 	
@@ -90,7 +90,7 @@ tcp::base_sock_buf::underflow()
 
 
 streambuf::int_type
-tcp::base_sock_buf::overflow(char ch)
+socketpp::tcp::base_sock_buf::overflow(char ch)
 {
 	if (ch != traits_type::eof()){
 		
@@ -117,7 +117,7 @@ tcp::base_sock_buf::overflow(char ch)
 }
 
 int
-tcp::base_sock_buf::sync()
+socketpp::tcp::base_sock_buf::sync()
 {
 	ptrdiff_t size = pptr() - pbase();
 	pbump(-size);

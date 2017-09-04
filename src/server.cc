@@ -2,7 +2,7 @@
 
 /*
   This class is a basic TCP server that listens for connections
-  and returns pointers to tcp::Socket classes upon connection.
+  and returns pointers to socketpp::tcp::Socket classes upon connection.
   This connection is then used for communicating with the connection
 
 
@@ -41,19 +41,17 @@ using namespace std;
 
 /* This is a basic all around tcp server */
 
-tcp::Server::Server(){
-
+socketpp::tcp::Server::Server()
+{
 	// creates the server socket
 	server = socket(AF_INET, SOCK_STREAM, 0);
 	if (server < 0){
 		cerr << "server.cc:Server ctor: Error creating listening socket" << endl;
 	}
-
-
-
 }
 
-tcp::Server::Server(int _port){
+socketpp::tcp::Server::Server(int _port)
+{
 
 	// creates the socket
 	server = socket(AF_INET, SOCK_STREAM, 0);
@@ -65,7 +63,9 @@ tcp::Server::Server(int _port){
 	port = _port;
 }
 
-int tcp::Server::binds(){
+int
+socketpp::tcp::Server::binds()
+{
 
 	if (_isBound){
 		cerr << "Server already bound" << endl;
@@ -87,7 +87,9 @@ int tcp::Server::binds(){
 	return 0;
 }
 
-int tcp::Server::binds(int _port){
+int
+socketpp::tcp::Server::binds(int _port)
+{
 
 	if (_isBound){
 		cerr << "Server already bound" << endl;
@@ -109,17 +111,18 @@ int tcp::Server::binds(int _port){
 	return 0;
 }
 
-bool  tcp::Server::isBound() { return this->_isBound; }
+bool
+socketpp::tcp::Server::isBound() { return this->_isBound; }
 
 int
-tcp::Server::setKeepAlive(bool var)
+socketpp::tcp::Server::setKeepAlive(bool var)
 {
 	int _var = (int) var;
 	return setsockopt(this->server, SOL_SOCKET, SO_KEEPALIVE, &_var, sizeof(int));
 }
 
 int
-tcp::Server::isKeepAlive()
+socketpp::tcp::Server::isKeepAlive()
 {
 	int status = 0;
 	socklen_t len = (socklen_t) sizeof(status);
@@ -131,14 +134,14 @@ tcp::Server::isKeepAlive()
 }
 
 int
-tcp::Server::setReuseAddr(bool var)
+socketpp::tcp::Server::setReuseAddr(bool var)
 {
 	int _var = (int) var;
 	return setsockopt(this->server, SOL_SOCKET, SO_REUSEADDR, &_var, sizeof(int));
 }
 
 int
-tcp::Server::isReuseAddr()
+socketpp::tcp::Server::isReuseAddr()
 {
 	int val = 0;
 	socklen_t len = (socklen_t) sizeof(val);
@@ -149,8 +152,8 @@ tcp::Server::isReuseAddr()
 		return val;
 }
 
-tcp::Socket&
-tcp::Server::accepts(){
+socketpp::tcp::Socket&
+socketpp::tcp::Server::accepts(){
 
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
@@ -159,12 +162,14 @@ tcp::Server::accepts(){
 		// TODO: handle error
 	}
 
-	tcp::Socket* temp = new tcp::Socket(conn);
+	socketpp::tcp::Socket* temp = new socketpp::tcp::Socket(conn);
 	
 	return *temp;
 }
 
-int tcp::Server::acceptfd(){
+int
+socketpp::tcp::Server::acceptfd()
+{
 
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
@@ -176,7 +181,9 @@ int tcp::Server::acceptfd(){
 	return conn; // you actually have to return the value
 }
 
-void tcp::Server::closes(){
+void
+socketpp::tcp::Server::closes()
+{
 	close(conn);
 	close(server);
 }

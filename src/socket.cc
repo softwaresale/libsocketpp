@@ -35,30 +35,34 @@ using namespace std;
 * of the various base classes. It inherits basic_socket
 * and iostream directly and uses base_sock_buf as a
 * supporting class */
-tcp::Socket::Socket()
-	: basic_socket(),
+socketpp::tcp::Socket::Socket()
+	: socketpp::tcp::basic_socket(),
 	  iostream(new base_sock_buf(this))
 	  /* Using the already instantiated basic_socket part of self */
 {
-
 }
 
-tcp::Socket::Socket(const char* host, int port)
-	: basic_socket(host, port),
+socketpp::tcp::Socket::Socket(const char* host, int port)
+	: socketpp::tcp::basic_socket(host, port),
 	  iostream(new base_sock_buf(this))
 {
-
 }
 
-tcp::Socket::Socket(int sockfd)
-	: basic_socket(sockfd),
+socketpp::tcp::Socket::Socket(const char* host, int port, int conn)
+  : socketpp::tcp::basic_socket(host, port, conn),
+    iostream(new base_sock_buf(this))
+{
+}
+
+socketpp::tcp::Socket::Socket(int sockfd)
+	: socketpp::tcp::basic_socket(sockfd),
 	  iostream(new base_sock_buf(this))
 {
 
 }
 
 ostream&
-tcp::Socket::operator<<(int val)
+socketpp::tcp::Socket::operator<<(int val)
 {
 	int32_t conv = htonl(val);
 	char* data = (char*) &conv;
@@ -70,7 +74,7 @@ tcp::Socket::operator<<(int val)
 }
 
 ostream&
-tcp::Socket::operator<<(double val)
+socketpp::tcp::Socket::operator<<(double val)
 {
 	ostringstream str;
 
@@ -85,7 +89,7 @@ tcp::Socket::operator<<(double val)
 }
 
 ostream&
-tcp::Socket::operator<<(float val)
+socketpp::tcp::Socket::operator<<(float val)
 {
 	ostringstream _str;
 	_str << val;
@@ -99,7 +103,7 @@ tcp::Socket::operator<<(float val)
 
 
 istream&
-tcp::Socket::operator>>(int& val)
+socketpp::tcp::Socket::operator>>(int& val)
 {
 	int32_t ret;
 
@@ -114,7 +118,7 @@ tcp::Socket::operator>>(int& val)
 }
 
 istream&
-tcp::Socket::operator>>(double& val)
+socketpp::tcp::Socket::operator>>(double& val)
 {
 	char* buffer = new char[sizeof(double)];
 
@@ -126,7 +130,7 @@ tcp::Socket::operator>>(double& val)
 }
 
 istream&
-tcp::Socket::operator>>(float& val)
+socketpp::tcp::Socket::operator>>(float& val)
 {
 	char* buffer = new char[sizeof(float)];
 	this->getline(buffer, sizeof(float));

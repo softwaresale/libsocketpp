@@ -38,10 +38,10 @@ using namespace std;
 
 /* Basic socket */
 
-tcp::basic_socket::basic_socket()
+socketpp::tcp::basic_socket::basic_socket()
 	: host(NULL),
 	  port(0)
-{	
+{
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
 		// cerr << "basesocket.cc:17:25: Error creating socket descriptor (non-zero return)" << endl;
@@ -51,7 +51,7 @@ tcp::basic_socket::basic_socket()
 }
 
 
-tcp::basic_socket::basic_socket(const char* _host, int _port)
+socketpp::tcp::basic_socket::basic_socket(const char* _host, int _port)
 	: host((char*) _host),
 	  port(_port)
 {
@@ -63,38 +63,36 @@ tcp::basic_socket::basic_socket(const char* _host, int _port)
 }
 
 
-tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
+socketpp::tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
 	: host((char*) _host),
 	  port(_port)
 {
-	socketfd = socket(AF_INET, SOCK_STREAM, 0); /
-/ creates the new socket
+	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
 		// cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
 		throw new ctor_exe_t(); // throw constructor exception
 	}
-	
+
 	if (conn){
         int ret = this->connects();
         if (ret == -1)
           cerr << "basesocket.cc:69: Error connecting to server" << endl;
     }
-
 }
 
-tcp::basic_socket::basic_socket(int sockd)
+socketpp::tcp::basic_socket::basic_socket(int sockd)
 	: socketfd(sockd)
 {
 }
 
 int
-tcp::basic_socket::getSockfd()
+socketpp::tcp::basic_socket::getSockfd()
 {
 	return this->socketfd;
 }
 
 bool
-tcp::basic_socket::isConnected()
+socketpp::tcp::basic_socket::isConnected()
 {
 	int error = 0;
         socklen_t size = sizeof(error);
@@ -107,7 +105,7 @@ tcp::basic_socket::isConnected()
 
 
 int
-tcp::basic_socket::connects(const char* _host, int _port)
+socketpp::tcp::basic_socket::connects(const char* _host, int _port)
 {
 
 	addr.sin_family      = AF_INET;         // sets the address's family
@@ -124,7 +122,7 @@ tcp::basic_socket::connects(const char* _host, int _port)
 
 
 int
-tcp::basic_socket::connects()
+socketpp::tcp::basic_socket::connects()
 {
 
 	if (host == NULL || port == 0){
@@ -153,7 +151,7 @@ tcp::basic_socket::connects()
 }
 
 const char*
-tcp::basic_socket::getLocalhost()
+socketpp::tcp::basic_socket::getLocalhost()
 {
 	
 	struct sockaddr_in localAddress;
@@ -165,13 +163,13 @@ tcp::basic_socket::getLocalhost()
 }
 
 int
-tcp::basic_socket::getLocalPort()
+socketpp::tcp::basic_socket::getLocalPort()
 {
         return this->port;
 }
 
 int
-tcp::basic_socket::sends(char* buffer)
+socketpp::tcp::basic_socket::sends(char* buffer)
 {
 
 	int bytes;
@@ -199,7 +197,7 @@ tcp::basic_socket::sends(char* buffer)
 }
 
 int
-tcp::basic_socket::sendBuf(char* data, int size)
+socketpp::tcp::basic_socket::sendBuf(char* data, int size)
 {
 	// make sure connected
 	if (!isConnected()){
@@ -221,7 +219,7 @@ tcp::basic_socket::sendBuf(char* data, int size)
 }
 
 char*
-tcp::basic_socket::reads()
+socketpp::tcp::basic_socket::reads()
 {
 
 	char* buffer;
@@ -251,7 +249,7 @@ tcp::basic_socket::reads()
 }
 
 int
-tcp::basic_socket::readBuf(char* buffer, int size)
+socketpp::tcp::basic_socket::readBuf(char* buffer, int size)
 {
 	int bytes = recv(socketfd, buffer, size, 0);
 	if (bytes < 0){
@@ -263,7 +261,7 @@ tcp::basic_socket::readBuf(char* buffer, int size)
 }
 
 int
-tcp::basic_socket::setOpt(int level, int option, const void* val)
+socketpp::tcp::basic_socket::setOpt(int level, int option, const void* val)
 {
 	socklen_t size = sizeof(val);
 	return setsockopt(this->socketfd, level, option,
@@ -271,7 +269,7 @@ tcp::basic_socket::setOpt(int level, int option, const void* val)
 }
 
 int
-tcp::basic_socket::getOpt(int level, int option, void* val)
+socketpp::tcp::basic_socket::getOpt(int level, int option, void* val)
 {
 	socklen_t size = sizeof(val);
 	return getsockopt(this->socketfd, level, option,
@@ -279,14 +277,14 @@ tcp::basic_socket::getOpt(int level, int option, void* val)
 }
 
 int
-tcp::basic_socket::setReuseAddr(bool var)
+socketpp::tcp::basic_socket::setReuseAddr(bool var)
 {
 	int _val = (int) var;
 	return this->setOpt(SOL_SOCKET, SO_REUSEADDR, (void*) &_val);
 }
 
 int
-tcp::basic_socket::isReuseAddr()
+socketpp::tcp::basic_socket::isReuseAddr()
 {
 	int val = 0;
 	int ret = this->getOpt(SOL_SOCKET, SO_REUSEADDR, &val);
@@ -297,14 +295,14 @@ tcp::basic_socket::isReuseAddr()
 }
 
 int
-tcp::basic_socket::setKeepAlive(bool var)
+socketpp::tcp::basic_socket::setKeepAlive(bool var)
 {
 	int _var = (int) var;
 	return this->setOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &_var);
 }
 
 int
-tcp::basic_socket::isKeepAlive()
+socketpp::tcp::basic_socket::isKeepAlive()
 {
 	int val = 0;
 	int ret = this->getOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &val);
@@ -315,7 +313,7 @@ tcp::basic_socket::isKeepAlive()
 }
 
 char*
-tcp::basic_socket::getPeerName()
+socketpp::tcp::basic_socket::getPeerName()
 {
 	struct sockaddr_storage info;
 	socklen_t len = sizeof(info);
@@ -340,7 +338,7 @@ tcp::basic_socket::getPeerName()
 }
 
 void
-tcp::basic_socket::closes()
+socketpp::tcp::basic_socket::closes()
 {
 	close(socketfd);
 }
