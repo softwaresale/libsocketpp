@@ -1,1 +1,15 @@
-./out/*
+ar-lib
+autom4te.cache/requests
+compile
+config.guess
+config.sub
+depcomp
+doc/libsocketpp.info
+doc/mdate-sh
+doc/stamp-vti
+doc/texinfo.tex
+doc/version.texi
+install-sh
+missing
+src/Makefile.in
+
