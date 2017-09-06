@@ -1,3 +1,6 @@
 -------------
 |Pre-release|
 -------------
+
+As of now, libsocketpp is currently undergoing the GNU review process. Once
+that is completed, then libsocketpp will officially be in full release.

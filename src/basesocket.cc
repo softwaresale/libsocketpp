@@ -318,7 +318,7 @@ tcp::basic_socket::getPeerName()
 {
 	struct sockaddr_storage info;
 	socklen_t len = sizeof(info);
-	
+
 	int ret = getpeername(this->socketfd, (struct sockaddr*) &info, &len);
 	if (ret == -1){
 		//cerr << "basesocket.cc:301: getpeername returned -1" << endl;
@@ -334,7 +334,7 @@ tcp::basic_socket::getPeerName()
 		//cerr << "basesocket.cc:301: getPeerName does not support AF_INET6" << endl;
 		return NULL;
 	}
-	
+
 	return addrstr;
 }
 

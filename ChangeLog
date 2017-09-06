@@ -12,24 +12,6 @@
     GNU General Public License for more details.
 
 
-	[0.2.0] -- 2017-07-13
-	---------------------
-	---------------------
+	2017-09-05 Charlie Sale <chucks.8090@gmail.com>
 
-	Pre-release
-	
-	ADDED
-	-----
-	- src/basesocket.cc: More option added
-	- src/socket.cc: Fixed operator issues
-
-
-	[0.1.0] -- 2017-06-15
-	---------------------------
-	---------------------------
-
-	Pre-release
-	
-	ADDED
-	-----
-	- src/* -- Added
+	* pre-release 
