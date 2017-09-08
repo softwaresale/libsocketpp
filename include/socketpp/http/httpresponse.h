@@ -30,7 +30,7 @@ using namespace std;
 namespace socketpp::http
 {
 
-  class http_response : public http_base
+  class http_response : public socketpp::http::http_base
   {
 
   private:

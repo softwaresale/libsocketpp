@@ -48,7 +48,7 @@ namespace socketpp::http
     } http_cmd_t;
 
 
-class http_request : public http_base
+  class http_request : public socketpp::http::http_base
 {
 
 private:

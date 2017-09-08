@@ -319,7 +319,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I../include/
 AM_CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic
-AM_LDFLAGS = -version-number 1:0:0
+AM_LDFLAGS = -version-number 1:0:0 -lz
 lib_LTLIBRARIES = libsocketpp.la
 libsocketpp_la_SOURCES = server.cc \
 			 basesocket.cc \

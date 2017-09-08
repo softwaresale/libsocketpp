@@ -61,6 +61,7 @@ public:
         http_base(string);
 
         string toString();
+  
         void setHeaderData(string, string);
         void setBody(string);
         string dumpHead();
