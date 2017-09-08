@@ -56,7 +56,7 @@ socketpp::tcp::Server::Server(int _port)
 	// creates the socket
 	server = socket(AF_INET, SOCK_STREAM, 0);
 	if (server < 0){
-		cerr << "Error creating listening socket" << endl;
+		cerr << "server.cc:Server Ctor: Error creating listening socket" << endl;
 	}
 
 	// sets local variables
@@ -68,7 +68,7 @@ socketpp::tcp::Server::binds()
 {
 
 	if (_isBound){
-		cerr << "Server already bound" << endl;
+		cerr << "server.cc:Server::binds: Server already bound" << endl;
 		return 1;
 	}
 
@@ -78,10 +78,10 @@ socketpp::tcp::Server::binds()
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if ( bind(server, (struct sockaddr*)&addr, sizeof(addr)) < 0 ){
-		cerr << "Error listening socket" << endl;
+		cerr << "server.cc:Server::binds: Error listening socket" << endl;
 		return 1;
 	}
-	
+
 	_isBound = true; // socket has been bound
 
 	return 0;
@@ -92,7 +92,7 @@ socketpp::tcp::Server::binds(int _port)
 {
 
 	if (_isBound){
-		cerr << "Server already bound" << endl;
+		cerr << "server.cc:Server::binds: Server already bound" << endl;
 		return 1;
 	}
 
@@ -102,10 +102,10 @@ socketpp::tcp::Server::binds(int _port)
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if ( bind(server, (struct sockaddr*)&addr, sizeof(addr)) < 0 ){
-		cerr << "Error listening socket" << endl;
+		cerr << "server.cc:Server::binds: Error listening socket" << endl;
 		return 1;
 	}
-	
+
 	_isBound = true; // server has been bound
 
 	return 0;
@@ -127,10 +127,14 @@ socketpp::tcp::Server::isKeepAlive()
 	int status = 0;
 	socklen_t len = (socklen_t) sizeof(status);
 	int ret = getsockopt(this->server, SOL_SOCKET, SO_KEEPALIVE, (void*)&status, &len);
+
+  /*
 	if (ret == -1)
 		return ret;
 	else
 		return status; // should be flag
+  */
+  return (ret == -1) ? ret : status;
 }
 
 int
@@ -146,10 +150,15 @@ socketpp::tcp::Server::isReuseAddr()
 	int val = 0;
 	socklen_t len = (socklen_t) sizeof(val);
 	int ret = getsockopt(this->server, SOL_SOCKET, SO_REUSEADDR, (void*)&val, &len);
+
+  /*
 	if (ret == -1)
 		return ret;
 	else
 		return val;
+  */
+
+  return (ret == -1) ? ret : val;
 }
 
 socketpp::tcp::Socket&
@@ -158,12 +167,12 @@ socketpp::tcp::Server::accepts(){
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
 	if (conn < 0){
-		cerr << "Error accepting connection" << endl;
+		cerr << "server.cc:Server::accepts: Error accepting connection" << endl;
 		// TODO: handle error
 	}
 
 	socketpp::tcp::Socket* temp = new socketpp::tcp::Socket(conn);
-	
+
 	return *temp;
 }
 
@@ -174,16 +183,15 @@ socketpp::tcp::Server::acceptfd()
 	listen(server, 10); // sets the server to listen
 	conn = accept(server, (struct sockaddr*)NULL, NULL);
 	if (conn < 0){
-		cerr << "Error accepting connection" << endl;
+		cerr << "server.cc:Server::acceptfd: Error accepting connection" << endl;
 		return 0;
 	}
-	
+
 	return conn; // you actually have to return the value
 }
 
 void
 socketpp::tcp::Server::closes()
 {
-	close(conn);
 	close(server);
 }

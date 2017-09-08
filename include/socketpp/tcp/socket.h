@@ -26,6 +26,9 @@
 #include <iostream>
 #include <socketpp/tcp/basesockbuf.h>
 #include <ostream>
+#include <socketpp/http/httpbase.h>
+#include <socketpp/http/httprequest.h>
+#include <socketpp/http/httpresponse.h>
 
 using namespace std;
 
@@ -48,11 +51,14 @@ public:
 	ostream& operator<<(int);
 	ostream& operator<<(double);
 	ostream& operator<<(float);
+  ostream& operator<<(socketpp::http::http_base*);
 
 	istream& operator>>(int&);
 	istream& operator>>(double&);
 	istream& operator>>(float&);
-	
+  istream& operator>>(socketpp::http::http_request&);
+  istream& operator>>(socketpp::http::http_response&);
+
 };
 
 }

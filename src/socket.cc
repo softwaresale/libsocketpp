@@ -28,6 +28,7 @@
 #include <cstdint>
 #include <cstring>
 #include <sstream>
+#include <socketpp/http/httpbase.h>
 
 using namespace std;
 
@@ -58,7 +59,6 @@ socketpp::tcp::Socket::Socket(int sockfd)
 	: socketpp::tcp::basic_socket(sockfd),
 	  iostream(new base_sock_buf(this))
 {
-
 }
 
 ostream&
@@ -101,6 +101,16 @@ socketpp::tcp::Socket::operator<<(float val)
 	return *this;
 }
 
+ostream&
+socketpp::tcp::Socket::operator<<(socketpp::http::http_base* hobj)
+{
+  string _str = hobj->toString();
+  char* _data = (char*) _str.c_str();
+
+  this->write(_data, strlen(_data));
+
+  return *this;
+}
 
 istream&
 socketpp::tcp::Socket::operator>>(int& val)

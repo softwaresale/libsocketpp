@@ -1,9 +1,7 @@
 
 
 /*
-  This is one of the main classes generated from libsocketpp. It is a 
-  streambases TCP socket class.
-
+  This file is the header for HTTP responses
 
   Copyright (C) 2017  Charlie Sale
 
@@ -42,12 +40,15 @@ namespace socketpp::http
    public:
     http_response();
     http_response(string);
+    http_response(string, int);
+
+    int parse(string);
 
     void   setStatusText(string);
     string getStatusText();
 
     void setStatusCode(int);
-    int  getStatusCode(); 
+    int  getStatusCode();
 
   };
 

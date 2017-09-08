@@ -24,6 +24,8 @@
 #include <iostream>
 #include <socketpp/http/httpbase.h>
 #include <socketpp/http/httprequest.h>
+#include <cstring>
+#include <utility>
 
 using namespace std;
 
@@ -49,80 +51,99 @@ socketpp::http::http_request::http_request(string request)
     : socketpp::http::http_base(request)
 {
     // skip all of this parsing that probably wont work anyways
-    /*
-    istringstream istr(request);
+}
 
-    char* cmdLine = new char[256]; // try to set a more dynamic value
-    istr.getline(cmdLine, 256);
-    string _cmd(cmdLine);
+int
+socketpp::http::http_request::parse(string data)
+{
 
-    istringstream type(_cmd);
-    char* header_type = new char[16];
-    type.get(header_type, 16, " ");
+  istringstream whole_response(data);
 
-    if (string(header_type) != "HTTP/1.1") /* Not a response  {
+  // get first line
+  char* __cmd_line = new char[64];
+  whole_response.getline(__cmd_line, 64);
+  __cmd_line[strlen(__cmd_line) + 1] = '\0';
+  istringstream cmd_line(__cmd_line);
 
-        // parse out data
-        int ctr = 0;
-        char c;
+  // get header data
+  char* __header_line = new char[128];
+  ostringstream __header_data;
+  while (whole_response.getline(__header_line, 128)){
+    __header_data << __header_line;
+  }
+  istringstream header_data_str(__header_data.str());
+  delete[] __header_line;
 
-        istringstream cmd_parser(_cmd);
+  // get body
+  char* __line = new char[128];
+  ostringstream __body;
 
-        ostringstring cmd, uri, version;
+  while (whole_response.getline(__line, 128)){
+    __body << __line;
+  }
 
-        // get command
-        char* __cmd = new char[12];
-        cmd_parser.get(cmd, 12, ' '); // deliminate at space
-        cmd << __cmd;
+  delete[] __line;
 
-        // get URI
-        char* __uri = new char[256];
-        cmd_parser.get(__uri, 256, ' '); // get at space
-        uri << __uri;
+  this->body = __body.str();
+  // parse data
 
-        // get version
-        char* __vers = new char[strlen("HTTP/1.1")]; // too lazy to count
-        cmd_parser.get(__vers, strlen("HTTP/1.1"), '\n'); // newline as delimator
-        version << __vers;
+  // get the version and make sure that data is not request
+  char* command_buffer = new char[16];
+  cmd_line.get(command_buffer, 16, ' '); // get first word
+  if (string(command_buffer) != "HTTP/1.1"){
 
-        // insert all parts of command line into the vector
-        this->cmd_line.insert(0, cmd.str());
-        this->cmd_line.insert(1, uri.str());
-        this->cmd_line.insert(2, version.str());
+    // save version
+    this->setCmdData("command", string(command_buffer));
 
-        // get header data
-        char* header = new char[256];
-        istr.get(header, 256, "\n\n"); // at double new line
-        string _hdr(header); // data contained in header
-        istringstream hd(_hdr);
+    // get other parts of command line
 
-        // parse header data
-        char* hdline = new char[64];
-        while (hd.getline(hdline, 64)){
-          istringstream item_parse(string(hdline));
-          char* key = new char[32];
-          char* val = new char[32];
+    /// get uri
+    char* uri = new char[128];
+    cmd_line.get(uri, ' '); // get characters of uri
+    this->setCmdData("uri", string(uri)); // double check this
 
-          // read both values
-          item_parse.get(key, 32, ': ');
-          item_parse.get(val, 32, '\n');
+    // get version
+    char* version = new char[strlen("HTTP/1.1")];
+    cmd_line.get(version, '\n');
+    this->setCmdData("_version", string(version));
 
-          this->header_data.emplace_back({key, val}); // emplace a new element at the back
-        }
+    // everything is set
+    delete[] uri;
+    delete[] version;
+    delete[] command_buffer;
 
-        // all header data should be added
+  } else {
+    return 1;
+  }
 
-        char* _body = new char[256];
-        isr.get(_body, 256, CRLF); // get until CRLF
-        this->body = string(_body);
+  // parse out header data type pairs
+  int isDone = 0;
+  while (!isDone){
 
-    } else {
-        cerr << "REEEEE!!" << endl;
-    }
+    // read key and value, make pair, store data
+    char* __key = new char[64];
+    char* __val = new char[64];
 
+    if (header_data_str.eof())
+      isDone = 1; // finished
 
-    // everything parsed
-    */
+    header_data_str.get(__key, 64, ':');
+    header_data_str.get(__val, 64, '\n');
+
+    pair<string, string> value;
+    value.first = string(__key);
+    value.second = string(__val);
+
+    this->header_data.push_back(value);
+
+    // clean up
+    delete[] __key;
+    delete[] __val;
+  }
+
+  // done
+
+  return 0;
 }
 
 void

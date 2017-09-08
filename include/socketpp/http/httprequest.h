@@ -56,11 +56,13 @@ private:
 protected:
 
 public:
-        http_request();
-        http_request(string);
+  http_request();
+  http_request(string);
 
-        void setCmd(http_cmd_t);
-        void setURI(string);
+  int parse(string);
+
+  void setCmd(http_cmd_t);
+  void setURI(string);
 };
 
 }

@@ -96,7 +96,7 @@ socketpp::tcp::basic_socket::isConnected()
 {
 	int error = 0;
         socklen_t size = sizeof(error);
-	
+
 	// SEGMENTATION FAULT
 	int ret = getsockopt(socketfd, SOL_SOCKET, SO_ERROR, &error, &size);
 
@@ -117,7 +117,7 @@ socketpp::tcp::basic_socket::connects(const char* _host, int _port)
 		return 1;
 	}
 
-	return 0;
+	return 0; // succeeded
 }
 
 
@@ -131,12 +131,11 @@ socketpp::tcp::basic_socket::connects()
 
 	}
 
-	/*
+	// this may have been commented out for a reason
 	if (isConnected()){
 		cerr << "basesocket.cc:connects::84: Socket already connected" << endl;
 		return -2;
 	}
-	*/
 
 	addr.sin_family      = AF_INET;          // sets the address's family
 	addr.sin_port        = htons(port);      // sets the address's port
@@ -146,17 +145,19 @@ socketpp::tcp::basic_socket::connects()
 		//cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return -1;
 	}
-	
+
 	return 0;
 }
 
 const char*
 socketpp::tcp::basic_socket::getLocalhost()
 {
-	
-	struct sockaddr_in localAddress;
-	socklen_t addressLen = sizeof(localAddress);
+
+	struct sockaddr_in  localAddress;
+	socklen_t           addressLen = sizeof(localAddress);
+
 	getsockname(socketfd, (struct sockaddr*)&localAddress, &addressLen);
+
 	const char* addr = NULL;
  	addr = inet_ntoa(localAddress.sin_addr);
 	return addr; // get the local address
@@ -165,7 +166,7 @@ socketpp::tcp::basic_socket::getLocalhost()
 int
 socketpp::tcp::basic_socket::getLocalPort()
 {
-        return this->port;
+  return this->port;
 }
 
 int
@@ -193,7 +194,6 @@ socketpp::tcp::basic_socket::sends(char* buffer)
 	}
 
 	return 0;
-
 }
 
 int
@@ -204,13 +204,13 @@ socketpp::tcp::basic_socket::sendBuf(char* data, int size)
 		//cerr << "basesocket.cc:sendBuf:164: Socket not connected" << endl;
 		return -2; // not connected
 	}
-	
+
 	int bytes = send(socketfd, data, size, 0); // get bytes read
 	if (bytes < 0){
 		//cerr << "basesocket.cc:sendBuf:164: No bytes sent" << endl;
 		return bytes;
 	}
-	
+
 	if ((bytes - size) != 0){ /* Not all data sent */
 	    return (bytes - size); // return negative not sent
 	}
@@ -225,7 +225,7 @@ socketpp::tcp::basic_socket::reads()
 	char* buffer;
 	int bytes, buflen;
 
-	// Read the incoming size 
+	// Read the incoming size
 	bytes = recv(socketfd, (char*)&buflen, sizeof(buflen), 0);
 	if (bytes < 0){
 		//cerr << "basesocket.cc:reads: Error reading size of data" << endl;
@@ -235,7 +235,7 @@ socketpp::tcp::basic_socket::reads()
 
 	buffer = new char[buflen+1]; // create a buffer for reading with room for null terminator
 
-	//* Read the data 
+	//* Read the data
 
 	bytes = recv(socketfd, buffer, buflen, 0);
 	if (bytes < 0){
@@ -263,17 +263,22 @@ socketpp::tcp::basic_socket::readBuf(char* buffer, int size)
 int
 socketpp::tcp::basic_socket::setOpt(int level, int option, const void* val)
 {
+  /*
 	socklen_t size = sizeof(val);
-	return setsockopt(this->socketfd, level, option,
-			  val, size);
+  return setsockopt(this->socketfd, level, option, val, size);
+  */
+
+  // this might be more efficient
+  return setsockopt(this->socketfd, level, option, val, (socklen_t) sizeof(val));
 }
 
 int
 socketpp::tcp::basic_socket::getOpt(int level, int option, void* val)
 {
+
 	socklen_t size = sizeof(val);
-	return getsockopt(this->socketfd, level, option,
-			  val, &size);
+	return getsockopt(this->socketfd, level, option, val, &size);
+
 }
 
 int
@@ -288,10 +293,14 @@ socketpp::tcp::basic_socket::isReuseAddr()
 {
 	int val = 0;
 	int ret = this->getOpt(SOL_SOCKET, SO_REUSEADDR, &val);
+
+  /*
 	if (ret == -1)
 		return ret;
 	else
 		return val;
+  */
+  return (ret == -1) ? ret : val;
 }
 
 int
@@ -306,10 +315,14 @@ socketpp::tcp::basic_socket::isKeepAlive()
 {
 	int val = 0;
 	int ret = this->getOpt(SOL_SOCKET, SO_KEEPALIVE, (void*) &val);
+
+  /*
 	if (ret == -1)
 		return ret;
 	else
 		return val;
+  */
+  return (ret == -1) ? ret : val;
 }
 
 char*
@@ -317,7 +330,7 @@ socketpp::tcp::basic_socket::getPeerName()
 {
 	struct sockaddr_storage info;
 	socklen_t len = sizeof(info);
-	
+
 	int ret = getpeername(this->socketfd, (struct sockaddr*) &info, &len);
 	if (ret == -1){
 		//cerr << "basesocket.cc:301: getpeername returned -1" << endl;
@@ -333,7 +346,7 @@ socketpp::tcp::basic_socket::getPeerName()
 		//cerr << "basesocket.cc:301: getPeerName does not support AF_INET6" << endl;
 		return NULL;
 	}
-	
+
 	return addrstr;
 }
 
