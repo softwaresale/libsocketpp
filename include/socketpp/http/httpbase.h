@@ -57,7 +57,6 @@ protected:
   string dumpCmd();
 
   string getCmdItem(string); // get's one of the command line parts (see map above)
-  string getHeaderVal(string); // get the value of one of the header values
 
 public:
   http_base();
@@ -66,6 +65,7 @@ public:
   string toString();
 
   void setHeaderData(string, string);
+  string getHeaderVal(string); // get the value of one of the header values
   void setBody(string);
   string dumpHead();
   string dumpBody();

@@ -161,3 +161,15 @@ socketpp::http::http_request::setURI(string uri)
 {
     this->setCmdData("uri", uri);
 }
+
+string
+socketpp::http::http_request::getCmd()
+{
+  return this->getCmdItem("command");
+}
+
+string
+socketpp::http::http_request::getUri()
+{
+  return this->getCmdItem("uri");
+}

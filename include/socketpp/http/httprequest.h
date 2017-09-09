@@ -48,7 +48,7 @@ namespace socketpp::http
     } http_cmd_t;
 
 
-  class http_request : public socketpp::http::http_base
+class http_request : public socketpp::http::http_base
 {
 
 private:
@@ -63,6 +63,9 @@ public:
 
   void setCmd(http_cmd_t);
   void setURI(string);
+
+  string getCmd();
+  string getUri();
 };
 
 }

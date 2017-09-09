@@ -135,26 +135,26 @@ socketpp::http::http_response::parse(string data)
 void
 socketpp::http::http_response::setStatusCode(int data)
 {
-    ostringstream num;
-    num << data;
-    this->setCmdData("status", num.str());
+  ostringstream num;
+  num << data;
+  this->setCmdData("status", num.str());
 }
 
 int
 socketpp::http::http_response::getStatusCode()
 {
-    string str = this->cmd_line[1];
-    return stoi(str);
+  string str = this->getCmdItem("status");
+  return stoi(str);
 }
 
 void
 socketpp::http::http_response::setStatusText(string stat)
 {
-    this->setCmdData("text", stat);
+  this->setCmdData("text", stat);
 }
 
 string
 socketpp::http::http_response::getStatusText()
 {
-    return this->cmd_line[2];
+  return this->getCmdItem("_version");
 }

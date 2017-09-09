@@ -13,9 +13,11 @@ int main()
 
 	cout << req.toString() << endl;
 
-  http_request parsed_request;
+        http_request parsed_request;
 
-  parsed_request.parse("POST /home/update.html HTTP/1.1");
+        parsed_request.parse("POST /home/update.html HTTP/1.1");
+	string command = parsed_request.getCmd();
+	cout << "command: " << command << endl;
 
 	return 0;
 }

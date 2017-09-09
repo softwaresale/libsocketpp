@@ -142,20 +142,25 @@ socketpp::http::http_base::toString()
     return str.str();
 }
 
+constexpr unsigned int
+str2int(const char* str, int h = 0)
+{
+  return !str[h] ? 5381 : (str2int(str, h+1)*33) ^ str[h];
+}
 
 string
 socketpp::http::http_base::getCmdItem(string data)
 {
   string item;
-  switch (data) {
+  switch (str2int(data.c_str())) {
 
-  case "version":
-  case "command":
+  case str2int("version"):
+  case str2int("command"):
     item = this->cmd_line.at(0);
     break;
 
-  case "uri":
-  case "status":
+  case str2int("uri"):
+  case str2int("status"):
     item = this->cmd_line.at(1);
     break;
 
@@ -168,7 +173,7 @@ socketpp::http::http_base::getCmdItem(string data)
 }
 
 string
-socketpp::http::http_base::getHeaderKey(string key)
+socketpp::http::http_base::getHeaderVal(string key)
 {
 
   vector<pair<string,string>>::iterator vect_it;

@@ -40,7 +40,6 @@ namespace socketpp::http
    public:
     http_response();
     http_response(string);
-    http_response(string, int);
 
     int parse(string);
 
