@@ -111,6 +111,7 @@ socketpp::http::http_base::toString()
     if (isDataSet)
         return this->data;
 
+    /*
     ostringstream str;
 
     // dump cmd line
@@ -138,6 +139,13 @@ socketpp::http::http_base::toString()
 
     // dump body
     str << this->body << "\r\n";
+    */
+
+    ostringstream str;
+    str << this->dumpCmd();
+    str << this->dumpHead();
+    str << this->dumpBody();
+    str << "\r\n";
 
     return str.str();
 }

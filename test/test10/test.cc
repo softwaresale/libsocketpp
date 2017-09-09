@@ -12,12 +12,16 @@ int main()
 	http_request req("GET /home/index.html HTTP/1.1");
 
 	cout << req.toString() << endl;
+	
+	cout << "Making oreq..." << endl;
+        http_request oreq;
+	cout << "Made" << endl;
+	
+	cout << "Setting options..." << endl;
+	oreq.setCmd(POST);
+	oreq.setURI("/home/index.html");
 
-        http_request parsed_request;
-
-        parsed_request.parse("POST /home/update.html HTTP/1.1");
-	string command = parsed_request.getCmd();
-	cout << "command: " << command << endl;
+	cout << oreq.toString() << endl;
 
 	return 0;
 }
