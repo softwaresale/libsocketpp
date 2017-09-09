@@ -29,14 +29,14 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 
 Phase 2 -- Implement security protocols Fourth Major Release (major version 2.x.x)
 ----------------------------------------------------------------------------------
-[    ] *.  Implement Http request/response library
-[    ] *.  Add compatibility for other HTTP request/reqpose libraries
-[    ] *.  Add compression with zlib
-[    ] *.  Add new exceptions
-[    ] *.  Implement security protocols
-[    ]          *. Options: GNU TLS, GNU SASL, *GSS*
-[    ] *.  Add Asynchronous accept method for Server class
-[    ] *.  Create an object stream for sending objects
+[    ] *.  Add compression with zlib                                       (2.1.x)
+[    ] *.  Implement Http request/response library                         
+[    ] *.  Add compatibility for other HTTP request/response libraries     
+[    ] *.  Add new exceptions                                              (2.2.x)
+[    ] *.  Implement security protocols                                    (2.3.x)
+[    ]          *. Options: GNU TLS, GNU SASL, or GSS                        
+[    ] *.  Create asynchronous server methods                              (2.4.x)
+[    ] *.  Create an object stream for sending objects                     
 
 
 Future -- Implement standard internet protocols
