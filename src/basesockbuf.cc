@@ -37,7 +37,7 @@
 
 using namespace std;
 
-tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
+socketpp::tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 	: sock(_sock),
 	  //putback(std::max(8, (int) size_t(1))),
 	  //buffer(std::max(256, (int) putback) + putback)
@@ -55,19 +55,19 @@ tcp::base_sock_buf::base_sock_buf(basic_socket* _sock)
 }
 
 streambuf::int_type
-tcp::base_sock_buf::underflow()
+socketpp::tcp::base_sock_buf::underflow()
 {
 	if (gptr() < egptr()){ // buffer not exhausted
 		return traits_type::to_int_type(*gptr());
 	}
-	
+
 	int putback = gptr() - eback();
 	if (putback > 4)
 		putback = 4;
-	
+
 	char* base = &buffer.front();
 	char* start = base;
-	
+
 	if (eback() == base){
 		memmove(base, egptr() - putback, putback);
 		start += putback;
@@ -76,12 +76,12 @@ tcp::base_sock_buf::underflow()
 	// read into the buffer from socket
 
 	int ret = sock->readBuf(start, buffer.size() - (start - base));
-	
+
 	if (ret < 0){
-		cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0. RET: " << ret << endl;
+		cerr << "socketpp::tcp::base_sock_buf:underflow(): sock->readBuf returned lower than 0. RET: " << ret << endl;
 		return traits_type::eof();
 	}
-	
+
 	// set pointers
 	setg(base, start, start + ret);
 
@@ -90,10 +90,10 @@ tcp::base_sock_buf::underflow()
 
 
 streambuf::int_type
-tcp::base_sock_buf::overflow(char ch)
+socketpp::tcp::base_sock_buf::overflow(char ch)
 {
 	if (ch != traits_type::eof()){
-		
+
 		assert(less_equal<char*>()(pptr(), epptr()));
 		*pptr() = ch;
 		pbump(1);
@@ -101,23 +101,20 @@ tcp::base_sock_buf::overflow(char ch)
 		// write data
 		ptrdiff_t size = pptr() - pbase();
 		pbump(-size);
-		
 		int ret = sock->sendBuf(pbase(), size); // should send data
 		if (ret <= 0){
 			cerr << "basesockbuf.cc:overflow: sock send not bytes. Ret: " << ret << endl;
 			return traits_type::eof();
 		}
-		 
 
 		return ch;
 	}
-		
-	
+
 	return traits_type::eof();
 }
 
 int
-tcp::base_sock_buf::sync()
+socketpp::tcp::base_sock_buf::sync()
 {
 	ptrdiff_t size = pptr() - pbase();
 	pbump(-size);
@@ -126,6 +123,6 @@ tcp::base_sock_buf::sync()
 		cerr << "basesockbuf.cc:sync: sock sent no bytes" << endl;
 		return traits_type::eof();
 	}
-	
+
 	return ret;
 }

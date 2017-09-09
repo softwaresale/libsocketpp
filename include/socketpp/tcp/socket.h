@@ -29,10 +29,10 @@
 
 using namespace std;
 
-namespace tcp
+namespace socketpp::tcp
 {
 
-class Socket : public tcp::basic_socket, public iostream
+class Socket : public socketpp::tcp::basic_socket, public iostream
 {
 
 private:
@@ -51,11 +51,11 @@ public:
 	istream& operator>>(int&);
 	istream& operator>>(double&);
 	istream& operator>>(float&);
-	
+
 };
 
-}
+  ostream& send(ostream& out);
 
-ostream& send(ostream& out);
+}
 
 #endif // SOCKET_H

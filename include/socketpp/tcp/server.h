@@ -34,10 +34,11 @@ using namespace std;
 /* Server class: wrapper for C sockets, specifically server */
 
 /* namespace tcp */
-namespace tcp 
+namespace socketpp::tcp
 {
 
-class Server {
+class Server
+{
 
 protected:
 	int                server, conn;
@@ -51,7 +52,7 @@ public:
 
 	int binds();                     // binds the server to the address if data is already given
 	int binds(int _port);            // binds address with data
-	
+
 	bool isBound();                  // true if server is bound, false if not
 
 	int setReuseAddr(bool var = true);
