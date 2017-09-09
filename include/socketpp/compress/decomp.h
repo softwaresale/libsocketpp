@@ -21,8 +21,8 @@
 */
 
 
-#ifndef COMPRESS_H
-#define COMPRESS_H
+#ifndef DECOMPRESS_H
+#define DECOMPRESS_H
 
 #include <zlib.h>
 #include <socketpp/compress/basecmp.h>
@@ -32,18 +32,22 @@ using namespace std;
 namespace socketpp::cmp
 {
 
-  class compress : public socketpp::cmp::base_compress
+  class decomp : public socketpp::cmp::base_compress
   {
 
-  public:
-    compress();
-    compress(const char*);
-    compress(char*);
-    compress(string);
+  private:
+    char* pointer_to_out_data; // derefrence this to the given value
 
-    char* dump(); // get the compressed data
+  public:
+    decomp();
+    decomp(char*);
+    decomp(const char*);
+    decomp(string);
+
+    void inflate(char*);
+
   };
 
 }
 
-#endif // COMPRESS_H
+#endif // DECOMPRESS_H

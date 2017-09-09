@@ -1,7 +1,8 @@
 
 
+
 /*
-  Header for compress.cc
+  Header for comp.cc
 
   Copyright (C) 2017  Charlie Sale
 
@@ -20,33 +21,29 @@
 */
 
 
-#ifndef BASECMP_H
-#define BASECMP_H
+#ifndef COMPRESS_H
+#define COMPRESS_H
 
-#include <string>
 #include <zlib.h>
+#include <socketpp/compress/basecmp.h>
 
 using namespace std;
 
 namespace socketpp::cmp
 {
 
-  class base_compress
+  class comp : public socketpp::cmp::base_compress
   {
 
-  private:
-    z_stream stream;
-    char*    indata; // data to work on
-    char*    dump_data;   // operation output
-
   public:
-    base_compress();
-    base_compress(char*);
+    comp();
+    comp(const char*);
+    comp(char*);
+    comp(string);
 
-    void destroy();
-
+    char* dump(); // get the compressed data
   };
 
 }
 
-#endif // BASECMP_H
+#endif // COMPRESS_H

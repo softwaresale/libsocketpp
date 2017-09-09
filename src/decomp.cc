@@ -1,8 +1,6 @@
 
-
-
 /*
-  Header for compress.cc
+  This file handles compressing data for the socket
 
   Copyright (C) 2017  Charlie Sale
 
@@ -20,34 +18,36 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-#ifndef DECOMPRESS_H
-#define DECOMPRESS_H
-
-#include <zlib.h>
+#include <iostream>
 #include <socketpp/compress/basecmp.h>
+#include <socketpp/compress/decomp.h>
+#include <cstring>
 
 using namespace std;
 
-namespace socketpp::cmp
+socketpp::cmp::decomp::decomp()
+  : socketpp::cmp::base_compress()
 {
-
-  class decompress : public socketpp::cmp::base_compress
-  {
-
-  private:
-    char* pointer_to_out_data; // derefrence this to the given value
-    
-  public:
-    decompress();
-    decompress(char*);
-    decompress(const char*);
-    decompress(string);
-
-    void inflate(char*);
-
-  };
-
 }
 
-#endif // DECOMPRESS_H
+socketpp::cmp::decomp::decomp(char* data)
+  : socketpp::cmp::base_compress(data)
+{
+  this->pointer_to_out_data = data; // derefrence pointer
+}
+
+socketpp::cmp::decomp::decomp(const char* data)
+  : socketpp::cmp::decomp((char*) data)
+{
+}
+
+socketpp::cmp::decomp::decomp(string data)
+  : socketpp::cmp::decomp(data.c_str())
+{
+}
+
+void
+socketpp::cmp::decomp::inflate(char * input)
+{
+  
+}
