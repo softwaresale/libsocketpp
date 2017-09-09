@@ -13,5 +13,9 @@ int main()
 
 	cout << req.toString() << endl;
 
+  http_request parsed_request;
+
+  parsed_request.parse("POST /home/update.html HTTP/1.1");
+
 	return 0;
 }

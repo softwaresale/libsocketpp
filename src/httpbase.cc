@@ -143,3 +143,47 @@ socketpp::http::http_base::toString()
 }
 
 
+string
+socketpp::http::http_base::getCmdItem(string data)
+{
+  string item;
+  switch (data) {
+
+  case "version":
+  case "command":
+    item = this->cmd_line.at(0);
+    break;
+
+  case "uri":
+  case "status":
+    item = this->cmd_line.at(1);
+    break;
+
+  default:
+    item = this->cmd_line.at(2);
+    break;
+  }
+
+  return item;
+}
+
+string
+socketpp::http::http_base::getHeaderKey(string key)
+{
+
+  vector<pair<string,string>>::iterator vect_it;
+
+  for (vect_it = this->header_data.begin();
+       vect_it != this->header_data.end();
+       vect_it++){
+
+    pair<string, string> item = *vect_it;
+
+    if (item.first == key){
+      return item.second;
+    }
+
+  }
+
+  return "";
+}
