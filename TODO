@@ -26,6 +26,8 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *   Write exception for constructors (errno already supplied: use default C socket values)
 [done] *.  Add texinfo automake build proceedure
 [    ] *.  Continuously update texinfo docs
+[    ] *.  Add feature to write operators to send size of incoming payload to other side (1.1.x)
+           so that the read operators can make an apropriatly sized buffer
 
 Phase 2 -- Implement security protocols Fourth Major Release (major version 2.x.x)
 ----------------------------------------------------------------------------------
