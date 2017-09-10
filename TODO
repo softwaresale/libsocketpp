@@ -26,20 +26,24 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *   Write exception for constructors (errno already supplied: use default C socket values)
 [done] *.  Add texinfo automake build proceedure
 [    ] *.  Continuously update texinfo docs
-[    ] *.  Add feature to write operators to send size of incoming payload to other side (1.1.x)
-           so that the read operators can make an apropriatly sized buffer
 
-Phase 2 -- Implement security protocols Fourth Major Release (major version 2.x.x)
-----------------------------------------------------------------------------------
-[    ] *.  Add compression with zlib                                       (2.1.x)
+Phase 2 -- Improve and add more features. Second Major Release (major version 2.x.x)
+------------------------------------------------------------------------------------
+[    ] *.  Add compression with zlib                                       (2.0.x)
 [    ] *.  Implement Http request/response library                         
 [    ] *.  Add compatibility for other HTTP request/response libraries     
-[    ] *.  Add new exceptions                                              (2.2.x)
-[    ] *.  Implement security protocols                                    (2.3.x)
-[    ]          *. Options: GNU TLS, GNU SASL, or GSS                        
-[    ] *.  Create asynchronous server methods                              (2.4.x)
-[    ] *.  Create an object stream for sending objects                     
+[    ] *.  Add new exceptions                                              (2.1.x)
 
+Phase 3 -- Asynchronous sockets and servers. Third Major Release (major version 3.x.x)
+--------------------------------------------------------------------------------------
+[    ] *.  tcp::SocketService class that handles a socket asynchronously  (3.0.x)
+[    ] *.  Function's for handling SocketService asynchronously
+
+Phase 4 -- Add security classes and operations. Fourth Major Release (major version 4.x.x)
+------------------------------------------------------------------------------------------
+[    ] *.  Implement security protocols                                    (4.0.x)
+[    ]          *. Options: GNU TLS, GNU SASL, or GSS                       
+[    ] *.  Implement SSH protocol that derives the tcp::Socket class
 
 Future -- Implement standard internet protocols
 -------------------------------------------------------------------------------------------

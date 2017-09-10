@@ -54,7 +54,6 @@ tcp::Socket::Socket(int sockfd)
 	: basic_socket(sockfd),
 	  iostream(new base_sock_buf(this))
 {
-
 }
 
 ostream&
