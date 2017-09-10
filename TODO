@@ -25,16 +25,14 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add reuseAddress and keepAlive options on server
 [done] *   Write exception for constructors (errno already supplied: use default C socket values)
 [done] *.  Add texinfo automake build proceedure
-[    ] *.  Continuously update texinfo docs
-[    ] *.  Include gethostbyname in connects
+[done] *.  Include gethostbyname in connects
 
 Phase 2 -- Improve and add more features. Second Major Release (major version 2.x.x)
 ------------------------------------------------------------------------------------
 [    ] *.  Add compression with zlib                                       (2.0.x)
-[    ] *.  Add classes for making sending files easier
-[    ] *.  Implement Http request/response library                         (2.1.x)                     
-[    ] *.  Add compatibility for other HTTP request/response libraries     
-[    ] *.  Add new exceptions                                              (2.2.x)
+[    ] *.  Add classes for making sending files easier                  
+[    ] *.  Set up cURLpp as default handler of HTTP requests
+[    ] *.  Add new exceptions                                              (2.1.x)
 
 Phase 3 -- Asynchronous sockets and servers. Third Major Release (major version 3.x.x)
 --------------------------------------------------------------------------------------
