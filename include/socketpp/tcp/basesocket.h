@@ -32,41 +32,39 @@
 
 using namespace std;
 
-namespace tcp {
+namespace tcp
+{
 
 class basic_socket
 {
 
 private:
-        
-        
+
 protected:
 	int                socketfd;
 	struct sockaddr_in addr;
+  struct sockaddr_in server_address;
+  struct hostent*    server_data;
 	char*              host;
 	int                port;
-        char*              salt; // current salt value
-        char*              cliSalt; // salt of client
-        int                isSecure; // whether or not in secure mode
-        int                hashExchanged; // if exchangeHashes() has been executed
-        
+
 public:
         /*
 	 * Constructors:
 	 * -------------
 	 * basic_socket()                      --> constructs a basic socket object
-	 * basic_socket(const char*, int)      --> creates a socket object with 
+	 * basic_socket(const char*, int)      --> creates a socket object with
          *                                         connection data
          * basic_socket(const char*, int, int) --> same as before, but if last
          *                                         value is true, connects
-	 * basic_socket(int)                   --> creates a socket object around a 
+	 * basic_socket(int)                   --> creates a socket object around a
                                                    socket descriptor
 	 */
 	basic_socket();
 	basic_socket(const char*, int);
-        basic_socket(const char*, int, int);
+  basic_socket(const char*, int, int);
 	basic_socket(int);
-    
+
 	/*
 	 * getSockFd
 	 * ---------
@@ -79,14 +77,14 @@ public:
 	 * ------------
 	 * Returns a string containing the local IP address of the machine
 	 */
-	const char* getLocalhost(); 
-        
-        /*
-         * getLocalPort()
-         * --------------
-         * Returns the port currently being used
-         */
-        int getLocalPort();
+	const char* getLocalhost();
+
+  /*
+  * getLocalPort()
+  * --------------
+  * Returns the port currently being used
+  */
+  int getLocalPort();
 
 	/*
 	 * connects(const char*, int) --> connects to server with given data
@@ -95,21 +93,21 @@ public:
 	 *                                given connection data in constructor
 	 */
 	int connects(const char*, int);
-	int connects();                      
-        
+	int connects();
+
 	/*
 	 * isConnected()
 	 * -------------
 	 * true if socket is connected to server
 	 */
-	bool isConnected();                 
-        
+	bool isConnected();
+
 	/*
 	 * sends(char*)
 	 * ------------
 	 * Sends a string to a server, returns -1 on failure
 	 */
-       	int sends(char*);
+  int sends(char*);
 
 	/*
 	 * sendBuf(char*, int)
@@ -125,7 +123,7 @@ public:
 	 */
 	char* reads();
 	int   readBuf(char*, int);
-        
+
 	int setOpt(int, int, const void*);
 	int getOpt(int, int, void*);
 
@@ -151,11 +149,11 @@ public:
 	 *
 	 */
 	char* getPeerName();
-	
+
 	void closes();                      // closes the connection
 
 };
-        
+
 }
 
 #endif

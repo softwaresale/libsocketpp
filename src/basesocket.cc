@@ -41,7 +41,7 @@ using namespace std;
 tcp::basic_socket::basic_socket()
 	: host(NULL),
 	  port(0)
-{	
+{
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // creates the new socket
 	if (socketfd < 0){
 		// cerr << "basesocket.cc:17:25: Error creating socket descriptor (non-zero return)" << endl;
@@ -72,7 +72,7 @@ tcp::basic_socket::basic_socket(const char* _host, int _port, int conn)
 		// cerr << "basesocket.cc:31:44: Error creating socket descriptor (non-zero return)" << endl;
 		throw new ctor_exe_t(); // throw constructor exception
 	}
-	
+
 	if (conn){
         int ret = this->connects();
         if (ret == -1)
@@ -97,7 +97,7 @@ tcp::basic_socket::isConnected()
 {
 	int error = 0;
         socklen_t size = sizeof(error);
-	
+
 	// SEGMENTATION FAULT
 	int ret = getsockopt(socketfd, SOL_SOCKET, SO_ERROR, &error, &size);
 
@@ -109,12 +109,29 @@ int
 tcp::basic_socket::connects(const char* _host, int _port)
 {
 
-	addr.sin_family      = AF_INET;         // sets the address's family
+  server_data = gethostbyname(_host); // set server data
+  if (server_data == NULL) {
+    cerr << "basesocket.cc:connects:66: Error encountered in gethostbyname -- NO SUCH HOST" << endl;
+    return 1;
+  }
+
+  bzero((char*) &server_address, sizeof(server_address));
+  server_address.sin_family = AF_INET;
+  bcopy((char*) server_data->h_addr,
+        (char*) &server_address.sin_addr.s_addr,
+        server_data->h_length);
+  server_address.sin_port = htons(_port);
+
+  /*
+	addr.sin_family      = AF_INET;          // sets the address's family
 	addr.sin_port        = htons(_port);     // sets the address's port
 	addr.sin_addr.s_addr = inet_addr(_host); // sets the address's host
+  */
 
-	if ( connect(socketfd, (struct sockaddr*)&addr, sizeof(addr)) < 0){
-		//cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
+  int ret = connect(socketfd, (struct sockaddr*)&server_address, sizeof(server_address));
+
+	if (ret < 0){
+		cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return 1;
 	}
 
@@ -129,32 +146,33 @@ tcp::basic_socket::connects()
 	if (host == NULL || port == 0){
 		//cerr << "basesocket.cc:connects::84: Host and port not set" << endl;
 		return -1;
-
 	}
 
-	/*
-	if (isConnected()){
-		cerr << "basesocket.cc:connects::84: Socket already connected" << endl;
-		return -2;
-	}
-	*/
+  server_data = gethostbyname(host); // set server data
+  if (server_data == NULL) {
+    cerr << "basesocket.cc:connects:66: Error encountered in gethostbyname -- NO SUCH HOST" << endl;
+    return 1;
+  }
 
-	addr.sin_family      = AF_INET;          // sets the address's family
-	addr.sin_port        = htons(port);      // sets the address's port
-	addr.sin_addr.s_addr = inet_addr(host);  // sets the address's host
+  bzero((char*) &server_address, sizeof(server_address));
+  server_address.sin_family = AF_INET;
+  bcopy((char*) server_data->h_addr,
+        (char*) &server_address.sin_addr.s_addr,
+        server_data->h_length);
+  server_address.sin_port = htons(port);
+
 
 	if ( connect(socketfd, (struct sockaddr*)&addr, sizeof(addr)) < 0){
 		//cerr << "basesocket.cc:connects:66: Error connected to server (non-zero return value)" << endl;
 		return -1;
 	}
-	
+
 	return 0;
 }
 
 const char*
 tcp::basic_socket::getLocalhost()
 {
-	
 	struct sockaddr_in localAddress;
 	socklen_t addressLen = sizeof(localAddress);
 	getsockname(socketfd, (struct sockaddr*)&localAddress, &addressLen);
