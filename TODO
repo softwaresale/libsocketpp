@@ -31,7 +31,6 @@ Phase 2 -- Improve and add more features. Second Major Release (major version 2.
 ------------------------------------------------------------------------------------
 [    ] *.  Add compression with zlib                                       (2.0.x)
 [    ] *.  Add classes for making sending files easier                  
-[    ] *.  Set up cURLpp as default handler of HTTP requests
 [    ] *.  Add new exceptions                                              (2.1.x)
 
 Phase 3 -- Asynchronous sockets and servers. Third Major Release (major version 3.x.x)
@@ -51,3 +50,4 @@ NOTE: Must be complient with RFC
 [    ] *.  UDP
 [    ] *.  TELNET
 [    ] *.  FTP
+[    ] *.  HTTP?
