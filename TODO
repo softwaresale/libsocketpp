@@ -27,22 +27,23 @@ Phase 1 -- Complete basic Socket I/O functionality. First Release (major version
 [done] *.  Add texinfo automake build proceedure
 [done] *.  Include gethostbyname in connects
 
-Phase 2 -- Improve and add more features. Second Major Release (major version 2.x.x)
-------------------------------------------------------------------------------------
-[    ] *.  Add compression with zlib                                       (2.0.x)
-[    ] *.  Add classes for making sending files easier                  
-[    ] *.  Add new exceptions                                              (2.1.x)
-
-Phase 3 -- Asynchronous sockets and servers. Third Major Release (major version 3.x.x)
---------------------------------------------------------------------------------------
-[    ] *.  tcp::SocketService class that handles a socket asynchronously  (3.0.x)
+Phase 2 -- Asynchronous sockets and servers. Second Major Release (major version 2.x.x)
+---------------------------------------------------------------------------------------
+[    ] *.  tcp::SocketService class that handles a socket asynchronously  (2.0.x)
 [    ] *.  Function's for handling SocketService asynchronously
 
-Phase 4 -- Add security classes and operations. Fourth Major Release (major version 4.x.x)
-------------------------------------------------------------------------------------------
-[    ] *.  Implement security protocols                                    (4.0.x)
-[    ]          *. Options: GNU TLS, GNU SASL, or GSS                       
+Phase 3 -- Add security classes and operations. Third Major Release (major version 3.x.x)
+-----------------------------------------------------------------------------------------
+[    ] *.  Implement security protocols                                    (3.0.x)
+[    ]          *. Options: GNU TLS, GNU SASL, or GSS
 [    ] *.  Implement SSH protocol that derives the tcp::Socket class
+
+
+Phase 4 -- Improve and add more features. Fourth Major Release (major version 4.x.x)
+------------------------------------------------------------------------------------
+[    ] *.  Add classes for making sending files easier                     (4.0.x)
+[    ] *.  Add new exceptions                                              (4.1.x)
+[    ] *.  Add compression with zlib                                       
 
 Future -- Implement standard internet protocols
 -------------------------------------------------------------------------------------------
