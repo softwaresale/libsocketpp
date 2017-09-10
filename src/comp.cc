@@ -22,6 +22,7 @@
 #include <socketpp/compress/comp.h>
 #include <iostream>
 #include <cstring>
+#include <zlib.h>
 
 using namespace std;
 
@@ -36,12 +37,12 @@ socketpp::cmp::comp::comp(char* data)
   // compress data
   stream.avail_in  = (uInt)   strlen(indata)+1; // size of input string and terminator
   stream.next_in   = (Bytef*) indata;
-  stream.avail_out = (uInt)   sizeof(this->data_dump);
-  stream.next_out  = (Bytef*) this->data_dump;
+  stream.avail_out = (uInt)   sizeof(this->dump_data);
+  stream.next_out  = (Bytef*) this->dump_data;
 
   deflateInit(&stream, Z_BEST_COMPRESSION);
   deflate(&stream, Z_FINISH);
-  defalteEnd(&stream);
+  deflateEnd(&stream);
 }
 
 socketpp::cmp::comp::comp(const char* data)
@@ -57,5 +58,7 @@ socketpp::cmp::comp::comp(string data)
 char*
 socketpp::cmp::comp::dump()
 {
-  return this->data_dump;
+  char* __tmp = this->dump_data;
+  this->destroy();
+  return __tmp;
 }

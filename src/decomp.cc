@@ -33,7 +33,8 @@ socketpp::cmp::decomp::decomp()
 socketpp::cmp::decomp::decomp(char* data)
   : socketpp::cmp::base_compress(data)
 {
-  this->pointer_to_out_data = data; // derefrence pointer
+  this->pointer_to_out_data = &data; // derefrence pointer
+  this->input_size = (uInt) sizeof(data); // get input size
 }
 
 socketpp::cmp::decomp::decomp(const char* data)
@@ -47,7 +48,27 @@ socketpp::cmp::decomp::decomp(string data)
 }
 
 void
-socketpp::cmp::decomp::inflate(char * input)
+socketpp::cmp::decomp::inflate_data(char * input)
 {
-  
+  char* tmp = new char[input_size];
+
+  // this line needs to be fixed...
+  stream.avail_in = (uInt) sizeof(input) * 2; // try doubling the size of the input...
+  stream.next_in = (Bytef*) input;
+  stream.avail_out = input_size;
+  stream.next_out = (Bytef*) tmp; // store data in temporary buffer
+
+  // actually do the stuff
+  inflateInit(&stream);
+  inflate(&stream, Z_NO_FLUSH);
+  inflateEnd(&stream);
+
+  // set the tmp data to the derefrenced pointer to the outvalue
+  *pointer_to_out_data = tmp; // this should work...
+}
+
+int
+socketpp::cmp::decomp::getInputSize()
+{
+  return (int) this->input_size;
 }

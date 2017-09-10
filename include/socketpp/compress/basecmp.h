@@ -34,7 +34,7 @@ namespace socketpp::cmp
   class base_compress
   {
 
-  private:
+  protected:
     z_stream stream;
     char*    indata; // data to work on
     char*    dump_data;   // operation output

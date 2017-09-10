@@ -28,6 +28,8 @@
 #include <cstdint>
 #include <cstring>
 #include <sstream>
+#include <socketpp/compress/comp.h>
+#include <socketpp/compress/decomp.h>
 
 using namespace std;
 
@@ -97,6 +99,15 @@ socketpp::tcp::Socket::operator<<(float val)
 	return *this;
 }
 
+ostream&
+socketpp::tcp::Socket::operator<<(socketpp::cmp::comp data)
+{
+  char* __data = data.dump(); // get compressed data
+
+  this->write(__data, sizeof(__data)); // write data
+
+  return *this;
+}
 
 istream&
 socketpp::tcp::Socket::operator>>(int& val)
@@ -134,6 +145,20 @@ socketpp::tcp::Socket::operator>>(float& val)
 	val = atof(buffer);
 
 	return *this;
+}
+
+istream&
+socketpp::tcp::Socket::operator>>(socketpp::cmp::decomp& data)
+{
+  // double check this...
+
+  char* buffer = new char[data.getInputSize()]; // create buffer the same size as the given data
+
+  this->get(buffer, sizeof(buffer));
+
+  data.inflate_data(buffer);
+
+  return *this;
 }
 
 ostream&

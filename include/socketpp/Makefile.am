@@ -1,2 +1,2 @@
 
-SUBDIRS = tcp 
+SUBDIRS = tcp compress 
