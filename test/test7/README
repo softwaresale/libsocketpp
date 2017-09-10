@@ -1,9 +1,12 @@
-Goal: Test MD5 checksum status to see what happens with the MD5 sum
+Goal: Test out new accepts method and test reuseaddr and keepalive functionality
 
 Steps/Requirements:
-1. Use getOption for MD5 sum
-2. Print value
+1. Create server
+2. Set keepalive and reuseaddr settings
+3. Test them
+4. Accept new client
 
-STATUS: IN PROGRESS
+STATUS: SEMI-SUCCESS
 
-NOTES:
+NOTES: All settings work, but new accepts method does not. Still
+       need to define Socket&
