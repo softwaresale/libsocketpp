@@ -28,8 +28,7 @@
 
 using namespace std;
 
-namespace
-tcp
+namespace socketpp::tcp
 {
 
   struct _ctor_exe : public exception

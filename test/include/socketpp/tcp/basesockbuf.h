@@ -28,14 +28,14 @@
 
 using namespace std;
 
-namespace tcp
+namespace socketpp::tcp
 {
 
 class base_sock_buf : public streambuf
 {
 
 private:
-        basic_socket* sock;    // internal socket
+  basic_socket* sock;    // internal socket
 	vector<char>  buffer;  // internal character buffer?
 	vector<char>  outBuf; // buffer for writing outwards
 	//const size_t  putback; // put back size
@@ -48,10 +48,10 @@ protected:
 	int_type overflow(char ch);
 	int_type underflow();
 	int sync();
-	
+
 public:
 	base_sock_buf(basic_socket* _sock);
-	
+
 };
 
 }

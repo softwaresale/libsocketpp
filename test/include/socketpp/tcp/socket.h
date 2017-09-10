@@ -26,13 +26,15 @@
 #include <iostream>
 #include <socketpp/tcp/basesockbuf.h>
 #include <ostream>
+#include <socketpp/compress/comp.h>
+#include <socketpp/compress/decomp.h>
 
 using namespace std;
 
-namespace tcp
+namespace socketpp::tcp
 {
 
-class Socket : public tcp::basic_socket, public iostream
+class Socket : public socketpp::tcp::basic_socket, public iostream
 {
 
 private:
@@ -47,15 +49,17 @@ public:
 	ostream& operator<<(int);
 	ostream& operator<<(double);
 	ostream& operator<<(float);
+  ostream& operator<<(socketpp::cmp::comp);
 
 	istream& operator>>(int&);
 	istream& operator>>(double&);
 	istream& operator>>(float&);
-	
+  istream& operator>>(socketpp::cmp::decomp&);
+
 };
 
-}
+  ostream& send(ostream& out);
 
-ostream& send(ostream& out);
+}
 
 #endif // SOCKET_H

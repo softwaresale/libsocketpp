@@ -1,9 +1,0 @@
-Goal: Test MD5 checksum status to see what happens with the MD5 sum
-
-Steps/Requirements:
-1. Use getOption for MD5 sum
-2. Print value
-
-STATUS: IN PROGRESS
-
-NOTES:
