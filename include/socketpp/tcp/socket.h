@@ -18,44 +18,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #ifndef SOCKET_H
 #define SOCKET_H 1
 
-#include <socketpp/tcp/basesocket.h>
 #include <iostream>
-#include <socketpp/tcp/basesockbuf.h>
 #include <ostream>
+#include <socketpp/tcp/basesockbuf.h>
+#include <socketpp/tcp/basesocket.h>
 
 using namespace std;
 
-namespace tcp
-{
+namespace tcp {
 
-class Socket : public tcp::basic_socket, public iostream
-{
+class Socket : public tcp::basic_socket, public iostream {
 
 private:
-
 protected:
-
 public:
-	Socket();
-	Socket(const char*, int);
-	Socket(int);
+  Socket();
+  Socket(const char *, int);
+  Socket(int);
 
-	ostream& operator<<(int);
-	ostream& operator<<(double);
-	ostream& operator<<(float);
+  ostream &operator<<(int);
+  ostream &operator<<(double);
+  ostream &operator<<(float);
 
-	istream& operator>>(int&);
-	istream& operator>>(double&);
-	istream& operator>>(float&);
-	
+  istream &operator>>(int &);
+  istream &operator>>(double &);
+  istream &operator>>(float &);
 };
-
 }
 
-ostream& send(ostream& out);
+ostream &send(ostream &out);
 
 #endif // SOCKET_H

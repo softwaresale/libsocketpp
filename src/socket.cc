@@ -1,6 +1,6 @@
 
 /*
-  This is one of the main classes generated from libsocketpp. It is a 
+  This is one of the main classes generated from libsocketpp. It is a
   streambases TCP socket class.
 
 
@@ -20,13 +20,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <socketpp/tcp/basesocket.h>
-#include <socketpp/tcp/socket.h>
-#include <iostream>
-#include <socketpp/tcp/basesockbuf.h>
-#include <netinet/in.h>
 #include <cstdint>
 #include <cstring>
+#include <iostream>
+#include <netinet/in.h>
+#include <socketpp/tcp/basesockbuf.h>
+#include <socketpp/tcp/basesocket.h>
+#include <socketpp/tcp/socket.h>
 #include <sstream>
 
 using namespace std;
@@ -36,109 +36,84 @@ using namespace std;
 * and iostream directly and uses base_sock_buf as a
 * supporting class */
 tcp::Socket::Socket()
-	: basic_socket(),
-	  iostream(new base_sock_buf(this))
-	  /* Using the already instantiated basic_socket part of self */
-{
+    : basic_socket(), iostream(new base_sock_buf(this))
+/* Using the already instantiated basic_socket part of self */
+{}
 
-}
-
-tcp::Socket::Socket(const char* host, int port)
-	: basic_socket(host, port),
-	  iostream(new base_sock_buf(this))
-{
-
-}
+tcp::Socket::Socket(const char *host, int port)
+    : basic_socket(host, port), iostream(new base_sock_buf(this)) {}
 
 tcp::Socket::Socket(int sockfd)
-	: basic_socket(sockfd),
-	  iostream(new base_sock_buf(this))
-{
+    : basic_socket(sockfd), iostream(new base_sock_buf(this)) {}
+
+ostream &tcp::Socket::operator<<(int val) {
+  int32_t conv = htonl(val);
+  char *data = (char *)&conv;
+  int size = sizeof(conv);
+
+  this->write(data, size);
+
+  return *this;
 }
 
-ostream&
-tcp::Socket::operator<<(int val)
-{
-	int32_t conv = htonl(val);
-	char* data = (char*) &conv;
-	int size = sizeof(conv);
+ostream &tcp::Socket::operator<<(double val) {
+  ostringstream str;
 
-	this->write(data, size);
+  str << val;
 
-	return *this;
+  string _str = str.str();
+  const char *buf = _str.c_str();
+
+  this->write(buf, strlen(buf));
+
+  return *this;
 }
 
-ostream&
-tcp::Socket::operator<<(double val)
-{
-	ostringstream str;
+ostream &tcp::Socket::operator<<(float val) {
+  ostringstream _str;
+  _str << val;
+  string str = _str.str();
+  const char *buf = str.c_str();
 
-	str << val;
+  this->write(buf, strlen(buf));
 
-	string _str = str.str();
-	const char* buf = _str.c_str();
-
-	this->write(buf, strlen(buf));
-
-	return *this;
+  return *this;
 }
 
-ostream&
-tcp::Socket::operator<<(float val)
-{
-	ostringstream _str;
-	_str << val;
-	string str = _str.str();
-	const char* buf = str.c_str();
+istream &tcp::Socket::operator>>(int &val) {
+  int32_t ret;
 
-	this->write(buf, strlen(buf));
+  char *data = (char *)&ret;
+  int left = sizeof(ret);
 
-	return *this;
+  this->read(data, left); // read the data
+
+  val = ntohl(ret);
+
+  return *this;
 }
 
+istream &tcp::Socket::operator>>(double &val) {
+  char *buffer = new char[sizeof(double)];
 
-istream&
-tcp::Socket::operator>>(int& val)
-{
-	int32_t ret;
+  this->getline(buffer, sizeof(double)); // read double value into buffer
 
-	char* data = (char*) &ret;
-	int left = sizeof(ret);
+  val = atof(buffer); // try this...
 
-	this->read(data, left); // read the data
-
-	val = ntohl(ret);
-
-	return *this;
+  return *this;
 }
 
-istream&
-tcp::Socket::operator>>(double& val)
-{
-	char* buffer = new char[sizeof(double)];
+istream &tcp::Socket::operator>>(float &val) {
+  char *buffer = new char[sizeof(float)];
+  this->getline(buffer, sizeof(float));
 
-	this->getline(buffer, sizeof(double)); // read double value into buffer
+  val = atof(buffer);
 
-	val = atof(buffer); // try this...
-
-	return *this;
+  return *this;
 }
 
-istream&
-tcp::Socket::operator>>(float& val)
-{
-	char* buffer = new char[sizeof(float)];
-	this->getline(buffer, sizeof(float));
-
-	val = atof(buffer);
-
-	return *this;
-}
-
-ostream&
-send(ostream& out)
-{
-	out << '\n';
-	out.flush();
-	return out;
+ostream &send(ostream &out) {
+  out << '\n';
+  out.flush();
+  return out;
 }

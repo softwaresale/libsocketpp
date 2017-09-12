@@ -19,7 +19,6 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #ifndef EXCEPTION_H
 #define EXCEPTION_H 1
 
@@ -28,51 +27,44 @@
 
 using namespace std;
 
-namespace
-tcp
+namespace tcp {
+
+struct _ctor_exe : public exception {
+  const char *what() const throw() {
+    return "Exception encountered in constructing Socket or Server object";
+  }
+};
+
+typedef struct _ctor_exe ctor_exe_t;
+
+/*
+
+struct _conn_exe : public exception
 {
-
-  struct _ctor_exe : public exception
+  const char* what() const throw()
   {
-    const char* what() const throw()
-    {
-      return "Exception encountered in constructing Socket or Server object";
-    }
-  };
+    return "Exception encountered in connecting to Server. Check errno";
+  }
+};
 
-  typedef struct _ctor_exe ctor_exe_t;
 
-  /*
-
-  struct _conn_exe : public exception
+struct _bind_exe : public exception
+{
+  const char* what() const throw()
   {
-    const char* what() const throw()
-    {
-      return "Exception encountered in connecting to Server. Check errno";
-    }
-  };
+    return "Exception encountered when binding server object. Check errno";
+  }
+};
 
-
-  struct _bind_exe : public exception
+struct __exe : public exception
+{
+  const char* what() const throw()
   {
-    const char* what() const throw()
-    {
-      return "Exception encountered when binding server object. Check errno";
-    }
-  };
+    return "Exception encountered when binding server object. Check errno";
+  }
+};
 
-  struct __exe : public exception
-  {
-    const char* what() const throw()
-    {
-      return "Exception encountered when binding server object. Check errno";
-    }
-  };
-
-  */
-
-
-
+*/
 }
 
 #endif // EXCEPTION_H
