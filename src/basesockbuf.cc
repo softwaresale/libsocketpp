@@ -4,20 +4,20 @@
   to interface with a socket. It implements an internal `basic_socket*`
   that sends and recieves data.
 
-    Copyright (C) 2017  Charlie Sale
+  Copyright (C) 2017  Charlie Sale
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <algorithm>
@@ -27,110 +27,97 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <socketpp/tcp/basesockbuf.h>
-#include <socketpp/tcp/basesocket.h>
+#include <base/basesockbuf.h>
+#include <base/basesocket.h>
 #include <streambuf>
 #include <unistd.h>
 #include <vector>
+#include <sys/un.h>
+#include <netinet/in.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 
-using namespace std;
-
-tcp::base_sock_buf::base_sock_buf(basic_socket *_sock)
-    : sock(_sock),
+template <typename _AddrType>
+lsock::base::BaseSocketBuf<_AddrType>::BaseSocketBuf(lsock::base::BaseSocket<lsock::base::Connect, _AddrType> *_sock)
+    : m_sock(_sock),
       // putback(std::max(8, (int) size_t(1))),
-      // buffer(std::max(256, (int) putback) + putback)
-      buffer(2048), outBuf(256) {
-  // set up the read pointers
-  char *end = &buffer.front() + buffer.size();
-  setg(end, end, end);
+      // m_in_buffer(std::max(256, (int) putback) + putback)
+      m_in_buffer(2048), m_out_buffer(256)
+{
+    // set up the read pointers
+    char *end = &m_in_buffer.front() + m_in_buffer.size();
+    setg(end, end, end);
 
-  // set up the write pointers
-  char *base = &outBuf.front();
-  setp(base, base + outBuf.size() - 1); // -1 to make overflow easier
+    // set up the write pointers
+    char *base = &m_out_buffer.front();
+    setp(base, base + m_out_buffer.size() - 1); // -1 to make overflow easier
 }
 
-streambuf::int_type tcp::base_sock_buf::underflow() {
-  if (gptr() < egptr()) { // buffer not exhausted
-    return traits_type::to_int_type(*gptr());
-  }
-
-  int putback = gptr() - eback();
-  if (putback > 4)
-    putback = 4;
-
-  char *base = &buffer.front();
-  char *start = base;
-
-  if (eback() == base) {
-    memmove(base, egptr() - putback, putback);
-    start += putback;
-  }
-
-  // read into the buffer from socket
-
-  int ret;
-
-  /*
-  while (1){
-
-    ret = sock->readBuf(start, buffer.size() - (start - base));
-
-    if (ret < 0){
-      return traits_type::eof(); // error encountered
+template <typename _AddrType>
+std::streambuf::int_type
+lsock::base::BaseSocketBuf<_AddrType>::underflow()
+{
+    if (gptr() < egptr()) { // buffer not exhausted
+	return traits_type::to_int_type(*gptr());
     }
 
-    if (ret == 0)
-      break; // no more bytes to be read...
-  }
-  */
+    char *base = &m_in_buffer.front();
+    char *start = base;
 
-  ret = sock->readBuf(start, buffer.size() - (start - base));
+    // read into the buffer from socket
 
-  if (ret < 0) {
-    cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than "
-            "0. RET: "
-         << ret << endl;
-    return traits_type::eof();
-  }
+    int ret;
 
-  // set pointers
-  setg(base, start, start + ret);
+    ret = m_sock->simple_read(start, m_in_buffer.size() - (start - base));
 
-  return traits_type::to_int_type(*gptr());
+    if (ret < 0) {
+	return traits_type::eof();
+    }
+
+    // set pointers
+    setg(base, start, start + ret);
+
+    return traits_type::to_int_type(*gptr());
 }
 
-streambuf::int_type tcp::base_sock_buf::overflow(char ch) {
-  if (ch != traits_type::eof()) {
+template <typename _AddrType>
+std::streambuf::int_type
+lsock::base::BaseSocketBuf<_AddrType>::overflow(char ch)
+{
+    if (ch != traits_type::eof()) {
 
-    assert(less_equal<char *>()(pptr(), epptr()));
-    *pptr() = ch;
-    pbump(1);
+	assert(std::less_equal<char *>()(pptr(), epptr()));
+	*pptr() = ch;
+	pbump(1);
 
-    // write data
+	// write data
+	ptrdiff_t size = pptr() - pbase();
+	pbump(-size);
+
+	int ret = m_sock->simple_write(pbase(), size); // should send data
+	if (ret <= 0) {
+	    return traits_type::eof();
+	}
+
+	return ch;
+    }
+
+    return traits_type::eof();
+}
+
+template <typename _AddrType>
+int
+lsock::base::BaseSocketBuf<_AddrType>::sync()
+{
     ptrdiff_t size = pptr() - pbase();
     pbump(-size);
-
-    int ret = sock->sendBuf(pbase(), size); // should send data
+    int ret = m_sock->simple_write(pbase(), size);
     if (ret <= 0) {
-      cerr << "basesockbuf.cc:overflow: sock send not bytes. Ret: " << ret
-           << endl;
-      return traits_type::eof();
+	return traits_type::eof();
     }
 
-    return ch;
-  }
-
-  return traits_type::eof();
+    return ret;
 }
 
-int tcp::base_sock_buf::sync() {
-  ptrdiff_t size = pptr() - pbase();
-  pbump(-size);
-  int ret = sock->sendBuf(pbase(), size);
-  if (ret <= 0) {
-    cerr << "basesockbuf.cc:sync: sock sent no bytes" << endl;
-    return traits_type::eof();
-  }
-
-  return ret;
-}
+template class lsock::base::BaseSocketBuf<struct sockaddr_in>;
+template class lsock::base::BaseSocketBuf<struct sockaddr_un>;

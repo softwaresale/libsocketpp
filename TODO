@@ -11,32 +11,23 @@ This file contains steps to be taken and features to be added to the program.
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-    
-(Versioning begin at major when package is accepted...)
 
-[done] *.  Create a basic TCP socket system based off of C++ I/O                      (1.0.0)
-[done] *.  Add more options to make basic_socket more dynamic with getopt/setopt
-[done] *.  Add `getpeername()` capabilites to basic_socket
-[done] *.  Override formatted output for integer and numbers
-[done] *.  Add `getPort()` function
-[done] *.  Make socket connect in basic_socket constructor
-[done] *.  Add reuseAddress and keepAlive options on server
-[done] *   Write exception for constructors
-[done] *.  Add texinfo automake build proceedure
-[done] *.  Include gethostbyname in connects
-[    ] *.  tcp::SocketService class that handles a socket asynchronously              (2.0.x)
-[    ] *.  Function's for handling SocketService asynchronously
-[    ] *.  Implement security protocols                                               (3.0.x)
-[    ]          *. Options: GNU TLS, GNU SASL, or GSS
-[    ] *.  Implement SSH protocol that derives the tcp::Socket class
-[    ] *.  Add classes for making sending files easier                                (4.0.x)
-[    ] *.  Add new exceptions                                                         (4.1.x)
-[    ] *.  Add compression with zlib                                       
+For (1.0.0)
+[ ] 1. Reimplement package structure with different classes
+[ ]    a. lsock::BaseSocket
+[ ]    b. lsock::BaseServer
+[ ]    c. lsock::tcp::Socket
+[ ]    d. lsock::tcp::Server
+[ ]    e. lsock::unix::Socket
+[ ]    f. lsock::unix::Server
+[ ] 2. Implement asynchronous socket executor
+[ ]    a. lsock::async::Executor<_SockeType>
+[ ] 3. Convenience naming in convenience header
+[ ]    a. using TcpSocket  = lsock::tcp::Socket
+[ ]    b. using TcpServer  = lsock::tcp::Server
+[ ]    c. using UnixSocket = lsock::unix::Socket
+[ ]    d. using UnixServer = lsock::unix::Server
+[ ]    e. using TcpAsyncSocket = lsock::async::Executor<TcpSocket>
+[ ]    f. using TcpAsyncServer = lsock::async::Executor<TcpServer>
+[ ] 4. Rewrite numerical I/O operators (those are trash)
 
-Future -- Implement standard internet protocols
--------------------------------------------------------------------------------------------
-NOTE: Must be complient with RFC
-[    ] *.  UDP
-[    ] *.  TELNET
-[    ] *.  FTP
-[    ] *.  HTTP?

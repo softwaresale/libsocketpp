@@ -1,4 +1,6 @@
 
+ACLOCAL_AMFLAGS = -I m4
+
 SUBDIRS = src include doc .
 
 dist_noinst_DATA = TODO README.md README NEWS ChangeLog AUTHORS COPYING INSTALL LICENSE

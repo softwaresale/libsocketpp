@@ -1,8 +1,0 @@
-Goal: Test the `get` and `put` functionality with characters
-
-Steps/Requirements:
-1. Client sends multiple characters.
-2. Server recieves data in all `get` ways
-3. Server prints each character
-
-STATUS: SUCCESS

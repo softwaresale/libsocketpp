@@ -1,0 +1,4 @@
+
+basedir = $(includedir)/libsocketpp/base
+inetdir = $(includedir)/libsocketpp/inet
+
