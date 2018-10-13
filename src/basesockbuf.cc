@@ -1,4 +1,3 @@
-
 /*
   This class is a derivation from std::streambuf that allows a stream
   to interface with a socket. It implements an internal `basic_socket*`
@@ -27,110 +26,99 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <socketpp/tcp/basesockbuf.h>
-#include <socketpp/tcp/basesocket.h>
+#include <base/basesockbuf.h>
+#include <base/basesocket.h>
 #include <streambuf>
 #include <unistd.h>
 #include <vector>
 
-using namespace std;
+lsock::BaseSocketBuf::BaseSocketBuf(BaseSocket *_sock)
+    : m_sock(_sock),
+      m_in_buffer(2048),
+      m_out_buffer(256)
+{
+    // set up the read pointers
+    char *end = &m_in_buffer.front() + m_in_buffer.size();
+    setg(end, end, end);
 
-tcp::base_sock_buf::base_sock_buf(basic_socket *_sock)
-    : sock(_sock),
-      // putback(std::max(8, (int) size_t(1))),
-      // buffer(std::max(256, (int) putback) + putback)
-      buffer(2048), outBuf(256) {
-  // set up the read pointers
-  char *end = &buffer.front() + buffer.size();
-  setg(end, end, end);
-
-  // set up the write pointers
-  char *base = &outBuf.front();
-  setp(base, base + outBuf.size() - 1); // -1 to make overflow easier
+    // set up the write pointers
+    char *base = &m_out_buffer.front();
+    setp(base, base + m_out_buffer.size() - 1); // -1 to make overflow easier
 }
 
-streambuf::int_type tcp::base_sock_buf::underflow() {
-  if (gptr() < egptr()) { // buffer not exhausted
-    return traits_type::to_int_type(*gptr());
-  }
+std::streambuf::int_type
+lsock::BaseSocketBuf::underflow()
+{
+    if (!m_sock->connected())
+        return traits_type::eof();
 
-  int putback = gptr() - eback();
-  if (putback > 4)
-    putback = 4;
-
-  char *base = &buffer.front();
-  char *start = base;
-
-  if (eback() == base) {
-    memmove(base, egptr() - putback, putback);
-    start += putback;
-  }
-
-  // read into the buffer from socket
-
-  int ret;
-
-  /*
-  while (1){
-
-    ret = sock->readBuf(start, buffer.size() - (start - base));
-
-    if (ret < 0){
-      return traits_type::eof(); // error encountered
+    if (gptr() < egptr()) { // m_in_buffer not exhausted
+        return traits_type::to_int_type(*gptr());
     }
 
-    if (ret == 0)
-      break; // no more bytes to be read...
-  }
-  */
+    char *base = &m_in_buffer.front();
+    char *start = base;
 
-  ret = sock->readBuf(start, buffer.size() - (start - base));
+#if 0
+    if (eback() == base) {
+        memmove(base, egptr() - putback, putback);
+        start += putback;
+    }
+#endif
 
-  if (ret < 0) {
-    cerr << "tcp::base_sock_buf:underflow(): sock->readBuf returned lower than "
-            "0. RET: "
-         << ret << endl;
-    return traits_type::eof();
-  }
+    // read into the m_in_buffer from socket
 
-  // set pointers
-  setg(base, start, start + ret);
+    int ret;
+    ret = m_sock->simple_read(start, m_in_buffer.size() - (start - base));
+    if (ret < 0) {
+        return traits_type::eof();
+    }
 
-  return traits_type::to_int_type(*gptr());
+    // set pointers
+    setg(base, start, start + ret);
+
+    return traits_type::to_int_type(*gptr());
 }
 
-streambuf::int_type tcp::base_sock_buf::overflow(char ch) {
-  if (ch != traits_type::eof()) {
+std::streambuf::int_type
+lsock::BaseSocketBuf::overflow(char ch)
+{
+    if (!m_sock->connected())
+        return traits_type::eof();
 
-    assert(less_equal<char *>()(pptr(), epptr()));
-    *pptr() = ch;
-    pbump(1);
+    if (ch != traits_type::eof()) {
 
-    // write data
+        assert(std::less_equal<char *>()(pptr(), epptr()));
+        *pptr() = ch;
+        pbump(1);
+
+        // write data
+        ptrdiff_t size = pptr() - pbase();
+        pbump(-size);
+
+        int ret = m_sock->simple_write(pbase(), size); // should send data
+        if (ret <= 0) {
+            return traits_type::eof();
+        }
+
+        return ch;
+    }
+
+    return traits_type::eof();
+}
+
+int
+lsock::BaseSocketBuf::sync()
+{
+    if (!m_sock->connected())
+        return traits_type::eof();
+
     ptrdiff_t size = pptr() - pbase();
     pbump(-size);
-
-    int ret = sock->sendBuf(pbase(), size); // should send data
+    int ret = m_sock->simple_write(pbase(), size);
     if (ret <= 0) {
-      cerr << "basesockbuf.cc:overflow: sock send not bytes. Ret: " << ret
-           << endl;
-      return traits_type::eof();
+        return traits_type::eof();
     }
 
-    return ch;
-  }
-
-  return traits_type::eof();
-}
-
-int tcp::base_sock_buf::sync() {
-  ptrdiff_t size = pptr() - pbase();
-  pbump(-size);
-  int ret = sock->sendBuf(pbase(), size);
-  if (ret <= 0) {
-    cerr << "basesockbuf.cc:sync: sock sent no bytes" << endl;
-    return traits_type::eof();
-  }
-
-  return ret;
+    return ret;
 }
