@@ -352,7 +352,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = base inet .
+SUBDIRS = base tcp unix inet .
 include_HEADERS = libsocketpp.h
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive

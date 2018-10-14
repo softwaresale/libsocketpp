@@ -291,7 +291,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 inetdir = $(includedir)/libsocketpp/inet
-inet_HEADERS = tcpsocket.h tcpserver.h addr.h
+inet_HEADERS = addr.h
 all: all-am
 
 .SUFFIXES:

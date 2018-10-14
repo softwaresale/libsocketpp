@@ -29,47 +29,47 @@
 #include <base/addr.h>
 
 template <typename _ConnectFunc, typename _AddrType>
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::BaseSocket(int family, int type, int proto)
+lsock::base::Socket<_ConnectFunc, _AddrType>::Socket(int family, int type, int proto)
 {
     m_sockfd = socket(family, type, proto);
 }
 
 template <typename _ConnectFunc, typename _AddrType>
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::BaseSocket(int sfd)
+lsock::base::Socket<_ConnectFunc, _AddrType>::Socket(int sfd)
     : m_sockfd(sfd)
 {
 }
 
 template <typename _ConnectFunc, typename _AddrType>
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::~BaseSocket()
+lsock::base::Socket<_ConnectFunc, _AddrType>::~Socket()
 {
     disconnect();
 }
 
 template <typename _ConnectFunc, typename _AddrType>
 int
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::connect(lsock::base::BaseSockAddr<_AddrType> *ptr)
+lsock::base::Socket<_ConnectFunc, _AddrType>::connect(lsock::base::SockAddr<_AddrType> *ptr)
 {
     return m_connector(m_sockfd, ptr->get(), ptr->size());
 }
 
 template <typename _ConnectFunc, typename _AddrType>
 ssize_t
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::simple_write(char *buf, size_t len, int flags)
+lsock::base::Socket<_ConnectFunc, _AddrType>::simple_write(char *buf, size_t len, int flags)
 {
     return send(m_sockfd, buf, len, flags);
 }
 
 template <typename _ConnectFunc, typename _AddrType>
 ssize_t
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::simple_read(char *buf, size_t len, int flags)
+lsock::base::Socket<_ConnectFunc, _AddrType>::simple_read(char *buf, size_t len, int flags)
 {
     return recv(m_sockfd, buf, len, flags);
 }
 
 template <typename _ConnectFunc, typename _AddrType>
 void
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::disconnect(void)
+lsock::base::Socket<_ConnectFunc, _AddrType>::disconnect(void)
 {
     close(m_sockfd);
 }
@@ -77,7 +77,7 @@ lsock::base::BaseSocket<_ConnectFunc, _AddrType>::disconnect(void)
 /*
   Define used template classes
 */
-template class lsock::base::BaseSocket<lsock::base::Connect, struct sockaddr_in>;
-template class lsock::base::BaseSocket<lsock::base::Bind,    struct sockaddr_in>;
-template class lsock::base::BaseSocket<lsock::base::Connect, struct sockaddr_un>;
-template class lsock::base::BaseSocket<lsock::base::Bind,    struct sockaddr_un>;
+template class lsock::base::Socket<lsock::base::Connect, struct sockaddr_in>;
+template class lsock::base::Socket<lsock::base::Bind,    struct sockaddr_in>;
+template class lsock::base::Socket<lsock::base::Connect, struct sockaddr_un>;
+template class lsock::base::Socket<lsock::base::Bind,    struct sockaddr_un>;

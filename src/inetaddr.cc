@@ -8,12 +8,12 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-lsock::inet::InetAddr::InetAddr()
-    : lsock::base::BaseSockAddr<struct sockaddr_in>()
+lsock::inet::Addr::Addr()
+    : lsock::base::SockAddr<struct sockaddr_in>()
 { }
 
-lsock::inet::InetAddr::InetAddr(const std::string &host, int port)
-    : lsock::base::BaseSockAddr<struct sockaddr_in>()
+lsock::inet::Addr::Addr(const std::string &host, int port)
+    : lsock::base::SockAddr<struct sockaddr_in>()
 {
     m_addr.sin_family = AF_INET;
     m_addr.sin_port = htons(port);
@@ -24,12 +24,12 @@ lsock::inet::InetAddr::InetAddr(const std::string &host, int port)
     }
 }
 
-lsock::inet::InetAddr::~InetAddr()
+lsock::inet::Addr::~Addr()
 {
 }
 
 void
-lsock::inet::InetAddr::setHost(const std::string &host)
+lsock::inet::Addr::setHost(const std::string &host)
 {
     if (host == "default-host") {
         m_addr.sin_addr.s_addr = INADDR_ANY;
@@ -39,13 +39,13 @@ lsock::inet::InetAddr::setHost(const std::string &host)
 }
 
 void
-lsock::inet::InetAddr::setPort(int port)
+lsock::inet::Addr::setPort(int port)
 {
     m_addr.sin_port = htons(port);
 }
 
 void
-lsock::inet::InetAddr::set(const std::string &host, int port)
+lsock::inet::Addr::set(const std::string &host, int port)
 {
     setHost(host);
     setPort(port);

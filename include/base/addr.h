@@ -7,23 +7,23 @@
 
 namespace lsock
 {
-  namespace base
-  {
-    template <typename _Address>
-    class BaseSockAddr
+    namespace base
     {
-    public:
-      using Address = _Address;
-      BaseSockAddr();
-      virtual ~BaseSockAddr() { }
+        template <typename _Address>
+        class SockAddr
+        {
+        public:
+            using Address = _Address;
+            SockAddr();
+            virtual ~SockAddr() { }
 
-      virtual struct sockaddr *get();
-      virtual socklen_t size();
+            virtual struct sockaddr *get();
+            virtual socklen_t size();
 
-    protected:
-      Address m_addr;
-    };
-  }
+        protected:
+            Address m_addr;
+        };
+    }
 }
 
 #endif // _LS_BASE_ADDR_H

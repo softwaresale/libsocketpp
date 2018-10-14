@@ -31,21 +31,21 @@ namespace lsock
         };
 
         template <typename _ConnectFunc, typename _AddrType>
-            class BaseSocket
+        class Socket
         {
         public:
             using Connector = _ConnectFunc;
             using AddrType  = _AddrType;
 
-            BaseSocket() = delete;
-            BaseSocket(int family, int type, int proto = 0);
-            BaseSocket(int sfd);
-            virtual ~BaseSocket();
+            Socket() = delete;
+            Socket(int family, int type, int proto = 0);
+            Socket(int sfd);
+            virtual ~Socket();
 
-            bool isOpen() { return (m_sockfd != -1); }
+            bool isOpen() { return (m_sockfd > 0); }
             int getSfd() const { return m_sockfd; }
 
-            virtual int connect(lsock::base::BaseSockAddr<_AddrType> *addr);
+            virtual int connect(lsock::base::SockAddr<_AddrType> *addr);
 
             ssize_t simple_write(char *data, size_t len, int flags = 0);
             ssize_t simple_read(char *data, size_t len, int flags = 0);

@@ -17,6 +17,6 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = base inet .
+SUBDIRS = base tcp unix inet .
 
 include_HEADERS = libsocketpp.h

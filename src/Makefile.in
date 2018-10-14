@@ -134,7 +134,7 @@ am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
 am_libsocketpp_la_OBJECTS = baseserver.lo basesockbuf.lo baseaddr.lo \
-	basesocket.lo inetaddr.lo
+	basesocket.lo inetaddr.lo unixaddr.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -157,7 +157,8 @@ depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/baseaddr.Plo \
 	./$(DEPDIR)/baseserver.Plo ./$(DEPDIR)/basesockbuf.Plo \
-	./$(DEPDIR)/basesocket.Plo ./$(DEPDIR)/inetaddr.Plo
+	./$(DEPDIR)/basesocket.Plo ./$(DEPDIR)/inetaddr.Plo \
+	./$(DEPDIR)/unixaddr.Plo
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -334,7 +335,8 @@ libsocketpp_la_SOURCES = baseserver.cc \
                          basesockbuf.cc \
                          baseaddr.cc \
                          basesocket.cc \
-                         inetaddr.cc
+                         inetaddr.cc \
+												 unixaddr.cc
 
 all: all-am
 
@@ -419,6 +421,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesockbuf.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesocket.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inetaddr.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unixaddr.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -586,6 +589,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/basesockbuf.Plo
 	-rm -f ./$(DEPDIR)/basesocket.Plo
 	-rm -f ./$(DEPDIR)/inetaddr.Plo
+	-rm -f ./$(DEPDIR)/unixaddr.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -637,6 +641,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/basesockbuf.Plo
 	-rm -f ./$(DEPDIR)/basesocket.Plo
 	-rm -f ./$(DEPDIR)/inetaddr.Plo
+	-rm -f ./$(DEPDIR)/unixaddr.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

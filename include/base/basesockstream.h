@@ -9,32 +9,32 @@
 
 namespace lsock
 {
-  namespace base
-  {
-    template <typename _AddrType>
-    class BaseSocketStream : public BaseSocket<Connect, _AddrType>, public std::iostream
+    namespace base
     {
-    public:
-      BaseSocketStream() = delete;
-      BaseSocketStream(int family, int type, int proto = 0)
-        : BaseSocket<Connect, _AddrType>(family, type, proto),
-          std::iostream(new BaseSocketBuf<_AddrType>(this))
-      {
-      }
+        template <typename _AddrType>
+        class SocketStream : public Socket<Connect, _AddrType>, public std::iostream
+        {
+        public:
+            SocketStream() = delete;
+            SocketStream(int family, int type, int proto = 0)
+                : Socket<Connect, _AddrType>(family, type, proto),
+                  std::iostream(new SocketBuf<_AddrType>(this))
+                {
+                }
 
-      BaseSocketStream(int sfd)
-        : BaseSocket<Connect, _AddrType>(sfd),
-          std::iostream(new BaseSocketBuf<_AddrType>(this))
-      {
-      }
+            SocketStream(int sfd)
+                : Socket<Connect, _AddrType>(sfd),
+                  std::iostream(new SocketBuf<_AddrType>(this))
+                {
+                }
 
-      virtual ~BaseSocketStream()
-      { }
-    };
+            virtual ~SocketStream()
+                { }
+        };
 
-    template class BaseSocketStream<struct sockaddr_in>;
-    template class BaseSocketStream<struct sockaddr_un>;
-  }
+        template class SocketStream<struct sockaddr_in>;
+        template class SocketStream<struct sockaddr_un>;
+    }
 }
 
 #endif

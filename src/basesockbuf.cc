@@ -37,7 +37,7 @@
 #include <sys/socket.h>
 
 template <typename _AddrType>
-lsock::base::BaseSocketBuf<_AddrType>::BaseSocketBuf(lsock::base::BaseSocket<lsock::base::Connect, _AddrType> *_sock)
+lsock::base::SocketBuf<_AddrType>::SocketBuf(lsock::base::Socket<lsock::base::Connect, _AddrType> *_sock)
     : m_sock(_sock),
       // putback(std::max(8, (int) size_t(1))),
       // m_in_buffer(std::max(256, (int) putback) + putback)
@@ -54,7 +54,7 @@ lsock::base::BaseSocketBuf<_AddrType>::BaseSocketBuf(lsock::base::BaseSocket<lso
 
 template <typename _AddrType>
 std::streambuf::int_type
-lsock::base::BaseSocketBuf<_AddrType>::underflow()
+lsock::base::SocketBuf<_AddrType>::underflow()
 {
     if (gptr() < egptr()) { // buffer not exhausted
 	return traits_type::to_int_type(*gptr());
@@ -80,7 +80,7 @@ lsock::base::BaseSocketBuf<_AddrType>::underflow()
 }
 template <typename _AddrType>
 std::streambuf::int_type
-lsock::base::BaseSocketBuf<_AddrType>::overflow(char ch)
+lsock::base::SocketBuf<_AddrType>::overflow(char ch)
 {
     if (ch != traits_type::eof()) {
 
@@ -105,7 +105,7 @@ lsock::base::BaseSocketBuf<_AddrType>::overflow(char ch)
 
 template <typename _AddrType>
 int
-lsock::base::BaseSocketBuf<_AddrType>::sync()
+lsock::base::SocketBuf<_AddrType>::sync()
 {
     ptrdiff_t size = pptr() - pbase();
     pbump(-size);
@@ -118,5 +118,5 @@ lsock::base::BaseSocketBuf<_AddrType>::sync()
     return ret;
 }
 
-template class lsock::base::BaseSocketBuf<struct sockaddr_in>;
-template class lsock::base::BaseSocketBuf<struct sockaddr_un>;
+template class lsock::base::SocketBuf<struct sockaddr_in>;
+template class lsock::base::SocketBuf<struct sockaddr_un>;

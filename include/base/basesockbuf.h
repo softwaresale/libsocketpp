@@ -30,31 +30,31 @@
 
 namespace lsock
 {
-namespace base
-{
-    template <typename _AddrType>
-    class BaseSocketBuf : public std::streambuf
+    namespace base
     {
+        template <typename _AddrType>
+        class SocketBuf : public std::streambuf
+        {
 
-    private:
-	std::shared_ptr<lsock::base::BaseSocket<Connect, _AddrType>> m_sock;  // internal socket
-	std::vector<char> m_in_buffer; // internal character buffer?
-	std::vector<char> m_out_buffer; // buffer for writing outwards
-	// const size_t  putback; // put back size
+        private:
+            std::shared_ptr<lsock::base::Socket<Connect, _AddrType>> m_sock;  // internal socket
+            std::vector<char> m_in_buffer; // internal character buffer?
+            std::vector<char> m_out_buffer; // buffer for writing outwards
+            // const size_t  putback; // put back size
 
-	// hide copy and assignment
-	BaseSocketBuf(const BaseSocketBuf &);
-	BaseSocketBuf &operator=(const BaseSocketBuf &);
+            // hide copy and assignment
+            SocketBuf(const SocketBuf &);
+            SocketBuf &operator=(const SocketBuf &);
 
-    protected:
-	int_type overflow(char ch);
-	int_type underflow();
-	int sync();
+        protected:
+            int_type overflow(char ch);
+            int_type underflow();
+            int sync();
 
-    public:
-	BaseSocketBuf(BaseSocket<Connect, _AddrType> *_sock);
-    };
-}
+        public:
+            SocketBuf(Socket<Connect, _AddrType> *_sock);
+        };
+    }
 }
 
 #endif // BASESOCKBUF_H

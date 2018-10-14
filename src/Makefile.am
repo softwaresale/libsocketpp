@@ -11,7 +11,8 @@ libsocketpp_la_SOURCES = baseserver.cc \
                          basesockbuf.cc \
                          baseaddr.cc \
                          basesocket.cc \
-                         inetaddr.cc
+                         inetaddr.cc \
+												 unixaddr.cc
 
 install-exec-hook:
 	@(cd $(DESTDIR)$(libdir) && $(RM) $(lib_LTLIBRARIES))

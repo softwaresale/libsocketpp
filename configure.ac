@@ -39,6 +39,8 @@ AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  include/Makefile
                  include/base/Makefile
-		 include/inet/Makefile
+                 include/inet/Makefile
+                 include/tcp/Makefile
+                 include/unix/Makefile
                  src/Makefile])
 AC_OUTPUT

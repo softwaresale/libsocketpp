@@ -9,19 +9,18 @@
 
 namespace lsock
 {
-namespace inet
-{
-
-    class InetAddr : public lsock::base::BaseSockAddr<struct sockaddr_in>
+    namespace inet
     {
-    public:
-	InetAddr();
-	InetAddr(const std::string &name, int port);
-	virtual ~InetAddr();
+        class Addr : public lsock::base::SockAddr<struct sockaddr_in>
+        {
+        public:
+            Addr();
+            Addr(const std::string &name, int port);
+            virtual ~Addr();
 
-	void setHost(const std::string &name);
-	void setPort(int port);
-	void set(const std::string &name, int port);
-    };
-}
+            void setHost(const std::string &name);
+            void setPort(int port);
+            void set(const std::string &name, int port);
+        };
+    }
 }
