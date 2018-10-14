@@ -19,3 +19,9 @@ just run `# ldconfig`.
 If this command failes to fix your problem,
 then add `/usr/local/lib` or where ever you installed the library to
 `/etc/ld.so.conf`.
+
+## Contributing
+See CONTRIBUTING.md
+
+## A note
+The documentation is very out of date. Ignore the `doc/` directory for now.
