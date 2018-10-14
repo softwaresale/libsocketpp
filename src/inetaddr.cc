@@ -18,9 +18,9 @@ lsock::inet::InetAddr::InetAddr(const std::string &host, int port)
     m_addr.sin_family = AF_INET;
     m_addr.sin_port = htons(port);
     if (host == "default-host") {
-	m_addr.sin_addr.s_addr = INADDR_ANY;
+        m_addr.sin_addr.s_addr = INADDR_ANY;
     } else {
-	inet_pton(AF_INET, host.c_str(), &m_addr.sin_addr);
+        inet_pton(AF_INET, host.c_str(), &m_addr.sin_addr);
     }
 }
 
@@ -32,9 +32,9 @@ void
 lsock::inet::InetAddr::setHost(const std::string &host)
 {
     if (host == "default-host") {
-	m_addr.sin_addr.s_addr = INADDR_ANY;
+        m_addr.sin_addr.s_addr = INADDR_ANY;
     } else {
-	inet_pton(AF_INET, host.c_str(), &m_addr.sin_addr);
+        inet_pton(AF_INET, host.c_str(), &m_addr.sin_addr);
     }
 }
 

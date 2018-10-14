@@ -1,4 +1,3 @@
-
 #ifndef _LS_BASE_SERVER_H
 # define _LS_BASE_SERVER_H
 
@@ -10,25 +9,26 @@
 
 namespace lsock
 {
-namespace base
-{
+  namespace base
+  {
     template <typename _AddrType>
     class BaseServer : public BaseSocket<Bind, _AddrType>
     {
     public:
-	BaseServer() = delete;
-	BaseServer(int family, int type, int proto = 0);
-	BaseServer(int sfd);
-	virtual ~BaseServer();
+      BaseServer() = delete;
+      BaseServer(int family, int type, int proto = 0);
+      BaseServer(int sfd);
+      virtual ~BaseServer();
 
-	template <typename _RetType>
-	std::unique_ptr<_RetType> accepts();
-	
-	ssize_t simple_read(char *, size_t, int) = delete;
-	ssize_t simple_write(char *, size_t, int) = delete;
+      int connect(BaseSockAddr<_AddrType> *addr);
+
+      std::unique_ptr<BaseSocketStream<_AddrType>> accept_basic();
+
+      ssize_t simple_read(char *, size_t, int) = delete;
+      ssize_t simple_write(char *, size_t, int) = delete;
     };
 
-}
+  }
 }
 
 #endif // _LS_BASE_SERVER_H

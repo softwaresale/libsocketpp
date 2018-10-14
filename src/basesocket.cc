@@ -28,9 +28,9 @@ lsock::base::BaseSocket<_ConnectFunc, _AddrType>::~BaseSocket()
 
 template <typename _ConnectFunc, typename _AddrType>
 int
-lsock::base::BaseSocket<_ConnectFunc, _AddrType>::connects(lsock::base::BaseSockAddr<_AddrType> *ptr)
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::connect(lsock::base::BaseSockAddr<_AddrType> *ptr)
 {
-  return m_connector(m_sockfd, ptr->get(), ptr->size());
+    return m_connector(m_sockfd, ptr->get(), ptr->size());
 }
 
 template <typename _ConnectFunc, typename _AddrType>

@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([libsocketpp], [0.0], [softwaresale01@gmail.com])
-AC_CONFIG_SRCDIR([test/client.cc])
+AC_CONFIG_SRCDIR([src/basesocket.cc])
 AC_CONFIG_HEADERS([include/config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])

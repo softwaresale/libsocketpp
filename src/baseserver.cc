@@ -1,4 +1,3 @@
-
 #include <memory>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -26,24 +25,30 @@ lsock::base::BaseServer<_AddrType>::~BaseServer()
 }
 
 template <typename _AddrType>
-template <typename _RetType>
-std::unique_ptr<_RetType>
-lsock::base::BaseServer<_AddrType>::accepts()
+int
+lsock::base::BaseServer<_AddrType>::connect(lsock::base::BaseSockAddr<_AddrType> *addr)
+{
+    int ret = lsock::base::BaseSocket<lsock::base::Bind, _AddrType>::connect(addr);
+    if (ret < 0)
+        return -1;
+
+    return listen(this->getSfd(), 5); // TODO: fix arbitrary
+}
+
+template <typename _AddrType>
+std::unique_ptr<lsock::base::BaseSocketStream<_AddrType>>
+lsock::base::BaseServer<_AddrType>::accept_basic()
 {
     int sfd = accept(this->getSfd(), nullptr, nullptr);
     if (sfd < 0)
       return nullptr;
-    
-    std::unique_ptr<_RetType> ptr(new _RetType(sfd));
+
+    std::unique_ptr<
+      lsock::base::BaseSocketStream<_AddrType>
+      > ptr(new lsock::base::BaseSocketStream<_AddrType>(sfd));
 
     return ptr;
 }
 
 template class lsock::base::BaseServer<struct sockaddr_in>;
 template class lsock::base::BaseServer<struct sockaddr_un>;
-template std::unique_ptr<lsock::base::BaseSocketStream<struct sockaddr_in>> 
-	lsock::base::BaseServer<struct sockaddr_in>::accepts<lsock::base::BaseSocketStream<struct sockaddr_in>>();
-template std::unique_ptr<lsock::base::BaseSocketStream<struct sockaddr_un>>
-	lsock::base::BaseServer<struct sockaddr_un>::accepts<lsock::base::BaseSocketStream<struct sockaddr_un>>();
-template std::unique_ptr<lsock::inet::TcpSocket>
-	lsock::base::BaseServer<struct sockaddr_in>::accepts<lsock::inet::TcpSocket>();
