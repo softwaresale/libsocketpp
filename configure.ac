@@ -3,10 +3,11 @@
 
 AC_PREREQ([2.69])
 AC_INIT([libsocketpp], [0.0], [softwaresale01@gmail.com])
-AC_CONFIG_SRCDIR([src/tcpsocket.cc])
-AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_SRCDIR([src/basesocket.cc])
+AC_CONFIG_HEADERS([include/config.h])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([gnu -Wall -Wextra])
+AC_CONFIG_MACRO_DIR([m4])
+AM_INIT_AUTOMAKE([gnu -Wall -Werror])
 
 # Checks for programs.
 AC_PROG_CXX
@@ -38,6 +39,6 @@ AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  include/Makefile
                  include/base/Makefile
-                 include/tcp/Makefile
+		 include/inet/Makefile
                  src/Makefile])
 AC_OUTPUT

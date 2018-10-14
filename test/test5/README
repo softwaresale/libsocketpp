@@ -1,9 +1,0 @@
-Goal: Test out getPeerName and getLocalHost
-
-Steps/Requirements:
-Req: Two machines
-
-1. Get localhost and peername of both machines
-2. Print each
-
-STATUS: SUCCESS

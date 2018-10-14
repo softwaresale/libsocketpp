@@ -19,61 +19,65 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//#include <config.h>
-
+#include <functional>
+#include <memory>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <unistd.h>
-
+#include <netinet/in.h>
 #include <base/basesocket.h>
+#include <base/addr.h>
 
-lsock::BaseSocket::BaseSocket(int domain, int type, int proto)
-    : m_isconnected(false)
+template <typename _ConnectFunc, typename _AddrType>
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::BaseSocket(int family, int type, int proto)
 {
-    // Just create a new socket
-    m_sockfd = socket(domain, type, proto);
-    if (m_sockfd < 0) {
-        // TODO: Handle error
-    }
+    m_sockfd = socket(family, type, proto);
 }
 
-lsock::BaseSocket::BaseSocket(int sfd)
-    : m_sockfd(sfd),
-      m_isconnected(false)
+template <typename _ConnectFunc, typename _AddrType>
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::BaseSocket(int sfd)
+    : m_sockfd(sfd)
 {
 }
 
-lsock::BaseSocket::~BaseSocket()
+template <typename _ConnectFunc, typename _AddrType>
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::~BaseSocket()
 {
-    this->disconnect();
+    disconnect();
 }
 
-void
-lsock::BaseSocket::setSfd(int sfd)
-{
-    m_sockfd = sfd;
-}
-
+template <typename _ConnectFunc, typename _AddrType>
 int
-lsock::BaseSocket::getSfd()
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::connect(lsock::base::BaseSockAddr<_AddrType> *ptr)
 {
-    return m_sockfd;
+    return m_connector(m_sockfd, ptr->get(), ptr->size());
 }
 
+template <typename _ConnectFunc, typename _AddrType>
 ssize_t
-lsock::BaseSocket::simple_read(char *buf, size_t len, int flags)
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::simple_write(char *buf, size_t len, int flags)
+{
+    return send(m_sockfd, buf, len, flags);
+}
+
+template <typename _ConnectFunc, typename _AddrType>
+ssize_t
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::simple_read(char *buf, size_t len, int flags)
 {
     return recv(m_sockfd, buf, len, flags);
 }
 
-ssize_t
-lsock::BaseSocket::simple_write(char *data, size_t len, int flags)
-{
-    return send(m_sockfd, data, len, flags);
-}
-
+template <typename _ConnectFunc, typename _AddrType>
 void
-lsock::BaseSocket::disconnect()
+lsock::base::BaseSocket<_ConnectFunc, _AddrType>::disconnect(void)
 {
     close(m_sockfd);
 }
+
+/*
+  Define used template classes
+*/
+template class lsock::base::BaseSocket<lsock::base::Connect, struct sockaddr_in>;
+template class lsock::base::BaseSocket<lsock::base::Bind,    struct sockaddr_in>;
+template class lsock::base::BaseSocket<lsock::base::Connect, struct sockaddr_un>;
+template class lsock::base::BaseSocket<lsock::base::Bind,    struct sockaddr_un>;

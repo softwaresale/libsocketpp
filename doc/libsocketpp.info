@@ -1,7 +1,7 @@
-This is libsocketpp.info, produced by makeinfo version 6.3 from
+This is libsocketpp.info, produced by makeinfo version 6.5 from
 libsocketpp.texi.
 
-This manual is for libsocketpp, 1.0
+This manual is for libsocketpp, 0.0
 
    Copyright (C) 2017 Charlie Sale
 
@@ -13,7 +13,7 @@ This manual is for libsocketpp, 1.0
      the section entitled "GNU Free Documentation License".
 
 
-File: libsocketpp.info,  Node: Top,  Next: Overview,  Up: (dir)
+File: libsocketpp.info,  Node: Top,  Up: (dir)
 
 A Guide to Libsocketpp
 **********************
@@ -39,7 +39,7 @@ of direct user input.
 * Index::
 
 
-File: libsocketpp.info,  Node: Overview,  Next: Tutorial,  Prev: Top
+File: libsocketpp.info,  Node: Overview,  Next: Tutorial
 
 1 Overview
 **********
@@ -1017,21 +1017,21 @@ Index
 
 Tag Table:
 Node: Top566
-Node: Overview1295
-Node: Tutorial3558
-Node: Getting4378
-Node: Acquring4596
-Node: Installing4705
-Node: Compiling5028
-Node: Including5683
-Node: Errors6375
-Node: Ctors7715
-Node: Accepting11935
-Node: Sendrecv14731
-Node: Opts17015
-Node: Closing17128
-Node: Extending17250
-Node: License17352
-Node: Index42467
+Node: Overview1278
+Node: Tutorial3529
+Node: Getting4349
+Node: Acquring4567
+Node: Installing4676
+Node: Compiling4999
+Node: Including5654
+Node: Errors6346
+Node: Ctors7686
+Node: Accepting11906
+Node: Sendrecv14702
+Node: Opts16986
+Node: Closing17099
+Node: Extending17221
+Node: License17323
+Node: Index42438
 
 End Tag Table

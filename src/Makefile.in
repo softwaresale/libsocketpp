@@ -100,7 +100,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_HEADER = $(top_builddir)/include/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -133,8 +133,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libsocketpp_la_LIBADD =
-am_libsocketpp_la_OBJECTS = basesocket.lo basesockbuf.lo tcpsocket.lo \
-	tcpserver.lo
+am_libsocketpp_la_OBJECTS = baseserver.lo basesockbuf.lo baseaddr.lo \
+	basesocket.lo inetaddr.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -152,12 +152,12 @@ AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
 am__v_at_1 = 
-DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/basesockbuf.Plo \
-	./$(DEPDIR)/basesocket.Plo ./$(DEPDIR)/tcpserver.Plo \
-	./$(DEPDIR)/tcpsocket.Plo
+am__depfiles_remade = ./$(DEPDIR)/baseaddr.Plo \
+	./$(DEPDIR)/baseserver.Plo ./$(DEPDIR)/basesockbuf.Plo \
+	./$(DEPDIR)/basesocket.Plo ./$(DEPDIR)/inetaddr.Plo
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -326,14 +326,15 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CPPFLAGS = -I$(top_srcdir)/include/
-AM_CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic -O2
-AM_LDFLAGS = -version-number 1:0:0
+AM_CPPFLAGS = -I$(top_srcdir)/include
+AM_CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -O2
+AM_LDFLAGS = -version-number 0:0:0
 lib_LTLIBRARIES = libsocketpp.la
-libsocketpp_la_SOURCES = basesocket.cc \
-			 basesockbuf.cc \
-			 tcpsocket.cc \
-			 tcpserver.cc
+libsocketpp_la_SOURCES = baseserver.cc \
+                         basesockbuf.cc \
+                         baseaddr.cc \
+                         basesocket.cc \
+                         inetaddr.cc
 
 all: all-am
 
@@ -413,10 +414,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/baseaddr.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/baseserver.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesockbuf.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basesocket.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tcpserver.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tcpsocket.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inetaddr.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -579,10 +581,11 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 	mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/basesockbuf.Plo
+		-rm -f ./$(DEPDIR)/baseaddr.Plo
+	-rm -f ./$(DEPDIR)/baseserver.Plo
+	-rm -f ./$(DEPDIR)/basesockbuf.Plo
 	-rm -f ./$(DEPDIR)/basesocket.Plo
-	-rm -f ./$(DEPDIR)/tcpserver.Plo
-	-rm -f ./$(DEPDIR)/tcpsocket.Plo
+	-rm -f ./$(DEPDIR)/inetaddr.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -629,10 +632,11 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/basesockbuf.Plo
+		-rm -f ./$(DEPDIR)/baseaddr.Plo
+	-rm -f ./$(DEPDIR)/baseserver.Plo
+	-rm -f ./$(DEPDIR)/basesockbuf.Plo
 	-rm -f ./$(DEPDIR)/basesocket.Plo
-	-rm -f ./$(DEPDIR)/tcpserver.Plo
-	-rm -f ./$(DEPDIR)/tcpsocket.Plo
+	-rm -f ./$(DEPDIR)/inetaddr.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
