@@ -13,20 +13,20 @@ This file contains steps to be taken and features to be added to the program.
     GNU General Public License for more details.
 
 For (1.0.0)
-[ ] 1. Reimplement package structure with different classes
-[ ]    a. lsock::BaseSocket
-[ ]    b. lsock::BaseServer
-[ ]    c. lsock::tcp::Socket
-[ ]    d. lsock::tcp::Server
-[ ]    e. lsock::unix::Socket
-[ ]    f. lsock::unix::Server
+[x] 1. Reimplement package structure with different classes
+[x]    a. lsock::BaseSocket
+[x]    b. lsock::BaseServer
+[x]    c. lsock::tcp::Socket
+[x]    d. lsock::tcp::Server
+[x]    e. lsock::unix::Socket
+[x]    f. lsock::unix::Server
 [ ] 2. Implement asynchronous socket executor
 [ ]    a. lsock::async::Executor<_SockeType>
 [ ] 3. Convenience naming in convenience header
-[ ]    a. using TcpSocket  = lsock::tcp::Socket
-[ ]    b. using TcpServer  = lsock::tcp::Server
-[ ]    c. using UnixSocket = lsock::unix::Socket
-[ ]    d. using UnixServer = lsock::unix::Server
+[x]    a. using TcpSocket  = lsock::tcp::Socket
+[x]    b. using TcpServer  = lsock::tcp::Server
+[x]    c. using UnixSocket = lsock::unix::Socket
+[x]    d. using UnixServer = lsock::unix::Server
 [ ]    e. using TcpAsyncSocket = lsock::async::Executor<TcpSocket>
 [ ]    f. using TcpAsyncServer = lsock::async::Executor<TcpServer>
 [ ] 4. Rewrite numerical I/O operators (those are trash)

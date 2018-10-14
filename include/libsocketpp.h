@@ -20,9 +20,9 @@ namespace lsock
 
     using InetAddr  = lsock::inet::Addr;
 
-    using UnixSocket = lsock::unix::Socket;
-    using UnixServer = lsock::unix::Server;
-    using UnixAddr   = lsock::unix::Addr;
+    using UnixSocket = lsock::ux::Socket;
+    using UnixServer = lsock::ux::Server;
+    using UnixAddr   = lsock::ux::Addr;
 }
 
 #endif // _LS_H
