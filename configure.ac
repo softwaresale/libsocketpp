@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libsocketpp], [0.0], [softwaresale01@gmail.com])
+AC_INIT([libsocketpp], [1.0], [softwaresale01@gmail.com])
 AC_CONFIG_SRCDIR([src/basesocket.cc])
 AC_CONFIG_HEADERS([include/config.h])
 AC_CONFIG_AUX_DIR([build-aux])

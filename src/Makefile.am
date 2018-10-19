@@ -3,7 +3,7 @@
 
 AM_CPPFLAGS = -I$(top_srcdir)/include # $(DEPS_CFLAGS)
 AM_CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -O2
-AM_LDFLAGS  = -version-number 0:0:0
+AM_LDFLAGS  = -version-number 1:0:0
 
 lib_LTLIBRARIES = libsocketpp.la
 
