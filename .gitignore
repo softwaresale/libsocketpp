@@ -12,4 +12,6 @@ doc/version.texi
 install-sh
 missing
 src/Makefile.in
+include/Makefile.in
+tests/Makefile.in
 

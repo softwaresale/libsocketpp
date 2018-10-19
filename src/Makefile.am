@@ -1,7 +1,7 @@
 
 # src/Makefile.am
 
-AM_CPPFLAGS = -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/include # $(DEPS_CFLAGS)
 AM_CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -O2
 AM_LDFLAGS  = -version-number 0:0:0
 
@@ -12,7 +12,8 @@ libsocketpp_la_SOURCES = baseserver.cc \
                          baseaddr.cc \
                          basesocket.cc \
                          inetaddr.cc \
-												 unixaddr.cc
+			 unixaddr.cc
+# libsocketpp_la_LIBADD = $(DEPS_LIBS)
 
 install-exec-hook:
 	@(cd $(DESTDIR)$(libdir) && $(RM) $(lib_LTLIBRARIES))

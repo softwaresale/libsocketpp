@@ -34,6 +34,7 @@ AC_CHECK_TYPES([ptrdiff_t])
 
 # Checks for library functions.
 AC_CHECK_FUNCS([memmove memset socket])
+# PKG_CHECK_MODULES([DEPS], [sigc++-2.0])
 
 AC_CONFIG_FILES([Makefile
                  doc/Makefile
@@ -42,5 +43,6 @@ AC_CONFIG_FILES([Makefile
                  include/inet/Makefile
                  include/tcp/Makefile
                  include/unix/Makefile
-                 src/Makefile])
+                 src/Makefile
+		 tests/Makefile])
 AC_OUTPUT

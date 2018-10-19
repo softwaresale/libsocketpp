@@ -132,7 +132,7 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libsocketpp_la_LIBADD =
+libsocketpp_la_DEPENDENCIES =
 am_libsocketpp_la_OBJECTS = baseserver.lo basesockbuf.lo baseaddr.lo \
 	basesocket.lo inetaddr.lo unixaddr.lo
 libsocketpp_la_OBJECTS = $(am_libsocketpp_la_OBJECTS)
@@ -327,7 +327,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CPPFLAGS = -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/include $(DEPS_CFLAGS)
 AM_CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -O2
 AM_LDFLAGS = -version-number 0:0:0
 lib_LTLIBRARIES = libsocketpp.la
@@ -336,8 +336,9 @@ libsocketpp_la_SOURCES = baseserver.cc \
                          baseaddr.cc \
                          basesocket.cc \
                          inetaddr.cc \
-												 unixaddr.cc
+			 unixaddr.cc
 
+libsocketpp_la_LIBADD = $(DEPS_LIBS)
 all: all-am
 
 .SUFFIXES:
