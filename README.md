@@ -3,7 +3,10 @@ This is a collection of C++ classes for networking with TCP sockets
 
 ## Installation
 
-From source...
+### From the AUR
+This package can be found in the AUR. Search for libsocketpp
+
+### From source...
 ```
 ./configure <prefix>
 make
